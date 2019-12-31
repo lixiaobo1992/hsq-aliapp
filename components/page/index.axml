@@ -1,0 +1,23 @@
+
+<view class="page-box {{ className }}">
+  <view class="page-content {{ contentClass }}" hidden="{{ isLoading }}">
+    <slot />
+  </view>
+  <view class="error-result" a:if="{{ isShowError }}">
+    <view class="error-img">
+      <image mode="widthFix" src="/img/tip-img/error-img{{type ? ('-' + type) : ''}}.png"/>
+    </view>
+    <view class="error-tip-text">{{ content }}</view>
+    <view class="error-button-view">
+      <view class="error-button" onTap="errorBtnEvent">{{ btnText }}</view>
+    </view>
+  </view>
+  <view class="a-cp-wrapper" hidden="{{ !isLoading }}">
+    <view class="a-cp-loading-indicator" aria-hidden="true">
+      <view class="a-cp-loading-item"></view>
+      <view class="a-cp-loading-item"></view>
+      <view class="a-cp-loading-item"></view>
+    </view>
+  </view>
+  <slot name="sub-block"></slot>
+</view>

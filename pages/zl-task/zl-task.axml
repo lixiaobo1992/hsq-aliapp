@@ -1,0 +1,67 @@
+<import src="/components/foot/foot.axml" />
+
+<dwd-page
+  id="dwd-page-zl-task"
+  className="page-zl-task"
+  contentClass="page-zl-task-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+
+  <view class="tabs" id="tabs-box">
+    <view a:for="{{tabs}}" class="tab {{listType == item.type ? 'switch' : ''}}" data-type="{{item.type}}" onTap="switchTab">
+      {{item.name}}
+      <view class="line"></view>
+    </view>
+  </view>
+  <scroll-view
+    scroll-y
+    onScrollToLower="onScrollToLower"
+    style="height: 100%"
+    lower-threshold="240"
+    onScroll="onTaskScroll">
+    <view class="couple-content" a:for="{{list}}">
+      <view class="content" data-type="zldetail" data-index="{{index}}" onTap="gotoNext">
+        <view class="content-img">
+          <image lazyLoad class="img" src="{{item.image}}" default-source="/img/tip-img/not-img2.png" />
+        </view>
+        <view class="content-title">
+          <text class="title max-line-2">{{item.title}}</text>
+          <text class="zl-num">{{item.totalNumber}}人助力</text>
+          <view class="sub-title">
+            <text class="price">¥<text>{{item.price[0]}}</text>.{{item.price[1]}}</text>
+            <text class="del-price">{{item.originalPrice}}</text>
+          </view>
+          <!-- 状态图章 -->
+          <image class="tags" a:if="{{item.status!=1}}" src="{{statusImg['s'+item.status]}}" mode="aspectFit" />
+        </view>
+      </view>
+      <view class="operate">
+        <!-- 倒计时 -->
+        <view class="count-down" a:if="{{(item.status === 1 || item.status === 2) && item.endTimeText  && item.leftStock > 0}}">还剩：{{item.endTimeText}}</view>
+        <view class="count-hint" a:if="{{item.status === 1  && item.leftStock == 0}}">助力商品已被抢光</view>
+        <view class="btns-box">
+          <view class="left-num" a:if="{{item.status === 1 && item.leftStock > 0}}">还差{{item.differNumber}}人</view>
+          <view class="left-num" a:if="{{item.status === 2}}">还差一步</view>
+          <!-- 按钮 -->
+          <view
+            class="task-btn btn-red" data-type="zllist" a:if="{{item.leftStock == 0 && item.status == 1}}"
+            onTap="gotoNext">助力其他好物</view>
+          <view
+            class="task-btn {{ item.btnStatus.btnClass }} {{item.btnStatus.isDisabled?'disabled':''}}" data-type="zlbtn" data-index="{{index}}"
+            onTap="gotoNext">{{item.btnStatus.text}}</view>
+        </view>
+      </view>
+    </view>
+    <view a:if="{{list.length && showFooter}}">
+      <template is="foot" data="{{text:'没有更多助力了~'}}"></template>
+    </view>
+    <view a:if="{{!list.length && !isLoading}}">
+      <image class="empty-img" src="https://img1.haoshiqi.net/miniapp/new_error_d13709db30.png" mode="aspectFit" />
+      <view class="empty-text">您目前没有助力{{listType === 2 ? '中' : (listType === 3 ? '成功' : '失败')}}的商品哦~</view>
+    </view>
+  </scroll-view>
+
+  <view class="complaint-btn" a:if="{{listType==4}}" data-type="complaint" catchTap="gotoNext">
+    <image src="https://img1.haoshiqi.net/miniapp/service/ico_service_db82986fe2.png" mode="widthFix" />
+  </view>
+</dwd-page>

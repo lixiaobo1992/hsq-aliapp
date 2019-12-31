@@ -1,0 +1,43 @@
+<dwd-tpl class="c-product-slider" data="{{ data }}" data-type="{{ data.type }}">
+  <view class="slider-box" style="{{data.bg.url ? 'padding-left: 0.2rem' : ''}}">
+    <view class="slider-goods-box">
+      <view
+        class="goods-box exposure-item"
+        a:for="{{data.list}}"
+        a:key="{{index}}"
+        data-index="{{index}}"
+        data-title="{{ data.moduleName }}"
+        data-url="{{item.link}}"
+        data-piwik-event="{{item.piwikEvent}}"
+        data-piwik-data="{{item.piwikData}}"
+        data-module-id="{{ data.id }}"
+        onTap="onDetailPage"
+      >
+        <view class="goods-img-box">
+          <image src="{{item.thumbnail}}" lazyLoad default-source="/img/tip-img/not-img2.png" class="img-box" />
+          <!-- 商品状态 -->
+          <image
+            class="row3-status-img"
+            src="{{ item.invalid_img }}"
+            a:if="{{ item.invalid_img }}"
+          />
+        </view>
+        <view class="goods-text-box">
+          <view class="goods-title max-line-2">{{ item.title }}</view>
+          <view class="goods-price-box">
+              <view class="goods-vip-price" a:if="{{ item.light_member_price > 0 }}">
+                  <view class="vip-bg"><image src="https://img1.haoshiqi.net/miniapp/img/vip_price2x_b9f4bf402f.png" class="img-vip" mode="scaleToFill" >
+                  </view>
+                  <text class="vip-price">￥{{ item.light_member_price }}</text>
+              </view>
+              <text class="market-price" a:else>￥{{ item.market_price }}</text>
+          </view>
+          <text class="price-integer">￥{{ item.price.price_yuan }}.{{ item.price.price_fen }}</text>
+        </view>
+      </view>
+      <view class="more-box" a:if="{{data.more.link}}" onTap="onUrlPage" data-url="{{data.more.link}}">
+        <image src="{{data.more.image.url}}" class="img-box" />
+      </view>
+    </view>
+  </view>
+</dwd-tpl>

@@ -1,0 +1,134 @@
+@import '/template/c-anchor/index.acss';
+@import '/template/c-product-row1/index.acss';
+@import '/template/c-product-row2/index.acss';
+@import '/template/c-product-row3/index.acss';
+@import '/template/c-swiper-product/index.acss';
+@import '/template/c-product-3/index.acss';
+@import '/template/c-seckill/index.acss';
+@import '/template/c-img-hor/index.acss';
+@import '/template/c-tab-product/index.acss';
+@import '/template/c-swiper/index.acss';
+@import '/components/feedback/index.acss';
+@import '/components/coupon/index.acss';
+
+page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.page-zt{
+  height: 100%;
+}
+scroll-view {
+  height: 100%;
+}
+
+#page-zt{
+  position: relative;
+}
+
+/* 轻会员 */
+
+.member-box {
+  background: #f7f7f7;
+  width: 100%;
+  overflow: hidden;
+}
+.member-info-box {
+  width: 700rpx;
+  height: 100rpx;
+  background: #FFF4B5;
+  margin: 20rpx 24rpx;
+  position: relative;
+}
+
+.member-info-title {
+  display: block;
+  font-size: 24rpx;
+  color: #914F08;
+  padding: 14rpx 18rpx;
+  padding-top: 20rpx;
+}
+
+.member-info-hint{
+  display: block;
+  font-size: 20rpx;
+  color: #914F08;
+  padding-left: 18rpx;
+}
+
+.member-info-btn{
+  position: absolute;
+  right: 34rpx;
+  top: 34rpx;
+  background-image: linear-gradient(-90deg, #FF7D08 0%, #FFBE2C 100%);
+  box-shadow: 0 4rpx 8rpx 0 rgba(255,145,37,0.53);
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  color: #fff;
+  text-align: center;
+  padding: 4rpx 18rpx;
+}
+
+.top-desc{
+  position: relative;
+}
+scroll-view {
+  height: 100%;
+}
+
+.wf-test {
+  overflow: hidden;
+}
+.wf-test .image {
+  width: 100%;
+  vertical-align: middle;
+  line-height: 0;
+  font-size: 0;
+  margin-top: -2rpx;
+}
+.back-top{
+  position: fixed;
+  right: 0;
+  bottom: 40rpx;
+  width: 80rpx;
+  height: 70rpx;
+  background: url("https://img1.haoshiqi.net/miniapp/img/back_top_741b7075e9.png");
+  background-repeat: no-repeat;
+  background-size: 70rpx;
+  background-position: left center;
+  opacity: 0.9;
+  z-index: 200;
+}
+
+.left-top-label{
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 20rpx;
+  font-size: 24rpx;
+  color: #fff;
+  box-sizing: border-box;
+  z-index: 5;
+}
+
+.right-top-rule{
+  position: absolute;
+  right: 0;
+  top: 20rpx;
+  z-index: 6;
+  height: 58rpx;
+  line-height: 58rpx;
+  padding: 0 20rpx;
+  background-image: linear-gradient(90deg, rgba(238,248,152,0.5) 12%, transparent 78%);
+  border-radius: 29rpx 0 0 29rpx;
+  color: #fff;
+  font-size: 28rpx;
+}
+.pulllist-loading{
+  height: 60rpx;
+  background: url("https://img1.haoshiqi.net/miniapp/img/loading_50c5e3e79b.gif");
+  background-repeat: no-repeat;
+  background-size: 40rpx;
+  background-position: center center;
+}

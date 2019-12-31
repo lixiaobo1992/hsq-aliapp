@@ -1,0 +1,8 @@
+{
+  "node_modules_es6_whitelist": [
+    "@xmini/xmini",
+    "@xmini/aliapp-component-base"
+  ],
+  "axmlStrictCheck": false,
+  "component2": true
+}

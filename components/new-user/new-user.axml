@@ -1,0 +1,9 @@
+<template name="userBenefit">
+  <view class="view-new {{hasChangeColor ? 'text-color' : ''}}" a:if="{{labels && labels.length}}">
+      <view class="user-benefit" a:for="{{labels}}">
+        <image class="img" src="{{item.icon}}" mode="aspectFit" />
+          <text class="title">{{item.title}}</text>
+          <view class="value">-￥{{(item.value*0.01).toFixed(2)}}</view>
+        </view>
+  </view>
+</template>

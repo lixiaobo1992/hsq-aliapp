@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "preinstall": "npm config set registry https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@xmini/aliapp-component-base": "0.0.13",
+    "@xmini/x-mini": "2.2.2-0",
+    "mini-html-parser2": "^0.1.4"
+  },
+  "devDependencies": {}
+}

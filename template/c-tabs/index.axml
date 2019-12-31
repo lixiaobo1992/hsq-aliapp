@@ -1,0 +1,25 @@
+<template name="c-tabs">
+  <view class="c-tabs c-tabs-{{ moduleIndex }} {{ scrollable ? 'c-tabs-scrollable' : '' }}">
+    <!-- 页面逻辑 -->
+    <scroll-view
+      scroll-x="{{ scrollable }}"
+      scroll-with-animation
+      scroll-animation-duration="300"
+      scroll-left="{{ scrollLeft }}"
+      class="c-tabs-scroll">
+      <view class="c-tabs-nav">
+        <view class="c-tabs-line" style="{{ lineStyle }}" />
+        <view
+          a:for="{{list}}"
+          class="ellipsis c-tabs-item {{ index === currentIndex ? 'c-tab-active' : '' }}"
+          style="{{ 'color:' + (activColor && (index === currentIndex) ? activColor : '') }}"
+          a:key="{{ index }}"
+          data-index="{{ index }}"
+          data-item="{{ item }}"
+          data-module-index="{{ moduleIndex }}"
+          data-chenge-event-name="{{ tabChengeEventName }}"
+          onTap="cTabsClick">{{ item.tab_name }}</view>
+      </view>
+    </scroll-view>
+  </view>
+</template>

@@ -1,0 +1,221 @@
+.c-product-col2{
+  position: relative;
+  overflow: hidden;
+  padding: 0 20rpx;
+}
+.c-product-col2 .col2-box{
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.c-product-col2 .row2-box{
+  width: 350rpx;
+  box-sizing: border-box;
+  padding-bottom: 10rpx;
+  border-radius: 10rpx;
+  height:100%;
+}
+.c-product-col2 .row2-box:nth-of-type(odd){
+  margin-right: 10rpx;
+}
+.c-product-col2 .row2-container{
+  width: 350rpx;
+  background: #fff;
+  border-radius: 10rpx;
+}
+.c-product-col2 .row2-img-box{
+  position: relative;
+  width: 350rpx;
+  padding-bottom: 100%;
+  border-radius: 10rpx;
+}
+.c-product-col2 .row2-img{
+  position: absolute;
+  border-radius: 10rpx 10rpx 0 0;
+  left: 0;
+  top: 0;
+  width: 350rpx;
+  height: 350rpx;
+
+  background-image: url('https://img1.haoshiqi.net/miniapp/not-img2_0056f25dcd.png');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center center;
+}
+.c-product-col2 .img-label{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 350rpx;
+  height: 350rpx;
+  z-index: 2;
+  overflow: hidden;
+}
+.c-product-col2 .icon-img{
+  width: 100%;
+}
+.c-product-col2 .row2-tag-img{
+  position: absolute;
+  left: 4rpx;
+  top: 0;
+  width: 56rpx;
+  height: 56rpx;
+}
+.c-product-col2 .row2-status-img{
+  position: absolute;
+  width: 40%;
+  height: 40%;
+  left: 30%;
+  top: 30%;
+}
+.c-product-col2 .row2-text-box{
+  margin-top: 20rpx;
+  padding: 0 18rpx;
+  position: relative;
+  text-align: left;
+}
+.c-product-col2 .row2-title{
+  color: #333;
+  font-size: 28rpx;
+  max-height: 72rpx;
+  /* margin-bottom: 20rpx; */
+  overflow: hidden;
+  line-height: 36rpx;
+  height:70rpx;
+}
+.c-product-col2 .title-tag{
+  padding: 0 5rpx;
+  background: #EA594C;
+  color: #ffffff;
+  font-size: 22rpx;
+  display: inline-block;
+  border-radius: 4rpx;
+  margin-right: 8rpx;
+  line-height: 30rpx;
+}
+
+.c-product-col2 .row2-tag-box{
+  width: 100%;
+  overflow: hidden;
+  line-height:32rpx;
+  height: 40rpx;
+  display: flex;
+  margin-top: 6rpx;
+  display:block;
+}
+.c-product-col2 .row2-text-tag{
+  border: 1px solid #EA594C;
+  border-radius: 4rpx;
+  color: #EA594C;
+  padding: 0 8rpx;
+  font-size: 20rpx;
+  margin-right: 4rpx;
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  min-width: 20rpx;
+  max-width:266rpx;
+}
+.c-product-col2 .row2-text-tag:first-child{
+    flex-shrink: 0;
+}
+.c-product-col2 .row2-price-box{
+  white-space: nowrap;
+  /* padding: 20rpx 20rpx 10rpx 20rpx; */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  /* position: absolute;
+  left: 0;
+  bottom: 0; */
+  width: 100%;
+  text-align:left;
+}
+.c-product-col2 .row2-price{
+  display: flex;
+  color: #FB0438;
+  padding-bottom:6rpx;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+.c-product-col2 .price-integer{
+  font-size: 38rpx;
+  height: 52rpx;
+  color:#F23D3D;
+  line-height: 52rpx;
+}
+.c-product-col2 .price-decimals{
+  font-size: 24rpx;
+}
+.c-product-col2 .row2-market{
+  font-size: 20rpx;
+  margin-left: 5rpx;
+  color: #999;
+  text-decoration: line-through;
+  display:block;
+  min-height:44rpx;
+  line-height:44rpx;
+}
+/* 添加会员价 */
+.c-product-col2 .row2-vip-price{
+  display:block;
+  font-size:24rpx;
+  min-height:44rpx;
+  line-height:44rpx;
+  margin-left:8rpx;
+}
+.c-product-col2 .vip-bg{
+  background: #333;
+  line-height:24rpx;
+  padding:0rpx 4rpx;
+  display:inline-block;
+}
+.c-product-col2 .img-vip{
+  width:24rpx;
+  height:14rpx;
+  display:inline-block;
+  border-top-left-radius:4rpx;
+  border-bottom-left-radius:4rpx;
+}
+.c-product-col2 .vip-price {
+  font-size:24rpx;
+  color:#333;
+  background: #FDFBEB;
+  padding:0 4rpx;
+  border-radius:4rpx;
+}
+.c-product-col2 .right-circle{
+  border-radius: 50%;
+  height:50rpx;
+  width:50rpx;
+  /* font-size:26rpx;
+  background: #F23D3D;
+  color: #fff;
+  text-align:center;
+  line-height:52rpx; */
+}
+.c-product-col2 .hot{
+  height:50rpx;
+  width:50rpx;
+}
+
+.row2-expire-day{
+  height:26rpx;
+  line-height:26rpx;
+  font-size:18rpx;
+  color: #999999;
+  width:100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.row2-expire-day .line{
+  height:26rpx;
+  width:1rpx;
+  margin:0 2rpx;
+}

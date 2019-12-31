@@ -1,0 +1,17 @@
+
+<!--
+  // currentPage //参数
+
+ -->
+<template name="tabbar">
+  <view class="tabbar-box" >
+    <view class="tab-item {{ currentPage == 'index' ? 'active' : '' }}" data-page="index" onTap="onSwitchTab">
+      <image class="tab-icon" src="https://img1.haoshiqi.net/miniapp/profile/ic_aliportal{{currentPage == 'index'?'_s':''}}.png" mode="aspectFit"/>
+      <text class="tab-text">首页</text>
+    </view>
+    <view class="tab-item {{ currentPage == 'profile' ? 'active' : '' }}" data-page="profile" onTap="onSwitchTab">
+      <image class="tab-icon" src="https://img1.haoshiqi.net/miniapp/profile/ic_aliprofile{{currentPage == 'profile'?'_s':''}}.png" mode="aspectFit"/>
+      <text class="tab-text">个人中心</text>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,77 @@
+<import src="/template/c-anchor/index.axml" />
+<import src="/template/c-img/index.axml" />
+<import src="/template/c-product-row2/index.axml" />
+<import src="/template/c-swiper-product/index.axml" />
+<import src="/template/c-product-3/index.axml" />
+<import src="/template/c-seckill/index.axml" />
+<import src="/template/c-img-hor/index.axml" />
+<import src="/template/c-tab-product/index.axml" />
+<import src="/template/c-swiper/index.axml" />
+<import src="/components/feedback/index.axml" />
+<import src="/components/coupon/index.axml" />
+
+<dwd-page
+  id="dwd-page-zt"
+  className="page-zt"
+  contentClass="page-zt-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <scroll-view
+    onScroll="onScroll"
+    lower-threshold="240"
+    scroll-y
+    scroll-with-animation="{{ isAnimation }}"
+    scroll-animation-duration="300"
+    scroll-top="{{offsetY}}"
+    onScrollToLower="onScrollToLower"
+    style="height:100%">
+    <view id="page-zt" style="background-color: {{bgColor}};">
+      <view id="lifeStyle" class="line" a:if="{{showLifeStyle}}">
+        <lifestyle publicId="2014082500009174">
+      </view>
+
+      <!-- 轻会员 -->
+      <view class="member-box" onTap="memberBtn" a:if="{{isMember}}">
+        <view class="member-info-box">
+          <text class="member-info-title">您的轻会员</text>
+          <text class="member-info-hint">可查看轻会员已享优惠，剩余优惠，解除会员等</text>
+          <text class="member-info-btn">查看管理</text>
+        </view>
+      </view>
+
+      <view class="top-desc">
+        <!-- <view class="left-top-label" a:if="{{ topLeftText != '' }}">{{ topLeftText }}</view> -->
+        <view class="right-top-rule"
+          a:if="{{ ruleButton.text }}"
+          onTap="onUrlPage"
+          data-url="{{ruleButton.url}}"
+          data-piwik-event="c_zt_rule"
+          data-piwik-data="{{item.url}}">{{ ruleButton.text }}</view>
+      </view>
+
+
+      <!-- <view a:if="{{showFavorite}}">
+        <favorite>
+          点我收藏，享受更多低价福利
+        </favorite>
+      </view> -->
+
+      <block a:for="{{modules}}">
+        <view a:key="{{ item.id }}" id="{{item.id}}" class="clearfix" style="padding:{{item.margin_top}}px {{ item.margin_lr }}px {{item.margin_bottom}}px {{ item.margin_lr }}px;">
+          <template is="{{ item.type }}" data="{{...item, moduleIndex: index}}"></template>
+        </view>
+      </block>
+
+      <view a:if="{{list && list.length}}" style="padding: 0 20rpx;">
+        <template is="c-product-row2" data="{{list, eventName: 'onDetailPage'}}"></template>
+        <!-- <view hidden="{{!bottomLoading}}" class="pulllist-loading"></view>  pullModel 中已经把 bottomLoading 这个变量删掉了-->  
+      </view>
+
+      <template is="feedback" data="{{isShowFeedback:showBackTop}}"></template>
+
+      <view hidden="{{!showBackTop}}" class="back-top" onTap="scrollToTop"></view>
+    </view>
+    <!-- 优惠券弹框 -->
+    <template is="coupon" data="{{showCoupon: showCoupon, couponHasMore: couponHasMore, couponList: couponList}}"></template>
+  </scroll-view>
+</dwd-page>

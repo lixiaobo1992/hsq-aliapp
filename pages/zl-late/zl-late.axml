@@ -1,0 +1,5 @@
+<view class="late-page">
+  <image class="empty-img" src="https://img1.haoshiqi.net/miniapp/new_error_d13709db30.png"  />
+  <view class="sub-title">您来晚啦～该活动已结束</view>
+  <button onTap="btnEvent" class="btn">去看看其他活动</button>
+</view>

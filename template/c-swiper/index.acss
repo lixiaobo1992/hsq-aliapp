@@ -1,0 +1,37 @@
+
+/* 每个页面仍需要设置 padding-top，因为 js 生成的慢，有短暂的高度不匹配 */
+.c-swiper {
+  position: relative;
+  padding-top: 100%;
+  width: 100%;
+}
+.c-swiper swiper {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+}
+.c-swiper-item{
+  /* 不能写 border: 1px solid #ff0 */
+
+}
+
+
+.c-swiper swiper image {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.c-swiper-1 .c-swiper-item{
+  line-height: 0;
+  padding:0 5rpx 0rpx 5rpx;
+  box-sizing: border-box;
+}
+
+.c-swiper-1 swiper image {
+  border-radius: 10rpx;
+  box-shadow: 0 4rpx 8rpx 0 rgba(224,224,224,0.50);
+}
+

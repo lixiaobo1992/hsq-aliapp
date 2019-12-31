@@ -1,0 +1,13 @@
+
+@import '/template/c-swiper/index.acss';
+@import '/template/c-product-row3/index.acss';
+
+.c-swiper-product .product-warp{
+  margin:24rpx 20rpx 0 20rpx;
+  overflow: hidden;
+  border-radius: 5rpx;
+}
+
+
+
+

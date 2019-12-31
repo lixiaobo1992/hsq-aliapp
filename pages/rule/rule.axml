@@ -1,0 +1,7 @@
+<view class="page">
+  <image class="rule-img" src="https://img1.haoshiqi.net/miniapp/couple_rules_d1fd4be413.jpg" mode="widthFix" />
+  <view class="rule-text">
+    <view class='rule-title'>拼团失败</view>
+    <text class="rule-content">1. 24小时内没有足够用户参与成团\n2. 商品售完\n3. 购买活动商品不符合活动参与条件\n以上情况均有可能导致拼团失败，系统会自动退款到您的支付账户</text>
+  </view>
+</view>

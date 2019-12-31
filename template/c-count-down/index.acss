@@ -1,0 +1,121 @@
+.c-count-down{
+  border-radius: 50rpx;
+  overflow: hidden;
+}
+.c-ctdw-inner{
+  display: flex;
+  height: 100rpx;
+  border-radius: 50rpx;
+  overflow: hidden;
+}
+.c-ctdw-item{
+  position: relative;
+  flex: 1;
+  font-size: 24rpx;
+  box-sizing: border-box;
+}
+/* .c-ctdw-item:first-of-type{
+  border-left-top-radius: 50rpx;
+  border-left-bottom-radius: 50rpx;
+}
+.c-ctdw-item:last-of-type{
+  border-right-top-radius: 50rpx;
+  border-right-bottom-radius: 50rpx;
+} */
+.c-ctdw-textbox{
+  position: absolute;
+  left: 25rpx;
+  right: 0;
+  top: 20rpx;
+  bottom: 20rpx;
+  color: #ffffff;
+  text-align: center;
+  line-height: 32rpx;
+  z-index: 10;
+  overflow: hidden;
+}
+.c-ctdw-textline{
+  text-align: center;
+  line-height: 32rpx;
+}
+.c-ctdw-textline view{
+  display: inline-block;
+  white-space: nowrap;
+  padding: 0 16rpx;
+  border-radius: 16rpx;
+}
+.c-ctdw-textactive{
+  top: 16rpx;
+  bottom: 16rpx;
+}
+.c-ctdw-active{
+  background-image: linear-gradient(90deg, #F14268, #F25F1B);
+}
+.c-ctdw-textactive view{
+  line-height: 34rpx;
+  overflow: hidden;
+}
+.c-ctdw-item10{
+  background-color: #FF8923;
+}
+.c-ctdw-item11{
+  background-color: #FFA223;
+}
+.c-ctdw-item12{
+  background-color: #FFB755;
+}
+.c-ctdw-item13{
+  background-color: #FEC683;
+}
+.c-ctdw-item30{
+  background-color: #B1B1B1;
+}
+.c-ctdw-item31{
+  background-color: #BAB9B9;
+}
+.c-ctdw-item32{
+  background-color: #C3C0C0;
+}
+.c-ctdw-item33{
+  background-color: #CCC8C8;
+}
+.c-ctdw-item20,
+.c-ctdw-item21,
+.c-ctdw-item22,
+.c-ctdw-item23{
+  background-color: #FF4E31;
+  font-size: 28rpx;
+}
+.c-ctdw-arrow{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60rpx;
+  height: 100rpx;
+  background: inherit;
+  z-index: 1;
+}
+.c-ctdw-arrow:before{
+  content: "";
+  position: absolute;
+  right: -30rpx;
+  top: 50rpx;
+  width: 100%;
+  height: 100%;
+  transform: rotate(30deg);
+  transform-origin: right top;
+  background: inherit;
+  z-index: 1;
+}
+.c-ctdw-arrow:after{
+  content: "";
+  position: absolute;
+  right: -30rpx;
+  top: -50rpx;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-30deg);
+  transform-origin: right bottom;
+  background: inherit;
+  z-index: 1;
+}

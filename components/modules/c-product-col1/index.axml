@@ -1,0 +1,74 @@
+<dwd-tpl class="c-product-col1" data="{{ data }}" data-type="{{ data.type }}">
+  <view class="product-row1-box">
+    <view
+      class="shop-box exposure-item"
+      a:for="{{data.list}}"
+      data-url="{{item.link}}"
+      data-index="{{index}}"
+      data-title="{{ data.moduleName }}"
+      a:key="{{index}}"
+      data-piwik-event="{{item.piwikEvent}}"
+      data-piwik-data="{{item.piwikData}}"
+      data-module-id="{{ data.id }}"
+      onTap="onDetailPage"
+    >
+      <view class="img-box">
+        <image class="shop-img" lazyLoad src="{{item.thumbnail}}" default-source="/img/tip-img/not-img2.png" />
+        <!-- 商品状态 抢光了 -->
+        <image
+          class="shop-status"
+          src="{{ item.invalid_img }}"
+          a:if="{{ item.invalid_img }}"
+        />
+      </view>
+      <view class="text-box">
+        <view class="flex-start">
+            <view class="shop-title">
+              <text class="title-tag" a:if="{{item.merchant_type == 2}}">自营</text>
+              {{ item.title }}
+            </view>
+            <view class="row-expire-day">
+              <text class="row-left-day">{{ item.expired_date_text_one }}</text>
+            </view>
+            <view
+              class="row2-tag-box {{item.arrowClick?'tag-overflow':''}}"
+              style="height:{{ !item.showupArrow?'100%':''}}"
+              a:if="{{ item.tags.length > 0}}"
+              >
+              <view
+                class="row2-text-tag"
+                a:for="{{item.tags}}"
+                a:key="{{tagIndex}}"
+                a:for-index="tagIndex"
+                a:for-item="tagData"
+                style="color:{{ tagData.color? tagData.color : '#ea594c' }}"
+              >{{ tagData.text }}</view>
+              <view class="left-arrow" data-type="arrow" data-index="{{ index }}" data-id="{{ data.id }}" a:if="{{item.arrowClick}}" catchTap="{{item.arrowClick ? 'onDetailPage' : ''}}">
+                <view class = " arrow {{!item.showupArrow?'up':'down'}}"> </view>
+              </view>
+          </view>
+        </view>
+        <view class="shop-price-box flex-end">
+          <view class="price-box">
+            <view class="price-integer">￥{{ item.price.price_yuan }}.{{ item.price.price_fen }}</view>
+            <text class="buy-btn">去抢购</text>
+          </view>
+          <view class="bottom-price">
+              <text class="row-vip-price" a:if="{{ item.light_member_price > 0 }}">
+                  <view class="vip-bg"><image src="https://img1.haoshiqi.net/miniapp/img/vip_price2x_b9f4bf402f.png" class="img-vip" mode="scaleToFill" />
+                  </view>
+                  <text class="vip-price">￥{{ item.light_member_price }}</text>
+              </text>
+              <text class="market-price" a:else> ￥{{ item.market_price }}</text>
+            <view class="stock-progress-box">
+              <view class="progress-text">已抢{{ item.rate_percent + '%' }}</view>
+              <view class="progress-box">
+                <view class="current-progress" style="width: {{item.rate_percent}}%"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</dwd-tpl>

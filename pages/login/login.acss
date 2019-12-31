@@ -1,0 +1,6 @@
+.page-login {
+  padding: 32rpx;
+}
+.block-center {
+  margin: 400rpx 0 40rpx;
+}

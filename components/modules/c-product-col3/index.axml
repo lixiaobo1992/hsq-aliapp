@@ -1,0 +1,45 @@
+<dwd-tpl class="c-product-col3" data="{{ data }}" data-type="{{ data.type }}">
+  <view class="col3-box">
+    <view
+      class="row3-box exposure-item"
+      a:for="{{data.list}}"
+      a:key="{{index}}"
+      data-index="{{index}}"
+      data-title="{{ data.moduleName }}"
+      data-url="{{ item.link }}"
+      data-piwik-event="{{item.piwikEvent}}"
+      data-piwik-data="{{item.piwikData}}"
+      data-module-id="{{ data.id }}"
+      onTap="onDetailPage"
+    >
+      <view class="row3-container">
+        <view class="row3-img-box">
+          <!-- 商品图片 -->
+          <image class="row3-img" default-source="/img/tip-img/not-img2.png" lazyLoad src="{{item.thumbnail}}" />
+          <!-- 商品状态 -->
+          <image
+            class="row3-status-img"
+            src="{{ item.invalid_img }}"
+            a:if="{{ item.invalid_img }}"
+          />
+        </view>
+        <view class="row3-text-box">
+          <view class="row3-title max-line-2">{{ item.title }}</view>
+          <view class="row3-price-box">
+            <view class="row3-vip-price" a:if="{{ item.light_member_price > 0 }}">
+                <view class="vip-bg"><image src="https://img1.haoshiqi.net/miniapp/img/vip_price2x_b9f4bf402f.png" class="img-vip" mode="scaleToFill" />
+                </view>
+                <text class="vip-price">￥{{ item.light_member_price }}</text>
+              </view>
+            <view class="row3-market" a:else> ￥{{ item.market_price }}</view>
+            <text class="row3-price">
+              <text class="price-integer">￥{{ item.price.price_yuan }}.{{ item.price.price_fen }}</text>
+              <!-- <text class="price-decimals">.{{ item.price.price_fen }}</text> -->
+            </text>
+            <!-- <text class="row3-market">￥{{ item.market_price }}</text> -->
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</dwd-tpl>

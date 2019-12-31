@@ -1,0 +1,4 @@
+<block a:if="{{ data.type=='c-float' }}">
+  <dwd-float data="{{ data }}" />
+</block>
+<view a:else></view>

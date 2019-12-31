@@ -1,0 +1,19 @@
+<dwd-page
+  id="dwd-page-delivery"
+  className="page-delivery"
+  contentClass="page-delivery-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <view class="app-page">
+    <view class="title">{{title}}</view>
+    <view class="detail" a:for="{{details}}">
+      <view class="context0" a:if="{{index == 0}}">{{item.context}}</view>
+      <view class="context" a:if="{{index != 0}}">{{item.context}}</view>
+      <view class="time">{{item.time}}</view>
+    </view>
+
+    <view class="more-less" onTap="onMoreOrLess" a:if="{{datas.length > number}}">
+      <image class="more" src="https://img1.haoshiqi.net/miniapp/more_85508a3b09.png" mode="aspectFit" style="transform:rotate({{rotate}}deg)"/>
+    </view>
+  </view>
+</dwd-page>

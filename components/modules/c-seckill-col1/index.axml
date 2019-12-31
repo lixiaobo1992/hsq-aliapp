@@ -1,0 +1,125 @@
+<dwd-tpl class="c-seckill-col1" data="{{ data }}" data-type="{{ data.type }}">
+  <view class="seckill-row1-box">
+    <view
+      class="shop-box exposure-item"
+      a:for="{{data.list}}"
+      data-url="{{item.link}}"
+      data-index="{{index}}"
+      data-title="{{ data.moduleName }}"
+      a:key="{{index}}"
+      data-type="detail"
+      a:if="{{index < moreNumber}}"
+      data-id="{{item.pin_id}}"
+      onTap="onClick"
+    >
+      <view class="img-box">
+        <image class="shop-img" src="{{item.thumbnail}}" default-source="/img/tip-img/not-img2.png" />
+        <!-- 商品状态 抢光了 -->
+        <image
+          class="shop-status"
+          src="https://img1.haoshiqi.net/miniapp/img/sold_a64f1921fd.png"
+          a:if="{{!item.left_stock || !item.can_bought}}"
+        />
+        <image
+          class="shop-status"
+          src="https://img1.haoshiqi.net/miniapp/img/attention_502921af53.png"
+          a:if="{{item.is_subscribe && item.hintText.btnType != ''}}"
+        />
+      </view>
+      <view class="text-box">
+        <view class="flex-start">
+        <view class="shop-title">
+          <text class="title-tag" a:if="{{item.merchant_type == 2}}">自营</text>
+          {{ item.name }}
+        </view>
+        <view class="row-expire-day" a:if="{{ item.expired_date_text }}">
+            <text class="row-left-day">{{ item.expired_date_text }} </text>
+        </view>
+        <view
+        class="row2-tag-box {{item.arrowClick?'tag-overflow':''}}"
+        style="height:{{!item.showupArrow?'100%':''}}"
+        a:if="{{item.tags.length > 0}}">
+          <view
+            class="row2-text-tag"
+            a:for="{{item.tags}}"
+            a:key="{{tagIndex}}"
+            a:for-index="tagIndex"
+            a:for-item="tagData"
+            style="color: {{ tagData.color }}"
+          >{{ tagData.text }}</view>
+              <view
+                class="left-arrow"
+                data-type="arrow"
+                a:if="{{item.arrowClick}}"
+                data-index="{{index}}"
+                catchTap="{{item.arrowClick ? 'onClick' : ''}}"
+              >
+                  <view class="arrow {{!item.showupArrow?'up':'down'}}"> </view>
+                </view>
+        </view>
+        <view class="shop-timer-box">
+          <view class="timer-countdown">
+            <!-- a:if="{{activityTime.d > 0}}" -->
+            <view class="timer-text">
+              {{item.hintText.activityCountTip}}
+            </view>
+            <view
+              class="count-number-day"
+              a:if="{{item.countDownInfo.d > 0}}"
+            >
+              {{item.countDownInfo.d}}天
+            </view>
+            <view class="count-number">
+              {{item.countDownInfo.h}}
+            </view>
+            :
+            <view class="count-number">
+              {{item.countDownInfo.f}}
+            </view>
+            :
+            <view class="count-number">
+              {{item.countDownInfo.s}}
+            </view>
+          </view>
+        </view>
+      </view>
+        <view class="shop-price-box flex-end">
+          <view class="price-box">
+            <text class="price-integer">￥{{ item.price.price_yuan }}</text>
+            <text class="price-decimals">.{{ item.price.price_fen }}</text>
+            <text
+              class="buy-btn {{item.hintText.btnType == 'clearmsg' ? 'clear-ttn' : ''}} {{ item.residueTime < 300 && item.residueTime > 0 ? 'gray-btn' : '' }}"
+              catchTap="msgClick"
+              data-type="{{item.hintText.btnType}}"
+              data-index="{{index}}"
+              data-itemr="{{item.residueTime}}"
+              data-id="{{item.topic_id}}"
+              data-sku="{{item.sku_id}}"
+              data-url="{{item.link}}"
+              data-form-type="{{item.hintText.btnType}}"
+            >
+              {{item.hintText.btnText}}
+            </text>
+          </view>
+          <view class="bottom-price">
+            <view class="market-price">￥{{ item.market_price }}</view>
+            <view class="stock-progress-box" a:if="{{item.hintText.btnText == '马上抢'}}">
+              <view class="progress-text">已抢{{ item.rate_percent + '%' }}</view>
+              <view class="progress-box">
+                <view class="current-progress" style="width: {{item.rate_percent}}%"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="unfold-more-btn" a:if="{{moreNumber == 2 && data.list.length > 2}}" data-type="more" onTap="onClick">
+      <text class="more-btn-text">点击展开更多</text>
+      <image class="more-btn-img" src="../../../img/down-arrows-small.png" mode="aspectFit" />
+    </view>
+    <view class="pack-up-btn" a:if="{{moreNumber == 6 && data.list.length > 2}}" data-type="up" onTap="onClick">
+      <text class="up-btn-text">收起</text>
+      <image class="up-btn-img" src="../../../img/down-arrows-small.png" mode="aspectFit" />
+    </view>
+  </view>
+</dwd-tpl>

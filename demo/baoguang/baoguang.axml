@@ -1,0 +1,32 @@
+<view>
+  
+
+  <view class="product-list">
+    <view class="product-item exposure-item" a:for="{{ modules[0].list }}">
+      <view class="pic">
+        <image src="{{ item.pic }}" mode="widthFix" />
+      </view>
+      <view class="product-title">{{ item.name }}</view>
+    </view>
+  </view>
+
+  <view class="c-tofu layout-1-2">
+    <view
+      a:for="{{modules[1].list}}"
+      a:key="{{index}}"
+      class="item exposure-item">
+        <image class="image" src="{{item.image.url}}" mode="scaleToFill"></image>
+      </view>
+  </view>
+
+  <view class="product-list">
+    <view class="product-item exposure-item" a:for="{{ modules[2].list }}">
+      <view class="pic">
+        <image src="{{ item.pic }}" mode="widthFix" />
+      </view>
+      <view class="product-title">{{ item.name }}</view>
+    </view>
+  </view>
+
+
+</view>

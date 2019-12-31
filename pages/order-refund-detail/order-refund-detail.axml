@@ -1,0 +1,61 @@
+
+<dwd-page
+  id="dwd-page-refund-detail"
+  className="page-refund-detail"
+  contentClass="page-refund-detail-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+
+  <view class="refund-detail">
+    <view class="refund-banner">
+      <view class="banner-title">{{title}}</view>
+      {{content}}
+    </view>
+
+    <view class="audit-list" a:if="{{auditList}}" a:for="{{auditList}}">
+      <view class="refund-title">
+        <image class="img" src="{{item.type == 1 ? 'https://img1.haoshiqi.net/miniapp/seller_816481ce34.png' : item.type == 2 ? 'https://img1.haoshiqi.net/miniapp/user_service_5c54fac867.png' : userAvatar}}" mode="{{scale}}" />
+        <text class="name">{{item.type == 1 ? '卖家' : item.type == 2 ? '好食期' : '我'}}</text>
+        <text class="time">{{item.auditTime}}</text>
+      </view>
+      <view class="audit-content">
+        <view>
+          <text>{{item.statusDesc}}</text>
+        </view>
+        <view a:if="{{item.status === 2}}">
+          <text>退款金额：<text>¥{{item.amount/100}}</text></text>
+        </view>
+        <view a:if="{{item.note}}">
+          <text>说明：<text>{{item.note}}</text></text>
+        </view>
+      </view>
+    </view>
+    <view class="refund-info">
+      <view class="refund-title">
+        <image class="img" src="{{userAvatar}}" mode="{{scale}}" />
+        <text class="name">我</text>
+        <text class="time">{{applyTime}}</text>
+      </view>
+      <view class="refund-content">
+        <view class="refund-reason">
+          <text>退款原因：<text>{{reason}}</text></text>
+        </view>
+        <view class="refund-style">
+          <text>处理方式：<text>{{method}}</text></text>
+        </view>
+        <view class="refund-style">
+          <text>退款金额：<text>{{amountDesc}}</text></text>
+        </view>
+        <view class="refund-explain">
+          <text>退款说明：<text>{{note}}</text></text>
+        </view>
+        <view class="explain" a:if="{{refundImg}}">
+          <image lazyLoad class="explain-img" data-index="{{index}}" a:for="{{refundImg}}" src="{{item}}" mode="{{scale}}"  onTap="previewImage"/>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="complain" a:if="{{canComplaint}}">
+    <view class="complain-btn" data-refundid="{{refundOrderId}}" onTap="getCanComplaint">申请平台介入</view>
+  </view>
+</dwd-page>

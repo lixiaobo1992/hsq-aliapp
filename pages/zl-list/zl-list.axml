@@ -1,0 +1,108 @@
+
+<import src="/components/backtop/backtop.axml" />
+<import src="/components/foot/foot.axml" />
+
+<dwd-page
+  id="dwd-page-zl-list"
+  className="page-zl-list"
+  contentClass="page-zl-list-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <scroll-view
+    onScroll="onScroll"
+    scroll-into-view="{{viewId}}"
+    lower-threshold="240"
+    scroll-y
+    onScrollToLower="onScrollToLower"
+    >
+    <view id="scrollTop"></view>
+    <view class="top-head">
+      <image src="https://img1.haoshiqi.net/miniapp/zl/zl-top_bc6646f182.png" mode="widthFix"  />
+      <view class="btn rule-btn" data-type="rule" onTap="gotoNext"></view>
+      <button open-type="share" class="btn share-btn" data-type="share-btn" onTap="gotoNext"></button>
+    </view>
+    <!-- <button type="default" size="defaultSize" onTap="logout"> Button </button>
+    <button type="default" size="defaultSize" onTap="getAuthCode"> getAuthCode </button> -->
+
+    <view class="zl-list">
+
+      <view a:for="{{list}}" class="zl-list-item">
+        <view class="zl-item-img" data-position="img" data-type="zldetail" data-index="{{index}}" data-aid="{{item.aid}}" catchTap="gotoNext">
+          <image lazyLoad src="{{ item.image }}" default-source="/img/tip-img/not-img2.png" />
+          <view a:if="{{item.btnStatus.status == 2 || item.btnStatus.status == 3 }}" class="activity-time">{{ item.startTimeText }}</view>
+        </view>
+        <!-- 需要提交form id  status == 1 马上抢 -->
+        <form a:if="{{item.btnStatus.status == 1}}" class="zl-item-info" onSubmit="formBtnEvent" report-submit>
+          <input class="input-hidden" name="aid" value="{{item.aid}}" disabled="true" />
+          <input class="input-hidden" name="index" value="{{index}}" disabled="true" />
+          <!-- info -->
+          <view class="max-line-2 zl-item-title">{{item.title}}</view>
+          <text class="zl-num">{{item.totalNumber}}人助力</text>
+          <view class="schedule-box">
+            <view class="progress-bar" style="width:{{item.stockStatus.schedule}}%;"></view>
+            <text class="text-tip">{{item.stockStatus.text}}</text>
+          </view>
+          <view class="zl-sub-box">
+            <view class="price-box">
+              <text class="curr-price">¥<text>{{item.price[0]}}</text>.{{item.price[1]}}</text>
+              <text class="del-price">¥{{item.originalPrice}}</text>
+            </view>
+            <button class="zl-btn {{item.btnStatus.btnClass}}">
+              <text>{{item.btnStatus.text}}</text>
+            </button>
+          </view>
+          <button class="formid-submit form-btn" formType="submit" style="border:1px solid #f00;"></button>
+        </form>
+        <!-- 其他状态 -->
+        <view a:if="{{item.btnStatus.status != 1}}" class="zl-item-info" data-position="detail" data-type="zldetail" data-aid="{{item.aid}}" data-index="{{ index }}" catchTap="gotoNext">
+          <view class="max-line-2 zl-item-title">{{item.title}}</view>
+          <text class="zl-num">{{item.totalNumber}}人助力</text>
+          <view class="schedule-box">
+            <view class="progress-bar" style="width:{{item.stockStatus.schedule}}%;"></view>
+            <text class="text-tip">{{item.stockStatus.text}}</text>
+          </view>
+          <view class="zl-sub-box">
+            <view class="price-box">
+              <text class="curr-price">¥<text>{{item.price[0]}}</text>.{{item.price[1]}}</text>
+              <text class="del-price">¥{{item.originalPrice}}</text>
+            </view>
+            <!-- 需要提交form id  -->
+            <view a:if="{{item.btnStatus.status == 2 || item.btnStatus.status == 3}}" class="virtual-btn"></view>
+
+            <button a:if="{{item.btnStatus.status==4 || item.btnStatus.status == 5}}" class="zl-btn {{item.btnStatus.btnClass}}" >
+              <text>{{item.btnStatus.text}}</text>
+            </button>
+
+          </view>
+        </view>
+
+        <form
+          a:if="{{item.btnStatus.status == 2 || item.btnStatus.status == 3}}"
+          class="subscribe-btn"
+          onSubmit="formBtnEvent" report-submit>
+          <input class="input-hidden" name="aid" value="{{item.aid}}" disabled="true" />
+          <input class="input-hidden" name="index" value="{{index}}" disabled="true" />
+          <button formType="submit" class="zl-btn {{item.btnStatus.btnClass}}" >
+            <image a:if="{{item.btnStatus.status == 2}}" src="https://img1.haoshiqi.net/miniapp/time_dcb7586e15.png" />
+            <text>{{item.btnStatus.text}}</text>
+          </button>
+        </form>
+
+      </view>
+
+    </view>
+
+    <view a:if="{{list.length && showFooter}}">
+      <template is="foot" data="{{text:'没有更多商品了~'}}"></template>
+    </view>
+    <view a:if="{{!list.length && !isLoading}}">
+      <image class="empty-img" src="https://img1.haoshiqi.net/miniapp/new_error_d13709db30.png" mode="aspectFit" />
+      <view class="empty-text">目前没有助力的商品哦~</view>
+    </view>
+
+  </scroll-view>
+  <!-- 返回顶部按钮 -->
+  <template is="backTop" data="{{showBackTop,bottom:160}}"></template>
+
+  <view class="my-task-btn" data-type="mytask" onTap="gotoNext">我的免单</view>
+</dwd-page>

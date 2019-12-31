@@ -1,0 +1,17 @@
+<dwd-tpl class="c-tofu" data="{{ data }}">
+  <view class="c-tofu-box {{ data.layout ? `layout-${ data.layout }` : '' }}">
+    <view
+      a:for="{{data.list}}"
+      class="c-tofu-item exposure-item"
+      a:key="{{index}}"
+      data-index="{{index}}"
+      data-title="{{ data.moduleName }}"
+      data-url="{{item.link}}"
+      data-piwik-event="{{item.piwikEvent}}"
+      data-piwik-data="{{item.piwikData}}"
+      data-module-id="{{ data.id }}"
+      onTap="onUrlPage">
+      <image class="image" lazyLoad src="{{item.image.url}}" default-source="/img/tip-img/not-img2.png" mode="aspectFit"></image>
+    </view>
+  </view>
+</dwd-tpl>

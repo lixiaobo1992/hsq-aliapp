@@ -1,0 +1,7 @@
+{
+  "defaultTitle": "助力享免单",
+  "pullRefresh": true,
+  "usingComponents": {
+    "dwd-page": "/components/page/index"
+  }
+}

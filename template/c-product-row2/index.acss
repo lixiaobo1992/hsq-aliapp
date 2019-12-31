@@ -1,0 +1,193 @@
+.c-product-row2{
+  width: 100%;
+  overflow: hidden;
+}
+.row2-warp{
+  width: 100%;
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  margin-left: -3rpx;
+}
+.row2-box{
+  width: 344rpx;
+  background: #fff;
+  margin-left: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.member-radius {
+  border-radius: 5rpx;
+}
+
+.row2-img-box{
+  width: 100%;
+  position: relative;
+  line-height: 0;
+}
+.row2-img{
+  width: 100%;
+  height: 300rpx;
+  border-radius: 5rpx 5rpx 0 0;
+}
+.row2-status-img{
+  position: absolute;
+  width: 140rpx;
+  height: 140rpx;
+  left: 103rpx;
+  top: 80rpx;
+}
+
+.row2-tag-img{
+  position: absolute;
+  width: 56rpx;
+  height: 56rpx;
+  left: 10rpx;
+  top: 0rpx;
+  z-index: 1;
+}
+.row2-tag-box{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+.row2-tag-box .tag-item{
+  line-height: 0;
+}
+.row2-tag-box .tag-item text{
+  font-size: 18rpx;
+  color: #fff;
+  display: inline-block;
+  padding: 10rpx 10rpx;
+  border-top-right-radius: 10rpx;
+  line-height: 1;
+  margin: 0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.row2-tag-box .tag-item.tag-tit text{
+  font-size: 20rpx;
+  background-image: linear-gradient(90deg, rgba(247,96,130, 0.8) 21%, rgba(244,97,115, 0.8) 78%);
+}
+.row2-tag-box .tag-item.tag-sub text{
+  font-size: 18rpx;
+  background-image: linear-gradient(90deg, rgba(159,119,244, 0.8) 21%, rgba(105,50,221, 1) 78%);
+}
+
+
+.row2-text-box{
+  margin-top: 10rpx;
+  padding: 0 10rpx;
+}
+.row2-title{
+  margin-top: 10rpx;
+  display: block;
+  color: #000;
+  font-size: 26rpx;
+  line-height: 37rpx;
+  height: 74rpx;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-wrap:break-word
+}
+.row2-price-box{
+  margin-top: 20rpx;
+}
+.row2-price{
+  color: #BC1818;
+  font-size: 36rpx;
+  line-height: 42rpx;
+}
+.row2-market{
+  font-size: 30rpx;
+  color: #9b9b9b;
+  text-decoration: line-through;
+  margin-left: 10rpx;
+}
+
+/* 会员价 */
+.row2-member-price{
+  margin-top: 10rpx;
+  position: relative;
+  overflow: hidden;
+}
+.market-price {
+  display: block;
+  font-size: 28rpx;
+  color: #222;
+}
+.row2-member-price .member-price-box {
+  line-height: 50rpx;
+  position: relative;
+}
+
+.row2-member-price .member-price-row2 {
+  float: left;
+  font-size: 36rpx;
+  color: #FF1E1E;
+}
+.row2-member-price .member-icon-row2 {
+  float: left;
+  font-size: 20rpx;
+  color: #ff1e1e;
+  width: 90rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  border-radius: 4rpx;
+  border: 1px solid #ff1e1e;
+  margin-left: 14rpx;
+  margin-top: 7rpx;
+  background: #FFF3F3;
+  position: relative;
+}
+
+.member-icon-row2::after{
+  content: "";
+  border: 6rpx solid #FFF3F3;
+  border-left: none;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  position: absolute;
+  top: 50%;
+  left: -6rpx;
+  z-index: 1;
+  margin-top: -6rpx;
+}
+
+.member-icon-row2::before{
+  content: "";
+  border: 8rpx solid #c62c2e;
+  border-left: none;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  position: absolute;
+  top: 50%;
+  left: -8rpx;
+  z-index: 1;
+  border-radius: 4rpx;
+  margin-top: -8rpx;
+}
+
+.row2-member-price .member-btn-row2 {
+  position: absolute;
+  right: 10rpx;
+  bottom: 10rpx;
+  width: 66rpx;
+  height: 66rpx;
+  line-height: 66rpx;
+  text-align: center;
+  border: 1px solid #ff1414;
+  background: #fff;
+  box-shadow: 0 2rpx 4rpx 0 #CCCCCC;
+  color: #ff0000;
+  font-size: 34rpx;
+  border-radius: 66rpx;
+  font-weight: bold;
+}

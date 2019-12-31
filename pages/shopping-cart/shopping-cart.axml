@@ -1,0 +1,160 @@
+<import src="/components/coupon-toast/index.axml"/>
+
+<dwd-page
+  id="dwd-page-shopping"
+  className="page-shopping"
+  contentClass="page-shopping-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+    <view class="shopping-cart {{ shoppingCartList.length ? 'is-footer' : '' }}">
+
+      <view class="header-edit" a:if="{{ shoppingCartList.length && !isLoading }}">
+        <view class="product-number">共{{ productCount }}件商品</view>
+        <view class="edit-btn" onTap="onChengeEditStatus">{{ !currentEditStatus ? '编辑' : '完成' }}</view>
+      </view>
+
+      <view class="shopping-cart-content">
+        <view class="effective-product">
+          <view class="merchant-item" a:for="{{ shoppingCartList }}" a:for-item="merchantItem" a:for-index="merchantItemIndex" a:key="{{ merchantItem.merchant_id }}">
+            <view class="merchant-info">
+              <view class="select-icon {{ allMerchantStauts[merchantItem.merchant_id].isSelect ? 'active' : '' }}" data-merchantid="{{ merchantItem.merchant_id }}" onTap="merchantAllChooseEvent"></view>
+              <view class="merchant-name" data-id="{{ merchantItem.merchant_id }}" data-type="merchant" onTap="gotoNext">
+                <view class="merchant-icon"><image src="{{ allMerchantStauts[merchantItem.merchant_id].icon }}" /></view>
+                <text class="merchant-name-text">{{ allMerchantStauts[merchantItem.merchant_id].merchant_name }}</text>
+                <view class="right-arrow"></view>
+              </view>
+              <view class="collar-btm" a:if="{{ allMerchantStauts[merchantItem.merchant_id].is_coupon }}" data-merchantid="{{ merchantItem.merchant_id }}" onTap="showCoupon">领券</view>
+            </view>
+
+            <view class="merchant-activity-list">
+              <view class="merchant-activity-item" a:for="{{ merchantItem.activity_list }}" a:for-item="activityItem" a:for-index="activityItemIndex" a:key="{{ activityItem.activity_id }}">
+                <!-- 活动 -->
+                <view class="merchant-activity-header" a:if="{{ allActivityStauts[activityItem.activity_id].activity_type != 0 }}" data-url="{{ allActivityStauts[activityItem.activity_id].link }}" data-piwik-event="{{item.piwikEvent}}" data-piwik-data="{{item.piwikData}}" onTap="onUrlPage">
+                  <view class="activity-tag">{{ allActivityStauts[activityItem.activity_id].activity_tag }}</view>
+                  <view class="ellipsis activity-desc">{{ allActivityStauts[activityItem.activity_id].activity_desc }}</view>
+                  <view class="activity-btn" a:if="{{ allActivityStauts[activityItem.activity_id].activity_type == 1 && allActivityStauts[activityItem.activity_id].link }}">
+                    <text>{{ allActivityStauts[activityItem.activity_id].link_desc }}</text>
+                    <view class="right-arrow"></view>
+                  </view>
+                </view>
+                <!-- sku list -->
+                <view class="sku-product-list">
+                  <view class="sku-product-item-box" a:for="{{ activityItem.sku_list }}" a:for-item="sku_id" a:for-index="skuItemIndex" a:key="{{ sku_id }}">
+                    <dwd-swiper-action
+                      className="sku-product-item-swiper"
+                      index="{{ activityItemIndex + '_' + skuItemIndex }}"
+                      restore="{{swipeIndex === null || swipeIndex !== activityItemIndex + '_' + skuItemIndex}}"
+                      right="{{allSkuStauts[sku_id].swiper_action.right}}"
+                      extra="{{allSkuStauts[sku_id].swiper_action.extra}}"
+                      isSwitch="{{ isSwitch }}"
+                      onRightItemClick="onRightItemClick"
+                      onSwipeStart="onSwipeStart">
+                      <view class="sku-product-item">
+                        <view class="select-icon {{ allSkuStauts[sku_id].isSelect ? 'active' : '' }}" data-skuid="{{ sku_id }}" data-merchantid="{{ merchantItem.merchant_id }}" onTap="skuChooseEvent"></view>
+                        <view class="sku-product-item-content">
+                          <view class="sku-activity-header" a:for="{{ allSkuStauts[sku_id].shop_discount }}" a:for-item="shopItem" a:for-index="shopIndex" data-skuid="{{ sku_id }}" a:key="{{ shopIndex }}" catchTap="onShowPromotion">
+                            <view class="activity-tag">{{ shopItem.title }}</view>
+                            <view class="ellipsis activity-desc">
+                              <block a:for="{{shopItem.text}}" a:for-item="textItem" a:for-index="textIndex" a:key="{{textIndex}}">
+                                <text>{{ textItem.first}}</text>
+                                <text class="red">{{ textItem.second }}</text>
+                                <text a:if="{{ textIndex < shopItem.text.length-1  }}">, </text>
+                              </block>
+                            </view>
+                            <view class="right-arrow"></view>
+                          </view>
+                          <view class="sku-product-content">
+                            <view class="sku-img" data-id="{{ sku_id }}" data-type="detail" onTap="gotoNext">
+                              <image mode="scaleToFill" src="{{ allSkuStauts[sku_id].pic }}" default-source="/img/tip-img/not-img2.png"/>
+                            </view>
+                            <view class="sku-item-content">
+                              <view class="max-line-2 sku-title">
+                                <text class="sku-tag" a:if="{{allSkuStauts[sku_id].merchant_type == 2}}">自营</text>
+                                {{ allSkuStauts[sku_id].name }}
+                              </view>
+                              <view class="ellipsis sku-attr" data-skuid="{{ sku_id }}"  onTap="getSkuAttr">
+                                {{ allSkuStauts[sku_id].attrsText }}
+                                <view class="down-arrow"></view>
+                              </view>
+
+                              <view class="sku-price-sum">
+                                <view class="sku-price">¥{{ allSkuStauts[sku_id].priceText }}</view>
+                                <view class="sku-input">
+                                  <dwd-input-number value="{{ allSkuStauts[sku_id].amount }}" max="{{ allSkuStauts[sku_id].max_cart_nums }}" extra="{{allSkuStauts[allSkuStauts[sku_id].sku_id].swiper_action.extra}}"  size="small" onChange="countChangeVal" />
+                                </view>
+                              </view>
+                              <view class="purchase-limit-tip" a:if="{{ allSkuStauts[sku_id].max_cart_nums < allSkuStauts[sku_id].amount }}">本商品限购{{ allSkuStauts[sku_id].max_cart_nums }}件</view>
+                            </view>
+
+                          </view>
+                        </view>
+                      </view>
+                    </dwd-swiper-action>
+                  </view>
+
+                </view>
+              </view>
+            </view>
+
+          </view>
+        </view>
+
+        <!-- 购车为空 -->
+        <view class="content-null" a:if="{{ !shoppingCartList.length && !loseGoodsList.length && !isLoading}}">
+          <image class="null-img" src="https://img1.haoshiqi.net/miniapp/img/cart_null_e2c176bf9e.png" mode="scaleToFill" />
+          <view class="null-title">购物车空空如也！！</view>
+          <view class="null-text">为自己挑点好吃的吧</view>
+          <view class="null-btn" data-url="{{cartJumpUrl}}" onTap="onUrlPage">去逛逛</view>
+        </view>
+
+        <view class="invalid-product" a:if="{{ loseGoodsList.length && !isLoading }}">
+          <dwd-cart-lose data="{{ loseGoodsList: loseGoodsList }}"></dwd-cart-lose>
+        </view>
+
+      </view>
+
+      <view class="shopping-cart-footer" a:if="{{ shoppingCartList.length && !isLoading }}">
+        <view class="all-select-box" onTap="allChooseEvent">
+          <view class="select-icon {{ isAllSelect ? 'active' : '' }}"></view>
+          <text class="select-text">全选</text>
+        </view>
+        <view class="total-price" a:if="{{ !currentEditStatus }}">
+          合计 <text class="price-text">¥{{totalPriceText}}</text>
+        </view>
+        <view class="footer-btn" onTap="footerBtnEvent">
+          {{ !currentEditStatus ? '去结算(' + selectCount + ')' : '删除'  }}
+        </view>
+      </view>
+    </view>
+
+
+    <!-- sku -->
+    <dwd-sku-select
+      className="cart-sku-select"
+      isPopupShow="{{ isShowPopup }}"
+      normSelectTag="{{ normSelectTag }}"
+      skuBtnStatus="{{ skuBtnStatus }}"
+      attrList="{{ attrList }}"
+      skuStocksList="{{ skuStocksList }}"
+      smallCurrentSkuData="{{ smallCurrentSkuData }}"
+
+      maxBuySum="{{ maxBuySum }}"
+      currentSum="{{ currentSum }}"
+      onSetParentData="setCurrentData"
+      onBtnClick="onBtnClick"
+    />
+
+    <card-promotion
+      promotions="{{promotions}}"
+      type="shoppingCart"
+      promotionTitle="优惠"
+      onShowPromotionCon="handlePromotion"
+      isPopupShow="{{onShowPromotionInfo}}" />
+    <!--购物车优惠券列表弹层-->
+    <view class="popup-outbox" hidden="{{ !showCoupons }}">
+      <coupon-list coupons="{{coupons}}" onHandleItem="onHandleItem" ></coupon-list>
+    </view>
+    <!-- 领取成功toast -->
+    <template is="coupon-toast" a:if="{{sucToast}}"></template>
+
+</dwd-page>

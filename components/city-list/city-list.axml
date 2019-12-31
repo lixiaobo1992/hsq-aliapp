@@ -1,0 +1,24 @@
+<!--components/zone-list.aml-->
+<view class="city-list">
+  <view class="select-header">
+    <view class="select-title {{ isSelectProvince ? 'no-data': '' }}" onTap="cancelSelect">
+      {{ currentProvince.currentAddress ? currentProvince.currentAddress : '请选择' }}
+    </view>
+    <view a:if="{{ currentProvince.currentAddress }}" class="{{ isSelectProvince ? '' : 'no-data' }}">
+      请选择
+    </view>
+  </view>
+  <!-- 选择省份 -->
+  <block a:if="{{ isSelectProvince }}">
+    <view class="zone-item" a:for="{{zones}}" a:key="id" onTap="selectProvince" data-province="{{item}}">
+      <image a:if="{{ item.currentAddress == currentProvince.currentAddress }}" class="select-icon" src="https://img2.haoshiqi.net/item_detail_check@3x.png" mode="scaleToFill" />
+      <label class="zone-label">{{item.currentAddress}}</label>
+    </view>
+  </block>
+  <!-- 选择城市 -->
+  <block a:else>
+    <view class="zone-item" a:for="{{ cityList }}" a:key="{{ item.id }}" onTap="selectCity" data-city="{{item}}">
+      <label class="zone-label">{{ item.city }}</label>
+    </view>
+  </block>
+</view>

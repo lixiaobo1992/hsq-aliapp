@@ -1,0 +1,17 @@
+<template name="coupon-item">
+  <view
+    class="cont-coupon"
+    onTap="{{showArrow ? 'onShowCoupon' : ''}}"
+    data-show="{{showArrow ? 'true' : 'false'}}"
+  >
+    <view class="cont-title">领券：</view>
+    <view class="content">
+      <view class="coupon-tag">
+        <text class='item' a:for="{{list}}">
+          {{ item.desc }}
+        </text>
+      </view>
+    </view>
+    <image class="more" src="https://img1.haoshiqi.net/wxapp/img/more_85508a3b09.png" mode="aspectFill" />
+  </view>
+</template>

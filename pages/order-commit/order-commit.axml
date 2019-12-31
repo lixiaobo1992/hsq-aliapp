@@ -1,0 +1,189 @@
+<import src="/components/order-commit-pop/index.axml" />
+
+<dwd-page
+  id="dwd-page-commit"
+  className="page-commit"
+  contentClass="page-commit-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <view class="commit-order-page {{ msgboard.title ? 'msgTop' : '' }}" hidden="{{isLoading}}">
+    <view class="msg-box" a:if="{{ msgboard.title }}">
+      <image class="msg-img" src="https://img1.haoshiqi.net/miniapp/order-confirm/msgboard_878cc7e279.png" mode="aspectFit" />
+      <text class="msg-title">{{ msgboard.title }}</text>
+      <text class="msg-cont-btn" onTap="setModalBtn" a:if="{{ msgboard.title }}">详情</text>
+    </view>
+    <!-- 收货地址 -->
+    <view class="addres-info" onTap="onAddressBtnClicked">
+      <block a:if="{{ address.id }}">
+        <view class="user-info">
+          <text class="user-name">{{ address.contacter }}</text>
+          <text class="user-mobile">{{ address.mobile }}</text>
+        </view>
+        <view class="addres-text">{{ address.addressText }}</view>
+      </block>
+      <view class="not-addres" a:else>添加收货地址</view>
+      <image class="left-arrow" src="https://img1.haoshiqi.net/miniapp/more_85508a3b09.png" mode="widthFix" />
+    </view>
+
+    <view class="account-product">
+      <view class="barnd-card" a:for="{{ productList }}" a:key="{{ item.merchant_id }}">
+        <!-- 商家信息 -->
+        <view class="barnd-info">
+          <image class="barnd-icon" src="https://img1.haoshiqi.net/miniapp/img/merchant_icon_25a2d95ce6.png" mode="widthFix" />
+          <text class="barnd-name">{{ item.merchant_name }}</text>
+        </view>
+        <!-- 产品列表 -->
+        <view class="product-list">
+          <view class="product-item" a:for="{{ item.skuList }}" a:for-item="product" a:key="{{ product.id }}">
+            <view class="product-img">
+              <image src="{{ product.thumbnail }}" default-source="/img/tip-img/not-img2.png" mode="aspectFit" />
+            </view>
+            <view class="product-info">
+              <view class="max-line-2 product-title">{{ product.name }}</view>
+              <view class="product-price">
+                <text class="price">￥{{ product.price }}</text>
+                <text class="count">x<text>{{ product.amount }}</text></text>
+              </view>
+              <view class="product-decs" a:for="{{ product.attrs }}" a:for-item="attrItem">{{ attrItem }}</view>
+            </view>
+          </view>
+
+        </view>
+
+        <!-- 商家优惠 -->
+        <view a:if="{{ item.lately_double_tips }}" class="barnd-attach" data-index="{{ index }}" onTap="onShowShopDiscount">
+          <text class="attach-name">店铺活动</text>
+          <view class="attach-right merchant-offer">
+            <text class="offer-text">{{ item.lately_double_tips || '暂无可用' }}</text>
+            <image class="left-arrow" src="https://img1.haoshiqi.net/miniapp/more_85508a3b09.png" mode="widthFix" />
+          </view>
+        </view>
+        <!-- 商家券 -->
+        <view
+          class="barnd-attach"
+          data-type="merchant"
+          data-merchant-id="{{ item.merchant_id }}"
+          onTap="selectCouponEvent"
+          a:if="{{ merchantCoupon[item.merchant_id].list.length }}">
+          <text class="attach-name">店铺券</text>
+          <text class="coupon-tip" a:if="{{ merchantCoupon[item.merchant_id].list.length }}">{{ merchantCoupon[item.merchant_id].list.length }}张可用</text>
+          <view class="attach-right merchant-coupon">
+            <block a:if="{{ merchantCoupon[item.merchant_id].currentMerchantCoupon }}">
+              <text class="coupon-price">-¥{{ merchantCoupon[item.merchant_id].merchantDiscount }}</text>
+            </block>
+            <text a:else class="coupon-price">{{ merchantCoupon[item.merchant_id].list.length ? '未使用' : '暂无可用' }}</text>
+            <image class="left-arrow" src="https://img1.haoshiqi.net/miniapp/more_85508a3b09.png" mode="widthFix" />
+          </view>
+        </view>
+        <!-- 数量加减 商家邮费，留言 -->
+        <view class="barnd-attach" a:if="{{ isFastbuy && orderType !=7 }}">
+          <text class="attach-name">购买数量：</text>
+          <view class="attach-right buy-num">
+            <dwd-input-number value="{{ item.skuList[0].amount }}" max="{{ item.skuList[0].max_cart_nums }}" size="small" onChange="countChangeVal" />
+            <text class="buy-num-tip">本商品限购{{ item.skuList[0].max_cart_nums }}件</text>
+          </view>
+        </view>
+        <view class="barnd-attach">
+          <text class="attach-name">配送</text>
+          <view class="attach-right postage {{ !item.canDelivery || item.deliveryPrice ? 'not' : '' }}">{{ item.deliveryPriceText }}</view>
+        </view>
+        <view class="barnd-attach">
+          <text class="attach-name">留言</text>
+          <view class="attach-right leave-msg">
+            <input class="leave-input" type="text"  data-id="{{ item.merchant_id }}" value="{{ notes[item.merchant_id] }}" onInput="bindMessageInput" placeholder="建议留言前先与商家沟通确认" />
+          </view>
+        </view>
+        <view class="sub-total">共{{ item.totalAmount }}件商品<text class="sub-text">小计：</text><text class="sub-price">¥{{ item.needPayPriceText }}</text></view>
+      </view>
+
+      <!-- 优惠券 -->
+      <view class="offer-card coupon-card" data-type="platform" onTap="selectCouponEvent">
+        <view class="offer-type">
+          <text class="offer-name">平台券</text>
+          <text class="coupon-tip" a:if="{{ platformCouponList.length }}">{{ platformCouponList.length }}张可用</text>
+          <!-- <text class="coupon-tip">4张可用</text> -->
+          <text class="ellipsis member-tip" a:if="{{ lightMemberDiscountDesc }}">{{ lightMemberDiscountDesc }}</text>
+        </view>
+        <text
+          class="offer-price red"
+          a:if="{{ platformCouponList.length && currentPlatformCoupon.platformDiscount }}">-¥{{ (currentPlatformCoupon.platformDiscount/100).toFixed(2) }}
+        </text>
+        <text class="unused" a:elif="{{ !platformCouponList.length }}">暂无可用</text>
+        <text class="unused" a:elif="{{ !currentPlatformCoupon.platformDiscount }}">未使用</text>
+        <image class="left-arrow" src="https://img1.haoshiqi.net/miniapp/more_85508a3b09.png" mode="widthFix" />
+      </view>
+    </view>
+
+    <view class="submit-tip">
+      <image src="https://img1.haoshiqi.net/miniapp/iconwarningoutline_3470dc5fbe.png" />
+      <view class="tip-text">支付宝卡包优惠券将在<text>‘提交订单’</text>后自动生效并抵扣支付金额！</view>
+    </view>
+
+    <view class="footer-tip">
+      <image class="tip-icon" src="https://img1.haoshiqi.net/miniapp/commit_notice_9144887f24.png"></image>
+      <view class="tip-text">{{address.addressText || '请添加收货地址'}}</view>
+    </view>
+    <!-- 底部支付 -->
+    <view class="order-footer-btn">
+      <view class="pay-price">共{{ totalAmount }}件 合计：<text class="total-price">¥{{ needPayPriceText }}(省{{ savePriceText }})</text></view>
+      <view class="pay-btn {{isDisabled ? 'btn-disable' : ''}}" onTap="orderSubmit">提交订单</view>
+    </view>
+
+  </view>
+</dwd-page>
+<!-- 商品信息弹窗 -->
+<template
+  is="order-commit-pop"
+  data="{{hidden: windowHidden, data: popWindowData, animMaskData, animContentData}}"/>
+</template>
+
+
+<!-- 店铺活动弹窗 -->
+<view class="offer-popup">
+  <view class="popup-mask" onTap="setOfferPopup" a:if="{{isOfferPopupShow}}"></view>
+  <view class="offer-popup-content clearfix {{ isOfferPopupShow ? 'show': '' }}">
+    <view class="offter-content">
+      <view class="offter-title">
+        <text>店铺活动</text>
+        <image class="close-img"  src="../../img/delete.png" mode="aspectFit" onTap="setOfferPopup" />
+      </view>
+      <view class="scroll-reduce">
+        <view class="shop-reduce" a:if="{{productList[currentMerchantIndex].shopReduce.length}}">
+          <view a:for="{{productList[currentMerchantIndex].shopReduce}}" a:for-item="reduce" a:for-index="reduceIndex" a:key="reduceIndex" class="reduce-item">
+            <text class="reduce-tips">{{ reduce.tips }}</text>
+            <view class="reduce-content">
+              <view class="reduce-detail max-line-2">{{ reduce.reduceDetail }}</view>
+              <view class="reduce-price">-¥{{ reduce.price }}</view>
+            </view>
+          </view>
+        </view>
+        <view class="offter-product">
+          <view class="offter-product-item" a:for="{{ productList[currentMerchantIndex].skuList }}"
+        a:if="{{ item.discount_activity.shop_discount.length }}" >
+            <view class="pro-img">
+              <image mode="scaleToFill" src="{{ item.thumbnail }}" default-source="/img/tip-img/not-img2.png" />
+            </view>
+            <view class="pro-info">
+              <view class="pro-content">
+                <view class="max-line-2 pro-name">{{ item.name }}</view>
+                <view class="pro-num-price">
+                  <text class="pro-num">x{{ item.amount }}</text>
+                  <text class="offter-price"  a:if="{{item.discount_activity.discount_price}}">-¥{{item.discount_activity.discount_price}}</text>
+                  <text class="offter-price" a:else>无优惠</text>
+                </view>
+              </view>
+              <view class="offter-info">
+                <text a:for="{{ item.discount_activity.shop_discount }}" a:for-item="shopItem" class="{{ shopItem.status ? 'red': '' }}">{{index !=0 ? ', ':''}}{{shopItem.text}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="offter-total">
+          <view class="total-tit">共优惠金额</view>
+          <text class="red">-¥{{ productList[currentMerchantIndex].shop_activity_discount_price}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+

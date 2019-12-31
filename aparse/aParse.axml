@@ -1,0 +1,7 @@
+<import src="./components/aParse0.axml" />
+
+<template name="aParse">
+  <block a:for="{{aParseData}}" a:key="">
+    <template is="aParse0" data="{{item}}" />
+  </block>
+</template>

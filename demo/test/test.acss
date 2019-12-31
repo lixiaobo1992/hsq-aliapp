@@ -1,0 +1,46 @@
+/* @import "/components/lifecycle.acss"; */
+@import '/components/grid/index.acss';
+@import '/components/price/index.acss';
+
+
+.demo-block{
+  padding: 12px;
+}
+.demo-block .demo-title{
+  font-size:16px;
+  color: #333;
+}
+.demo-block .demo-content{
+  padding: 20px 10px;
+  border: 1px solid #ccc;
+}
+.test-btn{
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  width: 100px;
+  background-color: #999;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.desc {
+  margin: 40rpx 0 20rpx;
+  font-size: 32rpx;
+  text-align: center;
+}
+.container {
+  margin: 40rpx 0;
+  width: 100%;
+}
+.grid-item {
+  padding-top: 12% !important;
+}
+.grid-text {
+  margin-top: 0;
+}
+

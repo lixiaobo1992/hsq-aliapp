@@ -1,0 +1,54 @@
+<import src="/components/card/index.axml" />
+<import src="/components/foot/foot.axml" />
+<import src="/aparse/aParse.axml" />
+<import src="/components/back-home/index.axml" />
+<import src="/components/feedback/index.axml" />
+<import src="/components/coupon/index.axml" />
+
+<dwd-page
+  id="dwd-page-zt2"
+  className="page-zt2"
+  contentClass="page-zt2-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <scroll-view
+    scroll-y
+    onScrollToLower="onScrollToLower"
+    style="height:100%"
+    >
+    <view a:if="{{showFavorite}}">
+      <favorite>
+        点我收藏，享受更多低价福利
+      </favorite>
+    </view>
+    <form class="page-full-auto" onSubmit="formidSubmit" report-submit>
+      <button formType="submit" class="page-full-auto formid-submit">
+
+        <template is="backHome" data="{{isShowGoHome}}"></template>
+        <template is="feedback" data="{{isShowFeedback:true, log: 'c_tousu_zt'}}"></template>
+        <!-- <view class="view-image" a:if="{{banner.image}}">
+          <image class="image" src="{{banner.image}}" data-url="{{banner.url}}" onTap="onUrlPage" mode="scaleToFill" />
+        </view> -->
+        <template is="aParse" data="{{aParseData:banner.nodes}}"/>
+
+        <view>
+          <!-- 使用注意事项， card 不实现背景，自己外层盒子实现 -->
+          <view class="product-{{listMode}}">
+            <block a:for="{{list}}">
+              <template is="card" data="{{index:index,...item}}" />
+            </block>
+          </view>
+        </view>
+
+        <!-- 底部提示数据 -->
+        <view a:if="{{showFooter}}">
+          <template is="foot"></template>
+        </view>
+
+        <!-- 优惠券弹框 -->
+        <template is="coupon" data="{{showCoupon: showCoupon, couponHasMore: couponHasMore, couponList: couponList}}"></template>
+
+      </button>
+    </form>
+  </scroll-view>
+</dwd-page>

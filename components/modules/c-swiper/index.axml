@@ -1,0 +1,36 @@
+<dwd-tpl class="c-swiper" data="{{ data }}">
+  <!-- data.layout == 1 带间距 2 不带间距 -->
+  <view
+    class="c-swiper-box exposure-item {{ data.layout == 1 ? 'c-swiper-1' : '' }}"
+    style="padding-top: {{ newPadTop }}%">
+    <!-- 页面逻辑 -->
+    <swiper
+      indicator-dots="{{ data.list.length > 1 && data.dots ? true : false }}"
+      circular="{{ data.circular }}"
+      autoplay="{{ data.auto }}"
+      interval="{{ data.interval || 6000 }}"
+      previous-margin="{{ data.layout == 1 ? '12px' : '0px' }}"
+      next-margin="{{ data.layout == 1 ? '12px' : '0px' }}"
+      indicator-active-color="{{ data.activeColor }}"
+      indicator-color="rgba(0, 0, 0, .3)"
+      data-module-id="{{ data.id }}"
+      onChange="onChangeEvent">
+      <block a:for="{{ data.list }}">
+        <swiper-item a:key="{{ index }}" class="c-swiper-item" >
+          <image
+            class="c-swiper-img"
+            onTap="onUrlPage"
+            data-url="{{ item.link }}"
+            data-index="{{ index }}"
+            data-title="{{ data.moduleName }}"
+            src="{{ item.image.url }}"
+            default-source="/img/tip-img/not-img1.png"
+            data-piwik-event="{{item.piwikEvent}}"
+            data-piwik-data="{{item.piwikData}}"
+            data-module-id="{{ data.id }}"
+            mode="aspectFill" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</dwd-tpl>

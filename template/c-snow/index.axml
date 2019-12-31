@@ -1,0 +1,6 @@
+<template name="c-snow">
+  <view class="c-snow">
+    <!-- 页面逻辑 -->
+    <text class="snow-item" a:for="{{ snowData }}" a:key="{{ index }}" style="width: {{ item.width }}px; height: {{ item.height }}px; left: {{ item.left }}px; top: {{ item.top }}px;" ></text>
+  </view>
+</template>

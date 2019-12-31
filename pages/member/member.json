@@ -1,0 +1,10 @@
+{
+  "defaultTitle": "会员中心",
+  "pullRefresh": true,
+  "allowsBounceVertical": "YES",
+  "usingComponents": {
+    "dwd-page": "/components/page/index",
+    "dwd-product-col2": "/components/modules/c-product-col2/index",
+    "dwd-modules": "/components/modules/index/index"
+  }
+}

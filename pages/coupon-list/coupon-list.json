@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "我的优惠券",
+  "usingComponents": {
+    "dwd-page": "/components/page/index"
+  }
+}

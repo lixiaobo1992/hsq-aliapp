@@ -1,0 +1,7 @@
+{
+    "defaultTitle": "我的免单",
+    "pullRefresh": true,
+    "usingComponents": {
+      "dwd-page": "/components/page/index"
+    }
+}

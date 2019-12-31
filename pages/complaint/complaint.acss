@@ -1,0 +1,49 @@
+.page{
+    background-color: #f5f5f9;
+    color: #333;
+    font-size: 28rpx;
+}
+.title{
+    line-height: 80rpx;
+    padding-left: 30rpx;
+}
+.item-list{
+    padding-left: 30rpx;
+    background-color: #fff;
+}
+.item{
+    line-height: 88rpx;
+    border-top: 1rpx solid #e2e2e2;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 30rpx;
+    align-items: center;
+}
+.item image{
+    width: 36rpx;
+    height: 36rpx;
+    display: none;
+}
+.no-border{
+    border: none;
+}
+.next-block{
+    margin-top: 40rpx;
+    padding: 0 30rpx
+}
+.next-btn{
+    line-height: 80rpx;
+    width: 100%;
+    text-align: center;
+    background-color: #999;
+    border-radius: 6rpx;
+    font-size: 34rpx;
+    color: #fff;
+}
+.checked{
+    background-color: #108ee9;
+}
+
+.item .check-icon{
+    display: block;
+}

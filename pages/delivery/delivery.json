@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "查看物流",
+  "usingComponents": {
+    "dwd-page": "/components/page/index"
+  }
+}

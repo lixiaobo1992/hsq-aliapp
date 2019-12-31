@@ -1,0 +1,97 @@
+<import src="/components/swiper/swiper.axml" />
+<import src="/components/labels/labels.axml" />
+<import src="/components/attr-text/index.axml" />
+<import src="/components/attr-img/index.axml" />
+<import src="/components/sec-head/index.axml" />
+
+<dwd-page
+  id="dwd-page-zl-detail"
+  className="page-zl-detail"
+  contentClass="page-zl-detail-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+
+  <view class="page">
+    <!-- swiper -->
+    <template is="swiper" data="{{...swiperInfo}}"></template>
+
+    <!-- 商品信息 -->
+    <view class="view-info">
+      <view class="title max-line-2">{{name}}</view>
+      <view class="price-info">
+        <view class="price">
+          ￥<text>{{priceInt}}</text>
+        </view>
+        <view class="del-price">
+          价格 <text>{{marketPrice}}</text>
+        </view>
+        <view class="zl-num">
+          {{boosterNum}}人助力
+        </view>
+      </view>
+      <view class="desc">
+        <text>{{desc}}</text>
+      </view>
+      <image src="https://img1.haoshiqi.net/miniapp/order-confirm/order_no_left_768caaf448.png" mode="aspectFit" a:if="{{btnStatus.status == 6}}"/>
+      <image src="https://img1.haoshiqi.net/miniapp/order-confirm/end-icon_b455161ae7.png" mode="aspectFit" a:elif="{{btnStatus.status == 7}}"/>
+      <image src="https://img1.haoshiqi.net/miniapp/order-confirm/order_partake_icon_f31d525b2b.png" mode="aspectFit" a:elif="{{btnStatus.status == 8}}"/>
+    </view>
+
+    <!-- 促销信息 -->
+    <view class="promotions-block" a:if="{{promotions.length}}">
+      <template is="attr-img" data="{{ title:'促销：', list:promotions }}" ></template>
+    </view>
+
+    <!-- 参数列表 -->
+    <view class="mt" a:if="{{attrs}}">
+      <view class="attr-text attr-text-b">
+        <view class="title-b">参数：</view>
+        <view class="content-block">
+          <view class="content-item" a:for="{{attrs}}">
+            【{{item.name}}】 {{item.value}}{{index != attrs.length-1 ? '、' : ''}}
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 质保标签 -->
+    <view class="mt labels no-border" a:if="{{labels.length}}">
+      <template is="labels" data="{{list:labels, fontSize:24}}"></template>
+    </view>
+
+    <!-- 图文详情 -->
+    <view class="mt" a:if="{{graphicDetail}}">
+      <template is="sec-head" data="{{title:'图文详情'}}"></template>
+      <image lazyLoad a:for="{{graphicDetail}}" class="img-full" src="{{item}}" mode="widthFix" />
+    </view>
+
+    <!-- 底部按钮 -->
+
+    <view class="footer">
+      <view class="service" onTap="toCustomService">
+        <image lazyLoad src="https://img1.haoshiqi.net/miniapp/service/service_43dee1915e.png" mode="aspectFit" />
+        <text>客服</text>
+      </view>
+      <!-- 0 无状态 1 马上抢、 2 提醒我、 3 取消提醒、4、助力中、5、立即抢购(助力成功)，6 已抢光、 7 已结束 -->
+      <form
+        a:if="{{btnStatus.status == 1 || btnStatus.status == 2 || btnStatus.status == 3}}"
+        onSubmit="formBtnEvent" report-submit>
+        <button formType="submit" class="button {{btnStatus.type!==1?'btn-box':''}} {{ btnStatus.btnClass }}">
+          <text a:if="{{btnStatus.type == 1}}">{{ btnStatus.text }}</text>
+          <block a:else>
+            <view class="btn-tiem">{{ btnEndTimeTit + btnEndTimeText }}</view>
+            <view class="btn-text">{{ btnStatus.text }}</view>
+          </block>
+        </button>
+      </form>
+
+      <view a:else class="button {{btnStatus.type!==1?'btn-box':''}} {{ btnStatus.btnClass }}" data-type="footer-btn" onTap="goNext">
+        <text a:if="{{btnStatus.type == 1}}">{{ btnStatus.text }}</text>
+        <block a:else>
+          <view class="btn-tiem">{{ btnEndTimeTit + btnEndTimeText }}</view>
+          <view class="btn-text">{{ btnStatus.text }}</view>
+        </block>
+      </view>
+    </view>
+  </view>
+</dwd-page>

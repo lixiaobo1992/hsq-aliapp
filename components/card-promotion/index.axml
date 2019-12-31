@@ -1,0 +1,35 @@
+
+  <view class="promotion-popups" hidden="{{!isPopupShow}}">
+    <view class="new-mask" a:if="{{isPopupShow}}" data-type="close" onTap="handlePromotion"></view>
+    <view class="new-container new-container-ani">
+      <view class="container-title">{{ promotionTitle?promotionTitle:'优惠信息' }}</view>
+      <image src="https://img1.haoshiqi.net/miniapp/delete_ae056b2bf9.png" mode="widthFix" data-type="close" class="img-box" catchTap="handlePromotion" />
+      <view class="container-content">
+        <view class="container-content-item"
+          a:for="{{promotions}}"
+          a:key="{{index}}"
+          data-index="{{index}}"
+          >
+          <view class="item-title">
+            <text class="border">{{item.title}}</text>
+          </view>
+          <view class="desc" a:if="{{!type}}">{{item.text}}</view>
+          <view class="desc" a:else >
+            <text a:for="{{item.text}}" a:key="{{index}}" a:for-item="textItem">
+              <text>{{ textItem.first}}</text>
+              <text>{{ textItem.second }}</text>
+              <text a:if="{{ item.text.length-1 !== index}}">,</text>
+            </text>
+          </view>
+          <view class="link-text"
+            a:if="{{item.link}}"
+            data-url ="{{ item.link }}"
+            data-id="{{item.id}}"
+            onTap="onPinDetail"
+          >
+            <text>去凑单</text>
+            <image class="link-more" src="https://img1.haoshiqi.net/miniapp/more-link_71c7e3697d.png" mode="aspectFill" /></view>
+        </view>
+      </view>
+    </view>
+  </view>

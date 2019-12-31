@@ -1,0 +1,37 @@
+
+<!-- swiper实现，需要以下规则（swiper 有时出现 从0到100%宽度的弹性视觉问题）
+  swiper组件 必须加高度（可以由css替代）
+  swiper-item组件 必须设置内联高度，但不能是100%
+  image组件 必须设置宽高100%(可以css替代)，建议使用 scaleToFill 模式，填充满父容器
+  circular 加此属性，手机预览不出图
+  swiper 不能放在一个容器，先hide，后再显示，这会出问题
+-->
+
+<template name="swiper">
+  <!-- style="height: {{height}}px;" -->
+  <view class="swiper exposure-item" a:if="{{list && list.length}}" style="padding-top:{{paddingTop}}%">
+    <swiper
+    interval="{{delay || 6000}}"
+    indicator-dots
+    autoplay
+    data-module-id="{{ id }}"
+    onChange="{{ onChangeEventName }}"
+    >
+      <block a:for="{{list}}">
+        <swiper-item style="height: {{height}}px;">
+          <!-- style="width: 100%;height: 100%;" -->
+          <image
+          class="swiper-item"
+          onTap="onUrlPage"
+          data-url="{{item.url}}"
+          data-piwik-event="{{item.piwik ? item.piwik : ''}}点击"
+          data-piwik-data="{{item.url}}"
+          data-index="{{index}}"
+          src="{{item.image}}"
+          default-source="/img/tip-img/not-img1.png"
+          mode="aspectFit" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</template>

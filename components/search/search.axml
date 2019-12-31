@@ -1,0 +1,11 @@
+<!--components/search/search.wxml-->
+<template name="search">
+  <view class="search">
+    <view class="sub-view"
+    onTap="onSearch"
+    data-id="{{id}}" data-form-type="search">
+      <image src="../../img/icon_search.png" mode="aspectFit"></image>
+      <text>{{content}}</text>
+    </view>
+  </view>
+</template>

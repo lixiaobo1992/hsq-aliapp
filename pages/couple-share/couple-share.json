@@ -1,0 +1,6 @@
+{
+    "defaultTitle": "拼团分享",
+    "usingComponents": {
+      "dwd-page": "/components/page/index"
+    }
+}

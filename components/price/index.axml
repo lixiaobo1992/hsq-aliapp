@@ -1,0 +1,20 @@
+<template name="price">
+  <view class="price-box">
+    <block>
+      <view class="item item-type">{{ type }}</view>
+      <view class="item {{rmb ? 'item-rmb' : 'item-price'}}">{{ (price*0.01).toFixed(2) }}</view>
+      <block a:if="{{point > 0}}">
+        <view class="item item-point">{{ point }}</view>
+      </block>
+      <block a:if="{{memberPrice}}">
+        <view class="member-price">
+          <image src="https://img1.haoshiqi.net/miniapp/vip-icon_1be7bb7dd2.png" class="vip-icon" mode="scaleToFill" />
+          <view class="item-member-price">￥{{ (memberPrice * 0.01).toFixed(2) }}</view>
+        </view>
+      </block>
+      <block a:else>
+        <view class="item item-market-price">{{ (marketPrice*0.01).toFixed(2) }}</view>
+      </block>
+    </block>
+  </view>
+</template>

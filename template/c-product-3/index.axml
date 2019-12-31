@@ -1,0 +1,23 @@
+<import src="/template/c-img/index.axml" />
+<import src="/template/c-product-row3/index.axml" />
+
+<template name="c-product-3">
+  <view class="c-product-3">
+    <!-- 页面逻辑 -->
+    <template
+      is="c-img"
+      data="{{...images}}"></template>
+    <view class="c-product-3-warp" style="background-color:{{ productData.bg_color}};">
+      <template
+        is="c-product-row3"
+        data="{{list: productData.isShowMore ? productData.tempList : productData.list, eventName: productData.eventName}}"></template>
+      <view
+        class="more-btn"
+        style="background-color: {{ productData.button_bg_color }};"
+        a:if="{{ productData.isShowMore }}"
+        data-module-index="{{ moduleIndex }}"
+        onTap="{{ productData.moreEventName || '' }}"><text>查看更多</text><image src="https://img1.haoshiqi.net/miniapp/img/more_icon_0c8d06983e.png" /></view>
+    </view>
+
+  </view>
+</template>

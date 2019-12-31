@@ -1,0 +1,6 @@
+
+<template name="feedback">
+  <view class="btn-feedback {{ isShowFeedback?'btn-feedback-show':'' }}" onTap="goUdesk" data-log="{{ log }}">
+    <image  src="https://img1.haoshiqi.net/miniapp/feedback_a3477d662a.png" mode="aspectFit"/>
+  </view>
+</template>

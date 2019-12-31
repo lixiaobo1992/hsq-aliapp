@@ -1,0 +1,26 @@
+<template name="c-count-down">
+  <view class="c-count-down">
+    <view class="c-ctdw-inner">
+      <view
+        a:for="{{list}}"
+        a:key="{{item.id}}"
+        class="c-ctdw-item {{'c-ctdw-item' + item.status + index}}"
+        data-module-index="{{ moduleIndex }}"
+        data-id="{{ item.id }}"
+        data-start="{{ item.start }}"
+        data-status="{{ item.status }}"
+        data-index="{{index}}"
+        onTap="countDownOnClick">
+        <view class="c-ctdw-arrow" a:if="{{index < list.length - 1}}"></view>
+        <view class="c-ctdw-textbox {{item.status == 2 ? 'c-ctdw-textactive' : ''}}">
+          <view class="c-ctdw-textline">
+            <view class="{{curtIndex == index && curtIndex != seckillingIndex ? 'c-ctdw-active' : ''}}">{{ item.start }}</view>
+          </view>
+          <view class="c-ctdw-textline">
+            <view>{{ item.status == 1 ? '即将开始' : (item.status == 2 ? '正在秒杀' : '已结束') }}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

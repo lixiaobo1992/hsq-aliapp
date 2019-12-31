@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "dwd-tpl": "../tpl/index"
+  }
+}

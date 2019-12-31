@@ -1,0 +1,58 @@
+<import src="./aParseImg.axml" />
+<import src="./aParseBr.axml" />
+<import src="./aEmojiView.axml" />
+<import src="./aParse3.axml" />
+
+<template name="aParse2">
+  <!--<template is="aParse3" data="{{item}}" />-->
+  <!--判断是否是标签节点-->
+  <block a:if="{{item.node == 'element'}}">
+    <block a:if="{{item.tag == 'button'}}">
+      <button type="default" size="mini">
+        <block a:for="{{item.nodes}}" a:for-item="item" a:key="">
+          <template is="aParse3" data="{{item}}" />
+        </block>
+      </button>
+    </block>
+
+    <!--img类型-->
+    <block a:elif="{{item.tag == 'img'}}">
+      <template is="aParseImg" data="{{item}}" />
+    </block>
+
+    <!--a类型-->
+    <block a:elif="{{item.tag == 'a'}}">
+      <view onTap="onTapZtUrl" class="aParse-inline {{item.classStr ? item.classStr : ''}} aParse-{{item.tag}}" data-url="{{item.attr.href}}" style="{{item.styleStr}}">
+        <block a:for="{{item.nodes}}" a:for-item="item" a:key="">
+          <template is="aParse3" data="{{item}}" />
+        </block>
+      </view>
+    </block>
+
+    <block a:elif="{{item.tag == 'br'}}">
+      <template is="aParseBr"></template>
+    </block>
+    <!--其他块级标签-->
+    <block a:elif="{{item.tagType == 'block'}}">
+      <view class="{{item.classStr ? item.classStr : ''}} aParse-{{item.tag}}" style="{{item.styleStr}}">
+        <block a:for="{{item.nodes}}" a:for-item="item" a:key="">
+          <template is="aParse3" data="{{item}}" />
+        </block>
+      </view>
+    </block>
+
+    <!--内联标签-->
+    <view a:else class="{{item.classStr ? item.classStr : ''}} aParse-{{item.tag}} aParse-{{item.tagType}}" style="{{item.styleStr}}">
+      <block a:for="{{item.nodes}}" a:for-item="item" a:key="">
+        <template is="aParse3" data="{{item}}" />
+      </block>
+    </view>
+
+  </block>
+
+  <!--判断是否是文本节点-->
+  <block a:elif="{{item.node == 'text'}}">
+    <!--如果是，直接进行-->
+    <template is="aEmojiView" data="{{item}}" />
+  </block>
+</template>

@@ -1,0 +1,13 @@
+{
+  "defaultTitle": "购物车",
+  "pullRefresh": false,
+  "usingComponents": {
+    "dwd-page": "/components/page/index",
+    "dwd-swiper-action": "/components/swipe-action/index",
+    "dwd-input-number": "/components/input-number/index",
+    "dwd-sku-select": "/components/sku-select/index",
+    "coupon-list": "/components/coupon-list/index",
+    "card-promotion": "/components/card-promotion/index",
+    "dwd-cart-lose": "/components/cart-product-lose/index"
+  }
+}

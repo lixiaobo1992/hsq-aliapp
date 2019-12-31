@@ -1,0 +1,6 @@
+<template name="attr-text">
+    <view class="attr-text">
+      <text class="title">{{title}}</text>
+      <view class="content">{{content}}</view>
+    </view>
+</template>

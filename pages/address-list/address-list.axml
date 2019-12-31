@@ -1,0 +1,41 @@
+
+<dwd-page
+  id="dwd-page-address"
+  className="page-address"
+  contentClass="page-address-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <form class="page-full-auto" onSubmit="formidSubmit" report-submit>
+    <button formType="submit" class="page-full-auto formid-submit">
+      <view class="address-box">
+        <view class="address-list" a:for="{{address}}">
+          <view class="address-detail" data-id="{{item.id}}" data-index="{{index}}" onTap="selectOrderAddr">
+            <view class="address-info">
+              <text class="address-name">{{item.contacter}}</text>
+              <text class="address-mobile">{{item.mobile}}</text>
+            </view>
+            <text>{{item.province + item.city + item.district + item.detail_address}}</text>
+          </view>
+          <view class="address-operate">
+            <view class="address-select-box">
+              <view class="address-select" data-id="{{item.id}}" data-index="{{index}}" onTap="setDefault">
+                <text>默认地址</text>
+                <view class="address-radio {{item.is_default ? 'address-choose' : ''}}"></view>
+              </view>
+            </view>
+            <view class="address-edit-box address-edit" data-id="{{item.id}}" data-index="{{index}}" onTap="edit">编辑</view>
+            <block a:if="{{!isFromOrder}}">
+              <view class="address-delete-box address-delete" data-id="{{item.id}}" data-index="{{index}}" onTap="delete">删除</view>
+            </block>
+          </view>
+        </view>
+
+        <view a:if="{{!address.length && !isLoading}}">
+          <image class="empty-img" src="/img/tip-img/not-search-result.png" mode="aspectFit" />
+          <view class="empty-text">您还未设置收货地址，赶紧去新建吧~</view>
+        </view>
+      </view>
+      <view class="address-add-box" onTap="addAddress">+ 新增地址</view>
+    </button>
+  </form>
+</dwd-page>

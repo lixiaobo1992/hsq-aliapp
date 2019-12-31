@@ -1,0 +1,140 @@
+.c-product-row3{
+  width: 100%;
+  overflow: hidden;
+}
+.row3-warp{
+  width: 101.5%;
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  margin-bottom: -.5%;
+}
+.row3-box{
+  width: 32.5%;
+  background: #fff;
+  margin-right: 0.5%;
+  margin-bottom: 0.5%;
+}
+.row3-img-box{
+  width: 220rpx;
+  height: 210rpx;
+  margin: 0 auto;
+  margin-top: 7rpx;
+  position: relative;
+  line-height: 0;
+}
+.row3-img{
+  width: 100%;
+  height: 100%;
+}
+
+.row3-status-img{
+  position: absolute;
+  width: 140rpx;
+  height: 140rpx;
+  left: 40rpx;
+  top: 54rpx;
+  z-index: 2;
+}
+
+.row3-tag-img{
+  position: absolute;
+  width: 56rpx;
+  height: 56rpx;
+  left: 10rpx;
+  top: 0rpx;
+  z-index: 1;
+}
+.row3-tag-box{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+.row3-tag-box .tag-item{
+  line-height: 0;
+}
+.row3-tag-box .tag-item text{
+  font-size: 18rpx;
+  color: #fff;
+  display: inline-block;
+  padding: 10rpx 10rpx;
+  border-top-right-radius: 10rpx;
+  line-height: 1;
+  margin: 0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.row3-tag-box .tag-item.tag-tit text{
+  font-size: 20rpx;
+  background-image: linear-gradient(90deg, rgba(247,96,130, 0.8) 21%, rgba(244,97,115, 0.8) 78%);
+}
+.row3-tag-box .tag-item.tag-sub text{
+  font-size: 18rpx;
+  background-image: linear-gradient(90deg, rgba(159,119,244, 0.8) 21%, rgba(105,50,221, 1) 78%);
+}
+
+
+.row3-text-box{
+  padding: 0 10rpx;
+}
+.row3-title{
+  margin-top: 10rpx;
+  display: block;
+  color: #000;
+  font-size: 20rpx;
+  line-height: 26rpx;
+  height: 50rpx;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-wrap:break-word
+}
+
+
+
+.row3-price-box{
+}
+.row3-price{
+  color: #BC1818;
+  font-size: 34rpx;
+  line-height: 42rpx;
+}
+.row3-market{
+  font-size: 26rpx;
+  color: #9b9b9b;
+  text-decoration: line-through;
+  margin-left: 10rpx;
+}
+
+
+/* 会员价 */
+.row3-member-price{
+  margin-top: 10rpx;
+}
+.market-price {
+  display: block;
+  font-size: 28rpx;
+  color: #222;
+}
+.member-price-box {
+  line-height: 50rpx;
+}
+
+.member-price {
+  display: inline-block;
+  font-size: 36rpx;
+  color: #FF1E1E;
+}
+.member-icon{
+  font-size: 18rpx;
+  color: #ff1e1e;
+  background: #FFF3F3;
+  border-radius: 12rpx;
+  margin-left: 5rpx;
+  padding: 0 10rpx;
+}

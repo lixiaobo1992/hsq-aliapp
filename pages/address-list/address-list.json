@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "地址管理",
+  "usingComponents": {
+    "dwd-page": "/components/page/index"
+  }
+}

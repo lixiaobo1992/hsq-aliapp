@@ -1,0 +1,132 @@
+<import src="/components/card/index.axml" />
+<import src="/components/foot/foot.axml" />
+<import src="/components/pull-loading/index.axml" />
+<import src="/components/swiper/swiper.axml" />
+
+<dwd-page
+  id="dwd-page-search-result"
+  className="page-search-result"
+  contentClass="page-search-result-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+
+  <view class="search-page">
+    <view class="view-tab {{ showSort ? '' : 'tab1'}}">
+    <!-- 综合排序、销量  -->
+    <view class="tab">
+      <view
+        class="tab-sub"
+        a:for="{{ tab }}"
+        a:key="{{ item.text }}"
+        data-index="{{ index }}"
+        onTap="onClickTab"
+        >
+        <view class= "view-tap">
+          <text class="sub-title {{ clickIndex == index ? 'sub-title-red' : ''}}">{{ item.text }}</text>
+          <view a:if="{{item.topImg || item.botImg}}" class="img-block">
+            <block a:if="{{item.topImg}}">
+              <image
+                class="sub-img top"
+                mode="aspectFit"
+                src="{{ clickIndex == index ? item.topImg : icons }}"
+                >
+              </image>
+            </block>
+            <block a:if="{{item.botImg}}">
+              <image
+                class="sub-img bottom"
+                mode="aspectFit"
+                src="{{ clickIndex == index ? item.botImg : icons }}"
+                >
+              </image>
+            </block>
+          </view>
+        </view>
+      </view>
+      <view class="tab-sub" onTap='toggleViewSort'>
+        <view class= "view-tap no-border">
+          <text class="sub-title {{expiryIndex > 0 || showSort ? 'sub-title-red' : ''}} {{searchHasExpiryDate == 1 ? 'no-active' : ''}}">{{ expiryIndex > 0 ? sort[expiryIndex] : lastTab.text }}</text>
+          <view class="img-block">
+            <image
+              class="sub-img top"
+              mode="aspectFit"
+              src="{{ lastTab.topImg }}"
+              a:if ="{{ showSort }}"
+              ></image>
+            <image
+              class="sub-img bottom"
+              mode="aspectFit"
+              src="{{lastTab.botImg}}"
+              a:if ="{{ !showSort }}"
+              ></image>
+          </view>
+        </view>
+      </view>
+    </view>
+
+      <!--  综合排序、价格从高到低、价格从低到高  -->
+      <view class="view-sort" a:if="{{ showSort }}">
+        <view class="bg-alpha" onTap='toggleViewSort'></view>
+        <view class="sort"
+          a:for="{{ sort }}"
+          a:key="{{ item }}"
+          onTap="onClickSort"
+          data-index="{{ index }}"
+          >
+          <text class="sort-title {{ sortClickIndex == index ? 'sort-title-red' : '' }}" > {{ item }} </text>
+          <image class="sort-img" a:if="{{ sortClickIndex == index }}" mode="aspectFit" src="{{ iconSelected }}"></image>
+        </view>
+      </view>
+    </view>
+
+    <scroll-view
+      scroll-y
+      onScrollToLower="onScrollToLower"
+      lower-threshold="240"
+      style="height:100%"
+      scroll-into-view="{{viewId}}"
+      >
+      <view id="scrollTop"></view>
+      <view class="category-list {{category && category.length > 4 ? 'more-oneline' : ''}}" a:if="{{category && category.length > 0}}">
+        <view class="category-item-block" a:for="{{ category }}" a:key="{{ index }}">
+          <view class="category-item {{index == categoryIndex ? 'active' : ''}}"  onTap='goSearchText' data-text="{{item}}" data-index="{{ index }}">
+            <text>{{item}}</text>
+          </view>
+        </view>
+      </view>
+
+      <template is="swiper" data="{{...swiperInfo}}"></template>
+
+      <!-- skuList -->
+      <view class="view-list" a:if="{{list && list.length}}">
+        <!-- 使用注意事项， card 不实现背景，自己外层盒子实现 -->
+        <view class="product-{{listMode}}">
+          <block a:for="{{list}}">
+            <template is="card" data="{{...item}}" />
+          </block>
+        </view>
+      </view>
+
+      <view a:if="{{!list.length && !isLoading}}">
+        <image class="empty-img" src="/img/tip-img/not-search-result.png" mode="aspectFit" />
+        <view class="empty-text">暂无结果</view>
+      </view>
+
+      <!-- 推荐商品列表 -->
+      <view class="product-list" a:if="{{recommendList && recommendList.length}}">
+        <view class="list-text">
+          <text class="chn-text">猜你喜欢</text>
+          <text class="eng-text">GUESS YOU LIKE</text>
+        </view>
+        <dwd-product-col2 data="{{ {list: recommendList} }}" />
+      </view>
+
+      <template is="pull-loading" data="{{pullLoading}}" />
+
+      <view a:if="{{(recommendList.length || list.length) && showFooter}}">
+        <template is="foot" data="{{text:'没有更多商品了~'}}"></template>
+      </view>
+
+    </scroll-view>
+  </view>
+</dwd-page>

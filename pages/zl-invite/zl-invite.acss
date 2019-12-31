@@ -1,0 +1,620 @@
+
+page{
+  
+  background-image: linear-gradient(-46deg, #EA594C 0%, #FF4939 100%);
+}
+
+.invite-page{
+  padding: 20rpx 30rpx 0 30rpx;
+  overflow: hidden;
+}
+
+form .input-hidden{
+  opacity: 0;
+  position: absolute;
+  right: -1000%;
+  top:-1000%;
+}
+
+/* 上方提示 */
+.top-tip{
+  font-size: 34rpx;
+  color: #FFFFFF;
+  line-height: 44rpx;
+  margin-bottom: 20rpx;
+}
+
+
+/* 活动详情 */
+.activity-card{
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  padding:27rpx 30rpx;
+  border-radius: 10rpx;
+}
+
+.activity-card .activity-img{
+  width: 195rpx;
+  height: 195rpx;
+  margin-right: 20rpx;
+}
+.activity-card .activity-img image{
+  width: 100%;
+  height: 100%;
+}
+
+.activity-card .activity-info{
+  flex: 1;
+}
+
+.activity-info .activity-title{
+  font-size: 28rpx;
+  color: #212121;
+  line-height: 34rpx;
+  max-height: 68rpx;
+  margin-bottom: 20rpx;
+}
+
+.activity-info .zl-number{
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.activity-info .zl-end-time{
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #212121;
+  margin-top: 20rpx;
+}
+.activity-info .zl-end-time text{
+  display: inline-block;
+  width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  text-align: center;
+  color: #fff;
+  background: rgba(0,0,0,0.60);
+  border-radius: 4rpx;
+  margin: 0 10rpx;
+}
+.activity-info .zl-end-time text:first-child{
+  margin-left: 0;
+}
+
+.activity-info .activity-price{
+  margin-top: 24rpx;
+}
+
+.activity-info .activity-price .price{
+    font-size: 24rpx;
+    color: #ED0000;
+    margin-right: 15rpx;
+}
+
+.activity-info .activity-price .price text{
+    font-size: 32rpx;
+}
+.activity-info .activity-price .del-price{
+    font-size: 24rpx;
+    color: #999999;
+    text-decoration: line-through;
+}
+
+/* 助力进度 */
+.zl-box{
+  background: #FFFFFF;
+  border-radius: 10rpx;
+  padding: 32rpx 40rpx 60rpx 40rpx;
+  margin-top: 20rpx;
+  position: relative;
+}
+
+.zl-box .schedule-tip{
+  font-size: 34rpx;
+  color: #212121;
+  text-align: center;
+}
+.zl-box .schedule-tip text{
+  color: #FF4939;
+}
+
+.zl-box .zl-end-time{
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #212121;
+  margin-top: 20rpx;
+  justify-content: center;
+  margin-bottom: 35rpx;
+}
+.zl-box .zl-end-time text{
+  display: inline-block;
+  width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  text-align: center;
+  color: #fff;
+  background: rgba(0,0,0,0.60);
+  border-radius: 4rpx;
+  margin: 0 10rpx;
+}
+.zl-box .zl-end-time text:first-child{
+  margin-left: 0;
+}
+
+.zl-box .schedule-bar{
+  margin: 20rpx auto 30rpx auto;
+  background: #E2E2E2;
+  height: 16rpx;
+  width: 357rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.zl-box .schedule-bar .bar{
+  background-image: linear-gradient(-46deg, #EA594C 0%, #FF4939 100%);
+  height: 16rpx;
+  border-radius: 8rpx;
+}
+
+.zl-box .zl-btn{
+  width: 100%;
+  background-image: linear-gradient(-46deg, #EA594C 0%, #FF4939 100%);
+  border-radius: 6rpx;
+  border:none;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 34rpx;
+  color: #FFFFFF;
+}
+
+.zl-box .zl-tip{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 15rpx;
+  font-size: 24rpx;
+  color: #212121;
+  text-align: center;
+}
+
+.zl-box .zl-success-tit{
+  font-size: 34rpx;
+  color: #212121;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20rpx
+}
+.zl-box .zl-success-subtit{
+  font-size: 28rpx;
+  color: #212121;
+  text-align: center;
+}
+
+
+/* 好友助力列表 */
+
+.help-friend-box{
+
+  width: 95%;
+  margin: 0 auto;
+}
+
+
+.help-friend-box .tip-title{
+  font-size: 28rpx;
+  color: #FFFFFF;
+  text-align: center;
+  margin-bottom: 30rpx;
+  margin-top: 40rpx;
+}
+
+.help-friend-box .friend-list{
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 40rpx;
+}
+
+.help-friend-box .friend-list.one{
+  width: 50%;
+}
+.help-friend-box .friend-list.two{
+  width: 75%;
+}
+
+.help-friend-box .friend-list.box{
+  display: block;
+  overflow: hidden;
+  width: 115%;
+  margin-bottom: 0rpx;
+}
+
+.help-friend-box .friend-list.box .friend-item{
+  float: left;
+  margin-right: 6%;
+  margin-bottom: 4%;
+}
+
+.friend-list .friend-item{
+  width: 94rpx;
+  height: 94rpx;
+  border: 2rpx solid #fff;
+  border-radius: 100%;
+  position: relative;
+  background-color: #999999;
+}
+.friend-list .friend-item image{
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.friend-list .friend-item .my-icon{
+  position: absolute;
+  right: -2rpx;
+  bottom: -2rpx;
+  display: inline-block;
+  width: 54rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  background: #F5A623;
+  color: #fff;
+  font-size: 20rpx;
+  text-align: center;
+  border: 2rpx solid #FFFFFF;
+  border-radius: 14rpx;
+}
+
+.friend-list .friend-item.not{
+  background: none;
+  border:2rpx dashed #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50rpx;
+  color: #fff;
+}
+
+.friend-list .friend-item.not text{}
+
+.help-friend-box .more-btn{
+  text-align: right;
+  font-size: 24rpx;
+  color: #fff;
+  margin-bottom: 20rpx;
+  /* border: 1rpx solid #fff; */
+}
+.help-friend-box .more-btn text{
+  margin-left: 20rpx;
+  display: inline-block;
+  text-align: center;
+  width: 94rpx;
+}
+
+
+
+/* 状态提示 */
+
+
+.tip-status{
+
+}
+.tip-status .tip-title{
+  text-align: center;
+  font-size: 34rpx;
+  color: #fff;
+  margin-bottom: 10rpx;
+  
+}
+.tip-status .tip-title.bold{
+  font-weight: bold;
+}
+.tip-status .tip-title text{
+  font-size: 48rpx;
+  font-weight: bold;
+}
+.tip-status .tip-p{
+  text-align: center;
+  color: #fff;
+  font-size: 28rpx;
+}
+
+.btn-control{
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  margin-top: 20rpx;
+  text-align: center;
+  font-size: 34rpx;
+  color: #8B572A;
+  font-weight: bold;
+  background-image: linear-gradient(-180deg, #FFE0B2 8%, #FFCA7A 77%);
+  border-radius: 9rpx;
+}
+
+/* 分享选项 */
+
+.share-card{
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding-bottom: 40rpx;
+  margin-top: 20rpx;
+  overflow: hidden;
+}
+.share-card .card-title{
+  position: relative;
+  width: 455rpx;
+  border-bottom: 1px solid #999999;
+  height: 0;
+  margin: 45rpx auto;
+  text-align: center;
+}
+.share-card .card-title text{
+  width: 250rpx;
+  position: absolute;
+  top:-15rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  background-color: #fff;
+  padding: 0 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 28rpx;
+  color: #212121;
+}
+
+.share-card .share-option{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.share-card .share-option .share-item{
+  flex: 1;
+  border: none !important;
+  outline: none !important;
+  background: none !important;
+
+  width: auto;
+  height: 175rpx;
+  text-align: center;
+}
+.share-card .share-option .share-item image{
+  width: 108rpx !important;
+  height: 108rpx !important;
+  border-radius: 108rpx;
+  overflow: hidden;
+}
+.share-card .share-option .share-item text{
+  margin: 0 auto;
+  display: block;
+  width: 120rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  margin-top: 20rpx;
+  border: 1px solid #FD7317;
+  color: #FD7317;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+}
+
+
+/* 消息 */
+
+.new-success-box{
+  height: 332rpx;
+  overflow: hidden;
+  padding: 32rpx 50rpx;
+  background: rgba(255,255,255,0.31);
+  border-radius: 10rpx;
+  margin-top: 40rpx;
+  margin-bottom: 100rpx;
+}
+
+.msg-box{
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.new-success-box .msg-list{
+  position: relative;
+  top:0;
+  left: 0;
+}
+.msg-list .msg-item{
+  display: flex;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+.msg-list .msg-item .msg-pic{
+  width: 60rpx;
+  height: 60rpx;
+  border:2rpx solid #fff;
+  border-radius: 100%;
+  margin-right: 20rpx;
+  overflow: hidden;
+  background-color: #999999;
+}
+.msg-list .msg-item .msg-pic image{
+  width: 100%;
+  height: 100%; 
+}
+
+.msg-list .msg-item .msg-info{
+  flex: 1;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+}
+.msg-list .msg-item .msg-info .user-name{
+  flex: 1;
+}
+.msg-list .msg-item .msg-info .msg-tiem{
+  text-align: right;
+}
+
+
+.share-popups{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 8;
+  background: rgba(0,0,0,0.50);
+}
+.share-popups .popups-box{
+  padding: 30rpx 45rpx;
+  width: 540rpx;
+  background: rgba(255,255,255,0.90);
+  border-radius: 24rpx;
+  position: absolute;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+}
+.share-popups .popups-box .popups-title{
+  font-size: 34rpx;
+  color: #030303;
+  text-align: center;
+  margin-bottom: 43rpx;
+}
+.share-popups .popups-box .popups-content{
+  font-size: 26rpx;
+  color: #030303;
+  text-align: center;
+  line-height: 31rpx;
+  margin-bottom: 50rpx;
+}
+.share-popups .popups-box .popups-btn{
+  height: 80rpx;
+  line-height: 80rpx;
+  background-image: linear-gradient(-46deg, #EA594C 0%, #FF4939 100%);
+  border-radius: 6rpx;
+  font-size: 34rpx;
+  color: #FFFFFF;
+  text-align: center;
+  width: 100%;
+  border:none;
+}
+
+.share-popups .popups-box .close-popups{
+  position: absolute;
+  top: -100rpx;
+  right: 0;
+  display: block;
+  width: 68rpx;
+  height: 68rpx;
+
+}
+
+.stock-popups{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 8;
+  background: rgba(0,0,0,0.50);
+}
+.stock-popups .stock-popups-box{
+  width: 580rpx;
+  background: rgb(255,255,255);
+  border-radius: 20rpx;
+  position: absolute;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+}
+.stock-popups .stock-popups-box .popups-img-box{
+  width: 580rpx;
+  height: 295rpx;
+  margin-bottom: 43rpx;
+}
+.stock-popups .stock-popups-box .popups-img-box .popups-img{
+  width: 580rpx;
+  height: 295rpx;
+  border-radius: 20rpx 20rpx 0 0;
+}
+
+.stock-popups .stock-popups-box .stock-popups-content{
+  text-align: center;
+}
+
+.stock-popups .stock-popups-box .stock-popups-content .stock-img-text{
+  display: flex;
+  justify-content: center;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.stock-popups .stock-popups-box .stock-popups-content .stock-img-text .stock-hint-img{
+  margin-top: 10rpx;
+  margin-right: 15rpx;
+  width: 34rpx;
+  height: 24rpx;
+}
+
+.stock-popups .stock-popups-box .stock-popups-content .stock-img-text .stock-hint-text{
+  color: #222;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.stock-popups .stock-popups-box .stock-popups-content .stock-hint{
+  color: #999;
+  font-size: 28rpx;
+  text-align: center;
+  margin-top: 8rpx;
+}
+
+.stock-popups .stock-popups-box .stock-popups-content .stock-btn{
+  background-image: url('https://img1.haoshiqi.net/miniapp/img/button_6204fb6ce8.png');
+  background-size: 470rpx 88rpx;
+  border-radius: 40rpx;
+  width: 470rpx;
+  height: 88rpx;
+  line-height: 72rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 28rpx;
+  margin: 0 auto;
+  margin-top: 94rpx;
+  margin-bottom: 47rpx;
+}
+
+.stock-popups .stock-popups-box .close-popups{
+  position: absolute;
+  top: -100rpx;
+  right: 0;
+  display: block;
+  width: 68rpx;
+  height: 68rpx;
+
+}
+.share-content .share-step{
+  display: flex;
+  align-items: center;
+}
+.share-content .share-step:first-child{
+  margin-bottom: 36rpx;
+}
+.share-content .share-step image{
+  width: 60rpx;
+  height: 60rpx;
+}
+.share-content .share-step view{
+  flex: 1;
+  text-align: left;
+  font-size: 26rpx;
+  color: #030303;
+  line-height: 31rpx;
+  margin-left: 18rpx;
+}

@@ -1,0 +1,23 @@
+<template name="c-anchor">
+  <view class="c-anchor">
+    <view class="c-anchor-box {{positionClass}} {{switchClass}}" style="background-color: {{bg_color}}">
+      <view class="c-anchor-list">
+        <view
+          class="c-anchor-item"
+          a:for="{{list}}"
+          a:key="{{item.id}}"
+          data-idx="{{moduleIndex}}"
+          data-index="{{index}}"
+          data-id="{{item.component_id}}"
+          data-aid="{{ item.id }}"
+          data-name="{{ item.name }}"
+          onTap="anchorOnSelect">
+          <view class="c-anchor-text {{item.active ? 'c-anchor-active' : ''}}">{{item.name}}</view>
+        </view>
+      </view>
+      <view a:if="{{!equalH}}" class="c-anchor-switch" data-idx="{{moduleIndex}}" onTap="anchorOnSwitch">
+        <image class="c-anchor-arrow {{switchClass ? 'c-anchor-arrowon' : ''}}" src="https://img1.haoshiqi.net/miniapp/img/arrow_down_a9fff0c221.png" mode="aspectFit" />
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,114 @@
+<import src="/components/foot/foot.axml" />
+<import src="/components/pull-loading/index.axml" />
+
+<dwd-page
+  id="dwd-page-profile"
+  className="page-profile"
+  contentClass="page-profile-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <scroll-view
+    scroll-y
+    onScrollToLower="onScrollToLower"
+    style="height: 100%"
+    lower-threshold="240">
+    <form class="page-full-auto" onSubmit="formidSubmit" report-submit>
+      <button formType="submit" class="page-full-auto formid-submit">
+
+        <view class="app-page">
+          <view class="profile-top" >
+            <image src="https://img1.haoshiqi.net/miniapp/img/proflie_vip_85ed879c46.png" mode="widthFix" class="top-bg" />
+            <view class="top-info">
+              <view><image src="{{ userInfo.avatar }}" mode="aspectFit" class="user-avator"/></view>
+              <view class="user-info">
+                <view class="setting-btn" data-type="setup" onTap="handleListItemTap">
+                  <image src="https://img1.haoshiqi.net/miniapp/shezhicopy_5518b3ea85.png" mode="widthFix" />
+                </view>
+                <view class="user-name">
+                  <text>{{ userInfo.username }}</text>
+                  <view class="vip-status" a:if="{{ memberInfo.agreement_status }}">
+                    <image src="https://img1.haoshiqi.net/miniapp/img/hone_page_icon@2x_6d4dea3361.png" mode="widthFix" class="vip-tag"/>
+                  </view>
+                </view>
+                <text class="user-id">ID:{{ userInfo.user_id }}</text>
+              </view>
+            </view>
+            <view class="botton-item">
+              <view class="list" onTap="handleListItemTap" data-type="favorite">
+                <text class="list-num">{{ (numInfo.favoritesProductCnt	< 999)?numInfo.favoritesProductCnt :'999+' }}</text>
+                <text class="list-name">收藏夹</text>
+              </view>
+              <view class="list" onTap="handleListItemTap" data-type="favorite" data-index="2">
+                <text class="list-num">{{ (numInfo.favoritesMerchantCnt	< 999)?numInfo.favoritesMerchantCnt :'999+' }}</text>
+                <text class="list-name">收藏店铺</text>
+              </view>
+              <view class="list last" onTap="handleListItemTap" data-type="coupon">
+                <text class="list-num">{{ (numInfo.couponCnt	< 999)?numInfo.couponCnt :'999+' }}</text>
+                <text class="list-name">我的优惠券</text>
+              </view>
+            </view>
+          </view>
+          <!-- 增加会员中心入口，为固定配置图+链接跳转 -->
+          <view class="light-member-ticket" onTap="handleListItemTap" data-type="vip">
+            <view class="member-text" >
+              <image a:if="{{ memberInfo.agreement_status }}" src="https://img1.haoshiqi.net/miniapp/img/opened_icon_fdf7b2ca7b.png" mode="widthFix" class="img-status" />
+              <image a:else src="https://img1.haoshiqi.net/miniapp/not-open_849585e25c.png" mode="widthFix" class="img-status" />
+            </view>
+          </view>
+          <!--订单部分-->
+          <view class="sell-box overhidden">
+            <view class="all-order box-pad" onTap="goOrderList">
+              <text class="fl order-left">我的订单</text>
+              <view class="more"></view>
+              <view class="fr gray order-right">我的订单</view>
+            </view>
+            <view class="order-box box-pad" a:if="{{orderInfo.length}}">
+              <block a:for="{{orderInfo}}">
+                <view data-order-type="{{item.type}}" a:key="{{ index }}" onTap="goOrderList" class="pay-item">
+                  <view class="pay-icon">
+                    <view class="order-num"  a:if="{{item.num}}">{{item.num}}</view>
+                    <image src="{{item.image}}" mode="{{scale}}" class="icon-img"/>
+                  </view>
+                  <text class="pay-state">{{item.text}}</text>
+                </view>
+              </block>
+            </view>
+          </view>
+          <!-- 工具与服务 -->
+          <view class="sell-box overhidden">
+            <view class="all-order box-pad">
+              <text class="fl order-left">工具与服务</text>
+            </view>
+            <view class="order-box box-pad" a:if="{{serviceInfo.length}}">
+              <block a:for="{{serviceInfo}}">
+                <view a:key="{{ index }}" data-type="{{item.type}}" data-index="{{index}}" class="pay-item service-item" onTap="handleListItemTap">
+                  <view class="pay-icon">
+                    <view class="order-num" a:if="{{item.num}}">{{item.num}}</view>
+                    <image src="{{item.image}}" mode="{{scale}}"  class="icon-img"/>
+                  </view>
+                  <text class="pay-state">{{item.text}}</text>
+                </view>
+              </block>
+            </view>
+          </view>
+          <!-- 猜你喜欢 -->
+          <view class="view-recomment" a:if="{{list && list.length}}">
+            <text class="guess-title">猜你喜欢</text>
+            <block a:if="{{list && list.length}}">
+              <view class="product-list">
+                <dwd-product-col2 data="{{ {list: list} }}" />
+              </view>
+              <template is="pull-loading" data="{{pullLoading}}"></template>
+              <view a:if="{{showFooter}}">
+                <template is="foot" data="{{text:'没有更多数据了'}}"></template>
+              </view>
+            </block>
+          </view>
+        </view>
+
+      </button>
+    </form>
+  </scroll-view>
+</dwd-page>
+<!-- 底部tabbar -->
+

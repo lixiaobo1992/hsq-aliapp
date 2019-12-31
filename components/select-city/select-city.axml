@@ -1,0 +1,40 @@
+<view class='city-view' hidden='{{!didShowCitySelection}}'>
+  <!-- 30% -->
+  <view class='transparent' onTap='onCityView'>
+  </view>
+
+  <!-- 8% -->
+  <view class='city-view-title'>
+    <image class="address-back" hidden="{{swipeIndex == 0}}" src="https://img1.haoshiqi.net/miniapp/more_85508a3b09.png" mode="scaleToFill" onTap='goBack' />
+    <text class='select-city-label sendto'>配送至</text>
+    <view class="close-content" onTap='onCityView'>
+      <image class="close" src="https://img1.haoshiqi.net/miniapp/delete_4d67965d24.png" mode="aspectFit" />
+    </view>
+  </view>
+
+  <!-- 62% -->
+  <swiper class='city-type' current="{{swipeIndex}}" onChange='onChangeSwiperIndex'>
+    <swiper-item a:if="{{addresses.length > 0}}">
+      <scroll-view class='swipe-item' scroll-y='true'>
+        <address-list onSelectingNewCity="onSelectingNewCity" currentCity="{{currentCity}}">
+        </address-list>
+        <view class='add-bottom'></view>
+      </scroll-view>
+      <view class='choose-others' onTap='onChooseOthers'>选择其他城市</view>
+    </swiper-item>
+
+    <swiper-item a:if="{{zones.length > 0}}">
+      <scroll-view class='swipe-item' scroll-y='true'>
+        <city-list 
+          onSelectCity="onSelectingNewCity" 
+          onSelectProvince="selectProvince" 
+          isSelectProvince="{{ isSelectProvince }}"
+          didShowCitySelection="{{ didShowCitySelection }}">
+        </city-list>
+
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+
+</view>
+<slot></slot>

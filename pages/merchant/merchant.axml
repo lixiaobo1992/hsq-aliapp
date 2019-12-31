@@ -1,0 +1,97 @@
+<import src="/components/card/index.axml" />
+<import src="/components/foot/foot.axml" />
+<import src="/components/attr-coupon/index.axml" />
+<import src="/components/coupon-toast/index.axml"/>
+
+<dwd-page
+  id="dwd-page-merchant"
+  className="page-merchant"
+  contentClass="page-merchant-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <scroll-view  scroll-y onScrollToLower="onScrollToLower" scroll-top="{{scrollTop}}" lower-threshold="100" style="height:100%">
+    <form class="" bindsubmit="formidSubmit" report-submit="true">
+      <button id="formid" formType="submit"></button>
+    </form>
+    <label for="formid">
+      <view class="store-box">
+        <view class="store-header">
+          <view class="store-info">
+            <view class="info-box">
+              <image lazyLoad class="store-img" src="{{storeData.logo}}" default-source="/img/tip-img/not-img2.png" mode="aspectFit" />
+              <view class="store-text">
+                <view class="store-title">{{storeData.name}}</view>
+                <view class="store-site">
+                  <text class="prov-text">{{storeData.province}}</text>
+                  <text class="city-text">{{storeData.city}}</text>
+                </view>
+              </view>
+              <view class="store-collect" a:if="{{!isLike}}" data-status="{{isLike}}" onTap="collectBtn">
+                <image src="https://img1.haoshiqi.net/miniapp/collect_cc8299f031.png" mode="aspectFit" class="collect-img" />
+                <view class="collect-text">收藏</view>
+              </view>
+              <view class="store-collect" a:elif="{{isLike}}" data-status="{{isLike}}" onTap="collectBtn">
+                <image src="https://img1.haoshiqi.net/miniapp/collect-ok_cdac353447.png" mode="aspectFit" class="collect-ok-img" />
+                <view class="collect-text">已收藏</view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+      <view class="store-cont">
+        <view class="cont-inform" a:if="{{storeData.notice}}">
+          <text class="cont-title">店铺公告：</text>
+          <text class="infrom-text">{{storeData.notice}}</text>
+        </view>
+        <view class="cont-brand" a:if="{{storeData.brandList.length > 0}}">
+          <text class="cont-title">经营品牌：</text>
+          <text class="brand-text {{showdownArrow?'more':''}}" >
+            <text>{{brandData}}</text>
+            <view class="border" a:if="{{arrowClick}}"></view>
+          </text>
+          <view class="left-arrow" onTap="{{arrowClick ? 'onShowAll' : ''}}" a:if="{{arrowClick}}">
+              <text class="text">{{showdownArrow?'展开':'收起'}}</text>
+              <view class="arrow {{!showdownArrow?'up':''}}"></view>
+          </view>
+        </view>
+        <view class="copple-desc" a:if="{{coupleList.length}}" onTap="showCoupons">
+          <template is="attr-coupon" data="{{ list:coupleList, showArrow, coupleTitle}}" ></template>
+        </view>
+
+        <!-- 秒杀活动专区 -->
+        <block a:if="{{activityList.length > 0 && activityList}}">
+          <view class="seckill-title">秒杀专区 <text class="e-title">SECONDS KILL ZONE</text></view>
+            <view class="seckill-list">
+              <dwd-seckill-col1 data="{{ {list: activityList} }}" onUpdateBtnStatus="onUpdateBtnStatus" />
+            </view>
+          </view>
+        </block>
+
+        <!-- 列表 -->
+        <view id="shop-list" a:if="{{list && list.length > 0}}" class="seckill-title">商品列表 <text class="e-title">PRODUCT LIST</text></view>
+        <view class="store-list" a:if="{{list && list.length > 0}}">
+          <view class="product-card">
+            <block a:for="{{list}}">
+              <template is="card" data="{{...item,index}}" />
+            </block>
+          </view>
+        </view>
+        <!-- 全部商品按钮 -->
+        <view class="shop-all-btn" a:if="{{shopAllBtnStatus && activityList.length > 0 && activityList}}" onTap="allShopBtn">
+          <view class="btn-text">全部商品</view>
+          <view class="btn-e-text">PRODUCTS</view>
+          <image class="btn-img" src="../../img/down-arrows.png" mode="aspectFit" />
+        </view>
+        <view a:if="{{showFooter}}">
+          <template is="foot"></template>
+        </view>
+      </view>
+      <!-- 优惠券列表弹层 -->
+      <view class="popup-outbox {{showCoupons ? '' : 'hidden'}}">
+          <coupon-list coupons="{{coupons}}" onHandleItem="onHandleItem"></coupon-list>
+      </view>
+      <!-- 领取成功toast -->
+      <template is="coupon-toast" a:if="{{sucToast}}"></template>
+    </label>
+  </scroll-view>
+</dwd-page>

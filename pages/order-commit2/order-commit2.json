@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "确认订单",
+  "usingComponents": {
+    "dwd-page": "/components/page/index",
+    "dwd-input-number": "/components/input-number/index",
+    "merge-pay-modal": "/components/merge-pay-modal/index"
+  }
+}

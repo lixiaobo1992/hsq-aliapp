@@ -1,0 +1,52 @@
+<import src="/components/card/index.axml" />
+<import src="/components/foot/foot.axml" />
+<import src="/components/pull-loading/index.axml" />
+<import src="/components/backtop/backtop.axml" />
+<!-- <import src="/components/search/search.axml" /> -->
+<dwd-page
+  id="dwd-page-sku-list"
+  className="page-sku-list"
+  contentClass="page-sku-list-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <scroll-view
+    scroll-y
+    onScroll="onScroll"
+    scroll-into-view="{{viewId}}"
+    onScrollToLower="onScrollToLower"
+    lower-threshold="{{lowerThreshold}}"
+    style="height:100%"
+    >
+
+    <view id="scrollTop"></view>
+
+    <!-- 搜索框 -->
+    <!-- <view class="search" a:if="{{!params.q}}">
+      <template is="search" data="{{id : params.couponId, content:'搜索可使用券的商品'}}"/>
+    </view> -->
+
+    <!-- skuList -->
+    <view class="{{params.q ? '' : 'view-list'}}" a:if="{{list && list.length}}">
+      <!-- 使用注意事项， card 不实现背景，自己外层盒子实现 -->
+      <view class="product-{{listMode}}">
+        <block a:for="{{list}}" key="{{item.id}}">
+          <template is="card" data="{{...item}}" />
+        </block>
+      </view>
+    </view>
+
+    <template is="pull-loading" data="{{pullLoading}}" />
+
+    <!-- 返回顶部按钮 -->
+    <template is="backTop" data="{{showBackTop}}"></template>
+
+    <!-- 底部提示数据 -->
+    <view class="{{ (list && list.length) ? '' : 'view-footer' }}" a:if="{{list.length && showFooter}}">
+      <template is="foot"></template>
+    </view>
+    <view a:if="{{!list.length && !isLoading}}">
+      <image class="empty-img" src="/img/tip-img/not-search-result.png" mode="aspectFit" />
+      <view class="empty-text">暂无数据</view>
+    </view>
+  </scroll-view>
+</dwd-page>

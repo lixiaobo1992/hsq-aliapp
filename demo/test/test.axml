@@ -1,0 +1,116 @@
+<import src="/components/grid/index.axml" />
+<import src="/components/price/index.axml" />
+
+<view class="demo-block">
+  <view class="demo-title">测试打开H5页面</view>
+  <view class="demo-content" style="background-color: #fff;">
+    <button size="default" type="primary" data-url="miniapp://pages/Activity/JumpUrl/JumpUrl?appid=2018010301537963&jumpurl=https%3a%2f%2fzm.igooma.cn%2fActivity%2fSc1000_11379%3ftype%3d4&channel=alipayappletsyyhh&childid=6965" onTap="onUrlPage">Button</button>
+    <button class="test-btn" type="primary" data-url="http://10.0.6.70:8085/v2/phone-cost" onTap="tempEvent">跳转话费</button>
+  </view>
+</view>
+<!-- 关注生活号 alipays://platformapi/startapp?appId=20000047&publicId=2014082500009174&followType=PUBLIC -->
+<!-- <lifestyle publicId="2014082500009174" /> -->
+<view class="demo-block">
+  <view class="demo-title">img load test</view>
+  <view class="demo-content img-load">
+    <image mode="scaleToFill" style="max-width: 100%; background-image:url('https://img2.haoshiqi.net/Fl2_mcxaWYX917U8xTNRdbfgdY32?imageView2/1/q/75')" src="https://img2.haoshiqi.net/FtW5LPAA33vlXOHYy7O9X29jvovY?imageView2/1/q/75"/>
+  </view>
+</view>
+
+<view class="demo-block">
+  <view class="demo-title">测试小程序之间跳转</view>
+  <view class="demo-content" style="background-color: #fff;">
+    <button size="default" type="primary" data-url="miniapp://pages/Activity/JumpUrl/JumpUrl?appid=2018010301537963&jumpurl=https%3a%2f%2fzm.igooma.cn%2fActivity%2fSc1000_11379%3ftype%3d4&channel=alipayappletsyyhh&childid=6965" onTap="onUrlPage">Button</button>
+    <button class="test-btn" type="primary" onTap="jumpMiniapp">跳转小程序</button>
+  </view>
+</view>
+
+<view class="demo-block">
+  <view class="demo-title">测试小程序插件</view>
+  <view class="demo-content" style="background-color: #fff;">
+    <button class="test-btn" type="primary" onTap="jumpPlugin">跳转插件</button>
+  </view>
+</view>
+
+<view class="demo-block">
+  <view class="demo-title">sku test</view>
+  <view class="demo-content">
+    <view class="params-box" onTap="onSelectNorm">
+      <view a:if="{{ !notSelectedAttrName }}">
+        <block a:for="{{ selectedAttrName }}">
+          {{ index !== 0 ? '、' : '' }}【{{ item.attrName }}】{{ item.attrValue
+          }}{{ item.type == 2 ? '到期' : '' }}
+        </block>
+      </view>
+      <view a:else>请选择: {{ notSelectedAttrName }}</view>
+    </view>
+    <button class="test-btn" onTap="buyBtnClick">立即购买</button>
+    <button class="test-btn" onTap="addShoppingCartClick">加入购物车</button>
+  </view>
+</view>
+
+<view class="demo-block">
+  <view class="demo-title">input-number</view>
+  <view class="demo-content" style="background-color: #fff;">
+    <view>
+      <dwd-input-number value="{{ currentSum }}" max="{{ maxBuySum }}" size="small" onChange="countChangeVal" />
+      <dwd-input-number value="{{ currentSum }}" max="{{ maxBuySum }}" onChange="countChangeVal" />
+    </view>
+    <view>
+      <dwd-input-number value="{{ currentSum }}" max="{{ maxBuySum }}" size="small" styleType="border" onChange="countChangeVal" />
+      <dwd-input-number value="{{ currentSum }}" max="{{ maxBuySum }}" styleType="border" onChange="countChangeVal" />
+    </view>
+  </view>
+</view>
+
+
+<view class="demo-block">
+  <view class="demo-title">登录</view>
+  <view class="demo-content" style="background-color: #fff;">
+    <view>登录状态：{{ logged }}</view>
+    <view>用户信息：{{ userInfo.user_id }}</view>
+    <button class="test-btn" type="primary" onTap="testLogin">登录</button>
+  </view>
+</view>
+
+
+<view class="desc">页面导航</view>
+<view class="container">
+  <template is="grid" data="{{...pages}}" />
+</view>
+
+<view class="desc">一些公共组件</view>
+<view class="container">
+  <view class="c-title">价格组件：</view>
+  <view>
+    <template is="price" data="{{...price}}" />
+  </view>
+  <view class="c-title">产品 Card 组件：</view>
+  <view>
+    实现一个产品 Card
+  </view>
+</view>
+
+<view class="desc">代码测试</view>
+<view>
+  <text>跳转 </text>
+  <button type="default" data-type="url" onTap="onClick">url</button>
+  <button type="default" data-type="schema" onTap="onClick">schema</button>
+  <button type="default" data-type="test" onTap="onClick">test</button>
+  <button type="default" data-type="store" onTap="onClick">清除本地数据缓存</button>
+  <button type="default" data-type="track-event" onTap="onClick">事件统计</button>
+</view>
+<!-- sku -->
+<dwd-sku-select
+  isPopupShow="{{isShowPopup}}"
+  normSelectTag="{{ normSelectTag }}"
+  skuBtnStatus="{{ skuBtnStatus }}"
+  attrData="{{ attrData }}"
+  skuStocksList="{{ skuStocksList }}"
+  defaultSkuData="{{ defaultSkuData }}"
+  defaultSelectedIds="{{ defaultSelectedIds }}"
+  maxBuySum="{{ maxBuySum }}"
+  currentSum="{{ currentSum }}"
+  onSetParentData="setCurrentData"
+  onBtnClick="onBtnClick"
+/>

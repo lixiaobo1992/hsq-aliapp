@@ -1,0 +1,38 @@
+<view class="page">
+  <view class="title">
+    请详细描述事件的过程
+  </view>
+  <view class="reason">
+    <textarea type="text" value="{{reasonText}}" onInput="inputText" placeholder="必填、帮助小二更好的打击不法分子" class="reason-input" placeholder-class="reason-place" show-count="{{showCount}}"/>
+  </view>
+  <view class="title red-star">
+    补充证明材料
+  </view>
+
+  <view class="image-block">
+    <view class="image-item" a:for="{{imageList}}" data-index="{{index}}" onTap="previewImage">
+      <view class="item-block">
+        <image lazyLoad src="{{item}}" mode="aspectFill" />
+        <view data-index="{{index}}" catchTap="clearImage">
+          <icon type="clear" size="15"/>
+        </view>
+      </view>
+    </view>
+    <view class="addimg-btn" a:if="{{imageList.length < imageMax}}" onTap="uploadImage">
+      <view class="add-icon"></view>
+      <view class="add-text">
+        上传图片
+      </view>
+    </view>
+  </view>
+
+  <view class="next-block">
+    <form class="" onSubmit="formSubmit" report-submit>
+      <button formType="submit" class=" formid-submit page-index">
+        <view class="next-btn {{imageList.length > 0 && reasonText != '' ? 'active' : ''}}">
+          提交
+        </view>
+      </button>
+    </form>
+  </view>
+</view>

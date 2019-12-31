@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "申请退款",
+  "usingComponents": {
+    "dwd-page": "/components/page/index"
+  }
+}

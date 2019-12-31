@@ -1,0 +1,5 @@
+<view class="dwd-tpl-wrapper {{ className }}" hidden="{{ !isValid }}" style="{{ styles }}">
+  <slot>
+    <view>dwd-tpl</view>
+  </slot>
+</view>

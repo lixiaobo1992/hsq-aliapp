@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "分类",
+  "usingComponents": {
+    "dwd-page": "/components/page/index"
+  }
+}

@@ -1,0 +1,125 @@
+<!--pages/search/search.wxml-->
+<import src="/aparse/aParse.axml" />
+<import src="/components/pull-loading/index.axml" />
+<view class="page">
+  <!-- 搜索框 -->
+  <view class="search">
+    <view class="view-input">
+      <image class="icon-search" src="../../img/icon_search.png" mode="aspectFit"></image>
+      <input
+      class="input"
+      enableNative="{{false}}"
+      sync-input="{{true}}"
+      placeholder="{{placeholder}}"
+      value="{{inputValue}}"
+      placeholder-style="color: rgb(153, 153, 153); font-size: 28rpx; align-content: center;"
+      onInput="onInputValue"
+      onConfirm="{{hotSearch.url && !inputValue ? 'onUrlPage' : 'onInputSearch'}}"
+      confirm-type="search"
+      focus="{{focus}}"
+      data-id="{{couponId}}"
+      data-url="{{hotSearch.url}}"
+      data-hotsearch="{{hotSearch}}"
+      />
+      <view class="clear-icon" catchTap="{{inputValue.length < 2 ? 'inputFocus' : 'clearInput'}}">
+        <image 
+          class="icon-delete {{inputValue.length < 2 ? 'none' : ''}}"
+          src="../../img/delete.png" 
+          onTap="clearInput"
+          mode="aspectFit"></image>
+      </view>
+    </view>
+    <view
+      class="btn-search"
+      onTap="goBack"
+      data-id="{{couponId}}"
+      data-url="{{hotSearch.url}}"
+      data-hotsearch="{{hotSearch}}"
+      >取消</view>
+  </view>
+
+  <!-- 搜索建议 -->
+  <view a:if="{{pullLoading}}" class="search-loading">
+    <template is="pull-loading" data="{{pullLoading}}"></template>
+  </view>
+  <view class="search-suggest" a:if="{{searchList.length && !pullLoading}}">
+    <view 
+      class="search-suggest-item" 
+      a:for="{{searchList}}" 
+      a:key="{{index}}"
+      onTap="{{item.link ? 'onUrlPage' : 'onHotSearch'}}"
+      data-value="{{item.keywords}}"
+      data-url="{{item.link}}"
+      data-index ="{{ index }}"
+      >
+      <view class="search-suggest-keywords">
+        <rich-text nodes="{{searchSuggestList[index].keywords}}"></rich-text>
+      </view>
+      <view class="search-suggest-num">
+        <rich-text nodes="{{searchSuggestList[index].num}}"></rich-text>
+      </view>
+    </view>
+  </view>
+
+  <view a:elif="{{!searchList.length && !pullLoading}}">
+    <!-- 热门搜索 -->
+    <view class="hotSearch" a:if="{{hotSearchList.length}}">
+      <view class='section'>
+        <text>热门搜索</text>
+      </view>
+      <view class="row">
+        <view
+          class="item {{item.url ? 'url' : ''}}"
+          a:for="{{hotSearchList}}"
+          a:key="{{item}}"
+          onTap="{{item.url ? 'onUrlPage' : 'onHotSearch'}}"
+          data-value="{{item.value}}"
+          data-url="{{item.url}}"
+          data-index ="{{ index }}"
+          >{{item.value}}
+        </view>
+      </view>
+    </view>
+
+    <view class="modal-bg" a:if="{{modalOpened}}">
+      <view class="modal-box">
+        <modal
+          show="{{modalOpened}}"
+          onModalClick="onModalClick"
+          onModalClose="onModalClose"
+          >
+          <view class="modal-header" slot="header">提示</view>
+          <view class="model-content">确定清空搜索历史吗？</view>
+          <view class="model-ok" onTap="onModalClick" slot="footer">确定</view>
+          <view class="model-clear" onTap="onModalClose" slot="footer">取消</view>
+        </modal>
+      </view>
+    </view>
+
+
+
+    <!-- 最近搜索 -->
+    <view class="history">
+      <view class="section">
+        <text>最近搜过</text>
+        <view class="garbage" a:if="{{historyList && historyList.length}}" onTap="onGarbage" data-ispinsku="{{isPinSku}}">
+          <image src="../../img/icon_garbage.png" mode="aspectFit"></image>
+        </view>
+      </view>
+      <view class="row">
+        <view
+        class="item"
+        a:for="{{historyList}}"
+        a:key="{{item}}"
+        onTap="onClickHistory"
+        data-id="{{couponId}}"
+        data-value="{{item}}"
+        data-ispinsku="{{isPinSku}}"
+        >{{item}}
+        </view>
+      </view>
+
+      <view class="tip" a:if="{{!historyList.length}}">暂无搜索记录</view>
+    </view>
+  </view>
+</view>

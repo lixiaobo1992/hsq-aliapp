@@ -1,0 +1,37 @@
+<import src="/components/price/index.axml" />
+
+<template name="order-commit-pop">
+  <view class="modal" a:if="{{!hidden}}">
+    <view class="modal-mask" animation="{{animMaskData}}" onTap="{{data.listenBack}}" />
+    <view class="modal-container" animation="{{animContentData}}">
+      <view class="view-title">
+        <text class="c-title">{{data.title}}</text>
+      </view>
+      <scroll-view class="model-content">
+        <view a:for="{{data.itemList}}" a:for-item="item" onTap="onSkuItemClick">
+          <view class="product-item pop-product-item">
+            <view class="product-media" a:if="{{item.skuThumbnail}}">
+              <image class="pop-thumbnail" src="{{item.skuThumbnail}}" mode="aspectFit"/>
+            </view>
+            <view class="product-intro">
+              <view class="product-info">
+                <view class="product-title max-line-2 pop-color">{{item.name}}</view>
+                <view class="product-desc pop-color" a:if="{{desc}}">{{desc}}</view>
+              </view>
+              <view class="product-sub pop-color">
+                <template is="price" data="{{price:item.price,point:item.point}}" />
+                <text class="product-num pop-color" a:if="{{item.orderAmount}}">x {{item.orderAmount}}</text>
+              </view>
+            </view>
+            <block a:if="{{item.statusIcon}}">
+              <image class="pop-label-icon" src="{{item.statusIcon}}" mode="aspectFit" />
+            </block>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="btn-back" data-action-id="{{data.backText}}" onTap="{{data.listenBack}}">
+        <text>{{data.backText}}</text>
+      </view>
+    </view>
+  </view>
+</template>

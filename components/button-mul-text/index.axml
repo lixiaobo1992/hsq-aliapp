@@ -1,0 +1,6 @@
+<template name="button-mul-text">
+    <view class="button-mul-text">
+        <view class="top" a:if="{{top}}">{{top}}</view>
+        <view class="buttom">{{buttom}}</view>
+    </view>
+</template>

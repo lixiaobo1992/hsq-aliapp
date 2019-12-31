@@ -1,0 +1,11 @@
+{
+  "defaultTitle": "好食期",
+  "pullRefresh": true,
+  "usingComponents": {
+    "dwd-page": "/components/page/index",
+    "dwd-modules": "/components/modules/index/index",
+    "dwd-floats": "/components/floats/index/index",
+    "dwd-product-col2": "/components/modules/c-product-col2/index",
+    "dwd-float-msg": "/components/float-msg/index"
+  }
+}

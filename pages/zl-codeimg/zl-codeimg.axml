@@ -1,0 +1,20 @@
+<dwd-page
+  id="dwd-page-zl-codeimg"
+  className="page-zl-codeimg"
+  contentClass="page-zl-codeimg-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <view class="page">
+    <view class="img-block">
+      <image src="{{imgUrl}}" mode="widthFix" />
+    </view>
+    <view class="btn-block">
+      <view class="download-qr" onTap="downloadImage" data-type="qr">
+        下载二维码
+      </view>
+      <view class="download-img" onTap="downloadImage">
+        保存图片
+      </view>
+    </view>
+  </view>
+</dwd-page>

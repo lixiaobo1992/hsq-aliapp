@@ -1,0 +1,193 @@
+
+
+<dwd-page
+  id="dwd-page-zl-invite"
+  className="page-zl-invite"
+  contentClass="page-zl-invite-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <view class="invite-page">
+    <!-- <button type="default" size="defaultSize" onTap="logout"> Button </button> -->
+
+    <!-- 提示 -->
+    <view class="top-tip" a:if="{{isOwner == 2}}">
+      <view class="ellipsis">{{helpTitle}}</view>
+      <view class="classname">{{helpSubTitle}}</view>
+    </view>
+    <!-- 活动详情 -->
+    <view class="activity-card" data-type="zldetail" onTap="gotoNext">
+      <view class="activity-img">
+        <image lazyLoad src="{{activityCardInfo.image}}" />
+      </view>
+      <view class="activity-info">
+        <view class="max-line-2 activity-title">{{activityCardInfo.title}}</view>
+        <view class="zl-number">{{ activityCardInfo.booster_num }}人助力</view>
+        <!-- 助力时间 -->
+        <view class="zl-end-time" a:if="{{ isOwner ==1 && activityCardInfo.endTimeText && activityCardInfo.status == 2}}">
+          <text>{{activityCardInfo.endTimeText[0]}}</text> : <text>{{activityCardInfo.endTimeText[1]}}</text> : <text>{{activityCardInfo.endTimeText[2]}}</text> 后助力结束
+        </view>
+        <view class="activity-price">
+          <text class="price">¥<text>{{activityCardInfo.price[0]}}</text>.{{activityCardInfo.price[1]}}</text>
+          <text class="del-price">{{activityCardInfo.originalPrice}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 助力进度 -->
+    <view class="zl-box" a:if="{{isOwner==2}}">
+      <!-- 助力时间 -->
+      <view class="zl-end-time" a:if="{{ isOwner ==2 && activityCardInfo.endTimeText && activityCardInfo.status == 2}}">
+        <text>{{activityCardInfo.endTimeText[0]}}</text> : <text>{{activityCardInfo.endTimeText[1]}}</text> : <text>{{activityCardInfo.endTimeText[2]}}</text> 后助力结束
+      </view>
+      <!-- 助力者 助力完成 提示 -->
+      <!-- 助力状态为3 剩余助力为0 -->
+      <block a:if="{{activityCardInfo.status == 3 || !activityCardInfo.lastNumber}}">
+        <view class="zl-success-tit">助力完成</view>
+        <view class="zl-success-subtit">好友已经完成助力啦，你也去免费领取吧~</view>
+      </block>
+      <!-- 助力进度提示 -->
+      <view class="schedule-tip" a:if="{{activityCardInfo.lastNumber}}">已有{{activityCardInfo.join_count}}人助力，还差<text>{{activityCardInfo.lastNumber}}</text>人</view>
+      <view class="schedule-bar">
+        <view class="bar" style="width:{{ activityCardInfo.join_count>0?activityCardInfo.join_count/activityCardInfo.booster_num*100:0 }}%;"></view>
+      </view>
+      <!-- 助力按钮 -->
+      <form onSubmit="formBtnEvent" report-submit>
+        <input class="input-hidden" name="type" value="{{isJoin?'my-want-zl':'zl-btn'}}" />
+        <button formType="submit" class="zl-btn">{{ isJoin?'我也要免费领取':'助力一下' }}</button>
+      </form>
+      <view class="zl-tip" a:if="{{isJoin && activityCardInfo.status == 2}}">所有助力仅可助力一次哦～不可再助力啦～</view>
+    </view>
+
+    <!-- 任务发起者 -->
+    <block a:if="{{isOwner == 1}}">
+      <view class="help-friend-box">
+        <view class="tip-title">助力成功好友</view>
+        <!-- 帮忙好友列表 -->
+        <view class="friend-list {{helpUserListClass}}">
+          <view a:for="{{tempHelpUserList}}" class="friend-item {{ item.isNot?'not':'' }}">
+            <block a:if="{{!item.isNot}}">
+              <image lazyLoad src="{{item.userPic}}" />
+              <text a:if="{{item.isMy}}" class="my-icon">我</text>
+            </block>
+            <text a:else>?</text>
+          </view>
+        </view>
+        <!-- 底部按钮 -->
+        <view class="more-btn" a:if="{{isShowUp || isMore}}"><text a:if="{{isShowUp}}" onTap="packUp">收起</text> <text a:if="{{isMore}}" onTap="openUp">展开</text></view>
+      </view>
+
+      <!-- 提示 -->
+      <view class="tip-status">
+        <block a:if="{{activityCardInfo.status == 3 || activityCardInfo.status == 4 || activityCardInfo.status == 5}}" >
+          <!-- 标题 -->
+          <view class="tip-title bold">
+            {{ tipBox['tip'+activityCardInfo.status].title }}
+          </view>
+          <!-- 副标 -->
+          <view class="tip-p">
+            {{ tipBox['tip' + activityCardInfo.status].subText }}
+          </view>
+          <!-- 按钮 -->
+          <view class="btn-control" data-type="{{tipBox['tip' + activityCardInfo.status].btnEventType}}" onTap="gotoNext">
+            {{ tipBox['tip' + activityCardInfo.status].btnText }}
+          </view>
+          <view class="btn-control" data-type="again-order" a:if="{{setButStatus}}" onTap="gotoNext">重新发起</view>
+        </block>
+
+        <!-- 剩余要求数 -->
+        <view class="tip-title" a:if="{{activityCardInfo.status == 2}}">再邀请<text>{{activityCardInfo.lastNumber}}</text>位好友助力即可领取</view>
+
+      </view>
+
+      <view class="share-card" a:if="{{ activityCardInfo.status == 2 }}">
+        <view class="card-title"><text>选择邀请方式</text></view>
+        <view class="share-option">
+          <button open-type="share" class="share-item" data-type="share-alipay" onTap="gotoNext">
+            <image src="https://img1.haoshiqi.net/miniapp/zl/friends_3f3d76eac6.png" mode="widthFix" />
+            <text>发给好友</text>
+          </button>
+          <view class="share-item" data-type="share-wechat" onTap="gotoNext">
+            <image src="https://img1.haoshiqi.net/miniapp/zl/wechat_955d86210f.png" mode="widthFix" />
+            <text>发微信</text>
+          </view>
+          <view class="share-item" data-type="share-erwei" onTap="gotoNext">
+            <image src="https://img1.haoshiqi.net/miniapp/zl/erwei_0578b7aab0.png" mode="widthFix" />
+            <text>二维码</text>
+          </view>
+        </view>
+      </view>
+
+    </block>
+
+
+    <view class="new-success-box" a:if="{{msgList.length}}">
+      <view class="msg-box">
+        <view class="msg-list" animation="{{msgAnim}}">
+          <view class="msg-item" a:for="{{msgList}}">
+            <view class="msg-pic">
+              <image lazyLoad src="{{item.userPic}}" />
+            </view>
+            <view class="msg-info">
+              <text class="user-name">{{item.id}}{{item.userName}}</text>
+              <text class="msg-tiem">{{item.tiem}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</dwd-page>
+<!-- 分享弹窗 -->
+<view class="share-popups" a:if="{{isSharePopups}}">
+  <view class="popups-box">
+    <view class="popups-title">分享给微信好友</view>
+    <view class="popups-content share-content">
+      <view class="share-step">
+        <image src="https://img1.haoshiqi.net/miniapp/zl/share-step1_65ed93064e.png" />
+        <view>点击“立即下载”，下载图片到照片相册中</view>
+      </view>
+      <view class="share-step">
+        <image src="https://img1.haoshiqi.net/miniapp/zl/share-step2_c10d4670b1.png" />
+        <view>在照片相册中，拿取图片分享给微信好友</view>
+      </view>
+    </view>
+    <button data-type="download" onTap="gotoNext" class="popups-btn">立即下载</button>
+    <image src="https://img1.haoshiqi.net/miniapp/zl/close_7b5382dc48.png" mode="widthFix" class="close-popups"  onTap="setSharePopups" />
+  </view>
+</view>
+<!-- 助力成功弹窗 -->
+<view class="share-popups" a:if="{{isZlPopups}}">
+  <view class="popups-box">
+    <view class="popups-title">恭喜您！</view>
+    <view class="popups-content">
+      <view>您已成功帮好友助力啦！</view>
+      <view>获得一次发起助力享免单的机会。</view>
+    </view>
+    <form onSubmit="formBtnEvent" report-submit>
+      <input class="input-hidden" name="type" value="{{'my-want-zl'}}" />
+      <input class="input-hidden" name="post" value="1" />
+      <button formType="submit" class="popups-btn">免费领取</button>
+    </form>
+    <image src="https://img1.haoshiqi.net/miniapp/zl/close_7b5382dc48.png" mode="widthFix" class="close-popups" data-type="share"  onTap="setZlPopups" />
+  </view>
+</view>
+
+<!-- 助力中无库存弹窗 -->
+<view class="stock-popups" a:if="{{isStockPopups}}">
+  <view class="stock-popups-box">
+    <view class="popups-img-box">
+      <image src="https://img1.haoshiqi.net/miniapp/img/pop_up_a63a8a5a41.png" mode="widthFix" class="popups-img" />
+    </view>
+    <view class="stock-popups-content">
+      <view class="stock-img-text">
+        <image src="https://img1.haoshiqi.net/miniapp/img/kulian_icon_e50c21282f.png" class="stock-hint-img" mode="scaleToFill" />
+        <text class="stock-hint-text">您来晚了</text>
+      </view>
+      <view class="stock-hint">您的助力商品已被抢光</view>
+      <view class="stock-btn" data-type="zllist" onTap="setZlPopups">助力其他好物</view>
+    </view>
+    <image src="https://img1.haoshiqi.net/miniapp/zl/close_7b5382dc48.png" mode="widthFix" class="close-popups" data-type="stock" onTap="setZlPopups" />
+  </view>
+</view>
+

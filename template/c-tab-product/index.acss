@@ -1,0 +1,34 @@
+@import '/template/c-tabs/index.acss';
+@import '/template/c-product-row3/index.acss';
+
+.c-tab-product{
+  margin: 0 20rpx 0 20rpx;
+  border-radius: 5rpx;
+  overflow: hidden;
+}
+
+.c-tab-product-warp{
+  margin-top: 30rpx;
+}
+
+
+.c-tab-product .more-btn{
+  margin: 32rpx auto;
+  width: 235rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FDE044;
+  border-radius: 30rpx;
+}
+
+.c-tab-product .more-btn text {
+  font-size: 30rpx;
+  color: #FFFFFF;
+}
+.c-tab-product .more-btn image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 15rpx;
+}

@@ -1,0 +1,54 @@
+<!-- 接收 list: [], eventName  -->
+
+
+<template name="c-product-row3">
+  <view class="c-product-row3">
+    <!-- 页面逻辑  -->
+    <view class="row3-warp">
+      <view class="row3-box"
+        a:for="{{list}}"
+        a:key="{{item.pin_activities_id}}"
+        onTap="{{ eventName }}"
+        data-index="{{index}}"
+        data-module-index="{{moduleIndex}}"
+        data-id="{{item.pin_activities_id}}"
+        data-can-bought="{{item.can_bought}}">
+        <view class="row3-img-box">
+          <image src="{{item.sku_pic}}" class="row3-img" lazyLoad mode="scaleToFill" />
+          <!-- 抢光 | 停售 都展示抢光 -->
+          <block a:if="{{ !item.left_stock || !item.can_bought }}">
+            <!-- 抢光 -->
+            <image src="https://img1.haoshiqi.net/miniapp/img/sold_a64f1921fd.png" mode="scaleToFill" class="row3-status-img" />
+          </block>
+          <!-- 停售 -->
+          <!-- <image src="https://img1.haoshiqi.net/miniapp/img/halt_sales_75bd2f45cd.png" a:elif="{{!item.can_bought}}" mode="scaleToFill" class="row1-status-img" /> -->
+          <!-- 产品角标 -->
+          <block a:if="{{ item.corner_mark_image }}">
+            <image src="{{ item.corner_mark_image }}" mode="scaleToFill" class="row3-tag-img" />
+          </block>
+          <!-- 文字标注 -->
+          <view class="row3-tag-box" a:if="{{ item.master_label || item.slave_label }}">
+            <view class="tag-item tag-tit" a:if="{{ item.master_label }}"><text>{{ item.master_label }}</text></view>
+            <view class="tag-item tag-sub" a:if="{{ item.slave_label }}"><text>{{ item.slave_label }}</text></view>
+          </view>
+        </view>
+
+        <view class="row3-text-box">
+          <text class="row3-title">{{item.couple_title}}</text>
+          <view class="row3-price-box" a:if="{{!item.is_member}}">
+            <text class="row3-price">¥{{item.couple_price}}</text>
+            <text class="row3-market">¥{{item.market_price}}</text>
+          </view>
+          <!-- 轻会员价 -->
+          <view class="row3-member-price" a:if="{{item.is_member}}">
+            <text class="market-price">¥{{item.couple_price}}</text>
+            <view class="member-price-box" a:if="{{item.light_member_price > 0}}">
+              <text class="member-price">¥{{item.light_member_price}}</text>
+              <text class="member-icon">会员价</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

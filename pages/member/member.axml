@@ -1,0 +1,277 @@
+<import src="/aparse/aParse.axml" />
+<dwd-page
+  id="dwd-page-member"
+  className="page-member"
+  contentClass="page-member-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <scroll-view
+    lower-threshold="240"
+    scroll-y
+    onScrollToLower="onScrollToLower"
+    onScroll="{{ !isMember ? 'memberScroll' : '' }}"
+    style="height:100%">
+    <view class="member-page {{ !isMember ? 'is-footer' : '' }}">
+
+      <view class="member-header">
+        <!-- 未开通 -->
+        <view class="member-card not-vip" a:if="{{ !isMember }}">
+          <view class="member-open-title">
+            <!-- <text class="tit-text">开通送</text><text class="tit-price">{{ cardListData[currentRightsIndex].discount }}</text><text  class="tit-text">元礼包</text> -->
+            <text class="tit-text">每月为您省</text><text class="tit-price">60</text><text class="tit-text">元</text>
+          </view>
+          <view class="member-open-desc">会员专享9大权益，先用券再付款，更省钱哦</view>
+          <image class="member-rule" data-type="rule" onTap="setShowPopup" mode="widthFix" src="https://img1.haoshiqi.net/miniapp/icon-rule_6bf757e3b3.png"/>
+          <!-- <view class="card-name" a:if="{{ cardListData.length && cardListData.length > currentRightsIndex }}">{{ cardListData[currentRightsIndex].template_type_name }}</view>
+          <view class="user-info">
+            <view class="user-pic"><image mode="scaleToFill" src="{{ userCardInfo.userAvatar }}"/></view>
+            <view class="user-name">亲爱的: {{ userCardInfo.userName }}</view>
+          </view>
+          <view class="open-offer"><text class="offer-text">开通轻会员领 <text>¥{{ cardListData[currentRightsIndex].discount }}</text> 优惠</text><image data-type="rule" onTap="setShowPopup" mode="widthFix" src="https://img1.haoshiqi.net/miniapp/icon-rule_6bf757e3b3.png"/></view> -->
+        </view>
+        <!-- 已开通 -->
+        <view class="member-card vip" a:else>
+          <view class="user-info">
+            <view class="user-pic"><image mode="scaleToFill" src="{{ userCardInfo.userAvatar }}"/></view>
+            <view class="user-detail">
+              <view class="user-name">{{ userCardInfo.userName }}</view>
+              <view class="vip-end-time"><text>{{ userCardInfo.member_end_time }}到期</text><image data-type="rule" onTap="setShowPopup" mode="widthFix" src="https://img1.haoshiqi.net/miniapp/icon-rule_6bf757e3b3.png"/></view>
+            </view>
+          </view>
+          <view class="plugin-entr-btn" data-type="entr" onTap="openBtnEvent">管理</view>
+
+          <view class="member-status">
+            <view class="member-status-item">
+              <text>{{ userCardInfo.member_use_day }}天</text>
+              <view>你已享受会员权益</view>
+            </view>
+            <view class="member-status-item">
+              <text>{{ userCardInfo.member_save_amount }}元</text>
+              <view>累计已省</view>
+            </view>
+          </view>
+
+        </view>
+      </view>
+
+      <block a:if="{{ !isMember }}">
+        <!-- 会员卡选择 -->
+        <view class="member-card-select">
+          <!-- <view class="card-list">
+            <view
+              a:for="{{ cardListData }}"
+              a:key="{{ item.template_id }}"
+              class="card-item {{ currentRightsIndex == index ? 'active' : '' }}"
+              data-index="{{ index }}"
+              onTap="changeCardEvent">
+              <view class="card-lable" a:if="{{ item.is_first_benefit }}">首次优惠</view>
+              <view class="card-name">{{ item.item_name }}</view>
+              <view class="card-price">¥{{ item.price }}</view>
+              <view class="card-del-price not-del" a:if="{{ item.is_first_benefit }}">后续¥{{ item.market_price }}/月</view>
+              <view class="card-del-price" a:else>¥{{ item.market_price }}</view>
+            </view>
+          </view> -->
+
+          <!-- <view class="open-tip">{{ !cardListData[currentRightsIndex].is_first_benefit ? openCardTip[0] : openCardTip[1] }}</view> -->
+          <!-- <view class="open-btn" data-type="card" onTap="openBtnEvent">开通仅需¥{{ cardListData[currentRightsIndex].price }} 享会员特权</view> -->
+
+          <view class="open-btn" data-type="card" onTap="openBtnEvent">开通会员 先享后付</view>
+          <view class="open-tip">¥{{ cardListData[currentRightsIndex].price }}会员费、到期再结算、不用不扣钱</view>
+        </view>
+        <!-- 底部浮动 开通按钮 -->
+        <view class="footer-open-btn" hidden="{{ !isShowOpenBtn }}" data-type="card1" catchTap="openBtnEvent">
+          <view class="footer-open-offer">
+            <view class="offter-text01">限时开通仅需¥{{ cardListData[currentRightsIndex].price }}</view>
+            <view class="offter-text02">享受会员特权</view>
+          </view>
+        </view>
+
+        <!-- 会员权益 -->
+        <view class="vip-privilege">
+          <view class="privilege-titel">专享9大特权</view>
+          <view class="privilege-list">
+            <view
+              class="privilege-item"
+              a:for="{{ vipRightsList }}"
+              a:key="{{ item.lable }}"
+              data-index="{{ index }}"
+              onTap="viprightsChange">
+              <image mode="widthFix" src="{{ item.icon }}"/>
+              <view class="privilege-name">{{ item.lable }}</view>
+              <view class="privilege-tag" a:if="{{ index == currentVipRightIndex }}"></view>
+            </view>
+          </view>
+          <view class="privilege-content">
+            <image class="privilege-icon" mode="widthFix" src="https://img1.haoshiqi.net/miniapp/vip-icon-content_6a5320b7ff.png"/>
+            <view class="item-tit">{{ vipRightsList[currentVipRightIndex].title }}</view>
+            <view class="item-content">· {{ vipRightsList[currentVipRightIndex].content }}</view>
+          </view>
+        </view>
+
+        <!-- 会员券列表 -->
+        <view class="member-coupon-box" a:if="{{ rightsListData[currentRightsIndex].length }}">
+          <view class="header-article"></view>
+          <view class="member-coupon-content">
+            <view class="rights-coupon-item" a:for="{{ rightsListData[currentRightsIndex] }}" a:key="{{ index }}">
+              <view class="coupon-num-header" a:if="{{ index == 0 }}">
+                <view class="coupon-num-text">已有<text>{{ userCardInfo.total_coupon }}w</text>人领取神券购物</view>
+              </view>
+              <view class="rights-coupon-title" a:else>轻会员神券天天领</view>
+              <view class="reveal-coupon-list">
+                <view
+                  class="reveal-coupon-item"
+                  a:for="{{ item.list }}"
+                  a:for-item="childItem"
+                  a:key="{{ childItem.coupon_code }}"
+                  data-type="open"
+                  onTap="setShowPopup">
+                  <view class="coupon-price"><text>{{ childItem.value }}</text> RMB</view>
+                  <view class="coupon-sub-title">{{ childItem.at_least_title }}</view>
+                  <view class="coupon-range">{{ childItem.usage_title }}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+      </block>
+
+      <block a:else>
+
+        <!-- 会员权益 -->
+        <view class="vip-privilege">
+          <view class="privilege-titel">专享9大特权</view>
+          <view class="privilege-list">
+            <view
+              class="privilege-item"
+              a:for="{{ vipRightsList }}"
+              a:key="{{ item.lable }}"
+              data-index="{{ index }}"
+              onTap="viprightsChange">
+              <image mode="widthFix" src="{{ item.icon }}"/>
+              <view class="privilege-name">{{ item.lable }}</view>
+              <view class="privilege-tag" a:if="{{ index == currentVipRightIndex }}"></view>
+            </view>
+          </view>
+          <view class="privilege-content">
+            <image class="privilege-icon" mode="widthFix" src="https://img1.haoshiqi.net/miniapp/vip-icon-content_6a5320b7ff.png"/>
+            <view class="item-tit">{{ vipRightsList[currentVipRightIndex].title }}</view>
+            <view class="item-content">· {{ vipRightsList[currentVipRightIndex].content }}</view>
+          </view>
+        </view>
+
+        <!-- isNewMember 不是新会员不展示权益列表 -->
+        <view class="rights-coupon-box" a:if="{{ userCardInfo.is_new_member }}">
+          <!-- 权益项 -->
+          <view class="rights-item" a:for="{{ rightsListData }}" a:key="{{ index }}">
+            <view class="header-article" a:if="{{ index == 0 }}"></view>
+            <view class="header-title" a:else><view class="header-title-text">轻会员神券天天领</view></view>
+            <view class="rights-item-content">
+              <view class="rights-cycle-header">
+                <view
+                  a:for="{{ item.list }}"
+                  a:for-item="childItem"
+                  a:for-index="childIndex"
+                  a:key="{{ childItem.user_benefit_Id }}"
+                  data-index="{{ childIndex }}"
+                  data-rights-index="{{ index }}"
+                  class="cycle-item {{ item.currentIndex == childIndex ? 'active' : '' }}"
+                  onTap="rightsTabBtnEvent">{{ childItem.title }}</view>
+              </view>
+              <!-- 权益周期列表 -->
+              <view class="rights-coupon-list-box">
+                <view class="rights-coupon-list">
+                  <view
+                    class="rights-coupon-item"
+                    a:for="{{ item.list[item.currentIndex].list }}"
+                    a:for-item="couponItem"
+                    a:for-index="childIndex"
+                    a:key="{{ couponItem.coupon_code }}"
+                    data-index="{{ childIndex }}"
+                    data-rights-index="{{ index }}"
+                    onTap="receiveCouponEvent">
+                    <view class="coupon-left">
+                      <view class="coupon-left-content">
+                        <view class="coupon-price"><text>{{ couponItem.value }}</text>RMB</view>
+                        <view class="coupon-sub-title">{{ couponItem.at_least_title }}</view>
+                      </view>
+                      <!-- <view class="coupon-left-content"  a:if="{{ couponItem.at_least }}" a:else>
+                        <text class="coupon-price-num">{{ couponItem.value }}</text>
+                        <view class="coupon-desc">
+                          <text>RMB</text>
+                          <text>{{ couponItem.at_least_title }}</text>
+                        </view>
+                      </view> -->
+                    </view>
+                    <view class="coupon-right {{ couponItem.status.className }}">
+                      <block a:if="{{ couponItem.status.statusCode == 0 }}">
+                        <text>立即</text><text>领取</text>
+                      </block>
+                      <block a:else>{{couponItem.status.text }}</block>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+        </view>
+      </block>
+
+
+      <!-- 专题模块  -->
+      <block a:if="{{ !isModulesLoading && modules.length }}">
+        <view class="topic-modules" style="{{ 'background-color: ' +  modules_bg_color }}">
+          <view class="tpl-modules" a:for="{{ modules }}" a:key="{{ item.id }}">
+            <dwd-modules data="{{item}}" />
+          </view>
+        </view>
+      </block>
+      <view class="list-loading" a:else="{{ isModulesLoading }}">
+        <image src="https://img1.haoshiqi.net/wxapp/img/loading_9602a579c2.gif" mode="aspectFit" />
+        <text class="loading-tip">加载中...</text>
+      </view>
+
+
+      <!-- 推荐品 -->
+      <view class="vip-recommend-product" a:if="{{list && list.length}}">
+        <view class="header-title"><view class="header-title-text">轻会员专享爆品推荐</view></view>
+
+        <view class="product-list">
+          <dwd-product-col2 data="{{ {list: list} }}" />
+        </view>
+
+        <view class="list-loading" a:if="{{ pullLoading }}">
+          <image src="https://img1.haoshiqi.net/wxapp/img/loading_9602a579c2.gif" mode="aspectFit" />
+          <text class="loading-tip">加载中...</text>
+        </view>
+
+        <!-- 底部提示数据 -->
+        <view  a:if="{{showFooter}}" class="foot">
+          <view class="footer">
+            <text class="tip">{{"没有更多商品了"}}</text>
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+  </scroll-view>
+  <view class="dwd-popup open-popup" hidden="{{ !isShowOpenPopup }}">
+    <view class="dwd-popup-mask" data-type="open" catchTap="setShowPopup"></view>
+    <view class="dwd-popup-content dwd-popup--center open-popup-conent {{ isShowOpenPopup ? 'show': '' }}">
+      <view class="open-tit">开通轻会员</view>
+      <view class="open-sub">好礼享不停！每月可送{{ cardListData[currentRightsIndex].discount }}元红包</view>
+      <view class="open-member-btn" data-type="card2" catchTap="openBtnEvent">立即开通</view>
+    </view>
+  </view>
+  <view class="dwd-popup rule-popup" hidden="{{ !isShowRulePopup }}">
+    <view class="dwd-popup-mask" data-type="rule" catchTap="setShowPopup"></view>
+    <view class="dwd-popup-content dwd-popup--center rule-popup-conent {{ isShowRulePopup ? 'show': '' }}">
+      <image class="rule-close-btn" data-type="rule" catchTap="setShowPopup" mode="widthFix" src="https://img1.haoshiqi.net/miniapp/close_eb2d42427e.png"/>
+      <view class="rule-conent">
+          <template is="aParse" data="{{aParseData:data.nodes}}"/>
+      </view>
+    </view>
+  </view>
+</dwd-page>

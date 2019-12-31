@@ -1,0 +1,6 @@
+{
+  "defaultTitle":"退款详情",
+  "usingComponents": {
+    "dwd-page": "/components/page/index"
+  }
+}

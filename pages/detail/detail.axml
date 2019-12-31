@@ -1,0 +1,327 @@
+<import src="/components/price/index.axml" />
+<import src="/components/labels/labels.axml" />
+<import src="/components/swiper/swiper.axml" />
+<import src="/components/sec-head/index.axml" />
+<import src="/components/coupon-item/index.axml"/>
+<import src="/components/attr-img/index.axml" />
+<import src="/components/attr-coupon/index.axml" />
+<import src="/components/button-mul-text/index.axml" />
+<import src="/components/back-home/index.axml" />
+<import src="/components/feedback/index.axml" />
+<import src="/components/detail-store/index.axml"/>
+<import src="/aparse/aParse.axml" />
+<import src="/components/coupon-toast/index.axml"/>
+
+<dwd-page
+  id="dwd-page-detail"
+  className="page-detail"
+  contentClass="page-detail-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+
+  <form class="page-full-auto" onSubmit="formidSubmit" report-submit>
+    <button formType="submit" class="page-full-auto formid-submit">
+
+      <view class="page" hidden="{{isLoading}}">
+
+        <template is="backHome" data="{{isShowGoHome}}"></template>
+        <template is="feedback" data="{{isShowFeedback:true, log: 'c_tousu_productdetail'}}"></template>
+
+        <!-- swiper -->
+        <template is="swiper" data="{{...swiperInfo}}"></template>
+
+        <!-- 秒杀 -->
+        <view
+          class="activity-block {{activityPreheat.activityStatus == 'start' ? 'activity-block-active' : ''}}"
+          a:if="{{ showAct }}"
+        >
+          <view class="activity-no-stock" a:if="{{ activityPreheat.activityStock < 1 && left_stock < 1}}">
+            <image src="https://img1.haoshiqi.net/miniapp/img/sold_a64f1921fd.png" mode="scaleToFill"/>
+          </view>
+          <view class="act-left">
+            <view class="act-left-left">
+              <view class="act-icon-box">
+                <view class="icon-box">
+                  <image class="act-icon" src="../../img/clock-icon.png" mode="scaleToFill" />
+                </view>
+                <text class="act-icon-text">{{activityPreheat.activityType == 1 ? '活动价' : '秒杀价'}}</text>
+              </view>
+              <view class="act-left-right">
+                <view class="act-ac-price">￥{{activityPreheat.price[0]}}.{{activityPreheat.price[1]}}</view>
+                <view class="act-mark-price">划线价￥{{ activityPreheat.activityMarketPrice }}</view>
+              </view>
+              <view class="act-inventory-box" a:if="{{ activityPreheat.activityStatus != 'end' ? 'true' : '' }}">
+                <view class="act-stock">
+                  <text>{{ activityPreheat.activityStatus == 'start' ? '仅剩' : '限量' }}</text>{{ activityPreheat.activityStock }}件
+                </view>
+                <view class="act-stock-rate" a:if="{{ activityPreheat.activityStatus == 'start' ? 'true' : '' }}">
+                  <view class="act-rate-box" style="width: {{activityPreheat.rateNumber}}%"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="act-right">
+            <view class="act-right-top {{activityPreheat.activityStatus == 'start' ? 'activity-block-text' : ''}}">
+              {{ activityPreheat.activityCountTip }}
+            </view>
+            <view class="act-countdown">
+              <view
+                class="count-number-day {{activityPreheat.activityStatus == 'start' ? 'activity-block-text' : ''}}"
+                a:if="{{activityPreheat.activityTime.d > 0}}"
+              >
+                {{ activityPreheat.activityTime.d }}天
+              </view>
+              <view class="count-number {{activityPreheat.activityStatus == 'start' ? 'activity-block-bg' : ''}}">
+                {{ activityPreheat.activityTime.h }}
+              </view>
+              :
+              <view class="count-number {{activityPreheat.activityStatus == 'start' ? 'activity-block-bg' : ''}}">
+                {{ activityPreheat.activityTime.f }}
+              </view>
+              :
+              <view class="count-number {{activityPreheat.activityStatus == 'start' ? 'activity-block-bg' : ''}}">
+                {{ activityPreheat.activityTime.s }}
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="cd-start {{hideCountDown ? '' : 'count-active'}}">
+        <!-- <view class="cd-start" style='display:block;'> -->
+          <view class='notice-img'>
+            <image src="https://img1.haoshiqi.net/miniapp/seckilling_e40d231bce.png" mode="aspectFit"/>
+          </view>
+          <text class="count-text">距开抢剩： <text a:if="{{count.days}}" class='time-num'>{{count.days}}</text><text a:if="{{count.days}}">天</text> <text class='time-num'>{{count.hours}}</text> 时 <text class='time-num'>{{count.minutes}}</text> 分 <text class='time-num'>{{count.seconds}}</text> 秒  </text>
+        </view>
+
+        <!-- 商品基本信息 -->
+        <view class="info">
+          <block a:if="{{ !showAct }}">
+            <view class='product-status' a:if="{{noStock || unLine}}">
+              <image src="https://img1.haoshiqi.net/miniapp/yiqiangguang1_a274290f4d.png" mode="scaleToFill" a:if="{{noStock}}"/>
+              <image src="https://img1.haoshiqi.net/miniapp/halt_sales_f7849365e5.png" mode="scaleToFill" a:elif="{{unLine}}"/>
+            </view>
+          </block>
+            <view class="info-title max-line-2">
+              <text class="title-zy" a:if="{{merchantType == 2}}">自营</text>{{name}}
+            </view>
+          <!-- 轻会员价格 -->
+          <view class="mt" a:if="{{isMember}}">
+            <view class="member-price-box">
+              <view class="member-price-icon">
+                <image src="https://img1.haoshiqi.net/miniapp/img/vip_price2x_b9f4bf402f.png" mode="widthFix"></image>
+              </view>
+              <text class="member-price-detail">¥{{ (memberPrice * 0.01).toFixed(2) }}</text>
+            </view>
+            <view class="market-price">¥<text>{{ (priceObj.couplePrice * 0.01).toFixed(2) }}</text></view>
+          </view>
+          <view class="mt" a:else>
+              <template is="price" data="{{...priceObj}}" />
+            </view>
+          <view class="mt info-desc">{{desc}}</view>
+
+          <!-- 轻会员banner a:if="{{isMember}}"-->
+          <view class="member-card" a:if="{{ memberCard.isShow }}" onTap="memberBtn">
+            <view class="icon-member">
+              <image src="https://img1.haoshiqi.net/miniapp/img/vip_detail_go2x_7c467273d7.png" mode="widthFix"></image>
+            </view>
+            <view class="member-info">
+              <view class="member-info-tit">
+                {{ memberCard.title }}
+                <text class="red">{{ memberCard.getPrice }}</text>到手
+              </view>
+              <view class="member-info-sub">{{ memberCard.desc }}</view>
+            </view>
+            <view class="member-status">
+              <text class="status-text">{{ memberCard.btnText }}</text>
+              <text class="left-arrow"></text>
+            </view>
+          </view>
+          <!-- <member-card price="{{ priceObj.price }}"></member-card> -->
+        </view>
+
+        <!-- 参数列表 -->
+        <view class="mt">
+          <view class="attr-text">
+            <text class="title">参数：</text>
+            <view class="params-box">
+              <view a:if="{{ !notSelectedAttrName }}">
+                <block a:for="{{ selectedAttrName }}">
+                  {{ index !== 0 ? '、' : '' }}【{{ item.attr_name }}】{{ item.value
+                  }}{{ item.type == 2 ? '到期' : '' }}
+                </block>
+              </view>
+              <view a:else>请选择: {{ notSelectedAttrName }}</view>
+            </view>
+          </view>
+        </view>
+
+        <!--领券消息-->
+        <view class="coupon-desc" a:if="{{coupleList.length}}" onTap="showCoupons">
+          <template is="attr-coupon" data="{{ list:coupleList, coupleTitle: '领券'}}" ></template>
+        </view>
+        <!-- 促销信息 -->
+        <view a:if="{{promotions.length}}">
+          <template is="attr-img" data="{{ list: promotions, showArrow:true }}" ></template>
+        </view>
+
+        <!-- 送至 -->
+        <view class='mt city' onTap="onSelectCity">
+          <view class='city-front'>
+            <label class='city-label'>送至：</label>
+            <image class="city-img" src="https://img1.haoshiqi.net/miniapp/address/location_e7c4dc70ce.png" mode="scaleToFill" />
+            <view class='city-name'>{{currentCity.currentAddress}}</view>
+            <image class="city-arrow" src="https://img1.haoshiqi.net/wxapp/img/more_85508a3b09.png" mode="scaleToFill" />
+          </view>
+        </view>
+        <!-- 运费信息 -->
+        <view class="white-bg">
+          <view class='city-cost white-bg'>
+            <label class='city-label'>运费：</label>
+            <view class="city-name {{ canDelivery ? '' : 'cannot-delivery' }}" >{{ freightInfo }}</view>
+          </view>
+        </view>
+
+        <!-- riskgo 广告 -->
+        <view
+          class="ad-article"
+          a:if="{{ riskgoAd.src }}"
+          data-url="{{ riskgoAd.link }}"
+          data-piwik-event="{{ riskgoAd.piwikEvent }}"
+          data-piwik-data="{{ riskgoAd.piwikData }}"
+          onTap="onUrlPage">
+          <image mode="scaleToFill" src="{{ riskgoAd.src }}"/>
+        </view>
+
+        <!-- 质保标签 -->
+        <view class="mt labels" a:if="{{labels.length}}">
+          <template is="labels" data="{{labels, fontSize:24}}"></template>
+        </view>
+
+        <!-- 拼团规则 -->
+        <view class="rule mt v-center space-between" onTap="toRule">
+          <text>{{rule}}</text>
+          <view>
+            <image class="rule-more" src="https://img1.haoshiqi.net/miniapp/more_85508a3b09.png" mode="aspectFill" />
+          </view>
+        </view>
+
+        <view class="couple-fast" a:if="{{fastInfo.list && fastInfo.list.length && !singleOnly}}">
+          <view class="couple-fast-title">{{fastInfo.head}}</view>
+          <view class="couple-fast-list">
+            <block a:for="{{fastInfo.list}}">
+              <view class="item flex-between fast-join-item" data-id="{{item.id}}" data-type="couple-share" onTap="goNext" data-index="{{index}}">
+                <view class="user flex-between">
+                  <image class="avatar" width="40" height="40" src="{{item.avatar || 'https://img1.haoshiqi.net/miniapp/avatar_5749d347e9.png'}}" mode="scaleToFill" />
+                  <view class="name">{{item.username}}</view>
+                </view>
+                <view class="oper flex-between">
+                  <view class="status">
+                    <view class="st">还差{{ (item.countLimit - item.joinCount) }}人成团</view>
+                    <view class="times">{{item.countDown}}</view>
+                  </view>
+                  <view class="btn-join">去参团</view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+
+        <!-- 店铺信息 -->
+        <view class="store">
+          <template is="detail-store" data="{{merchantData}}"></template>
+        </view>
+
+        <!-- 图文详情 -->
+        <!-- <view class="mt" a:if="{{morePics}}">
+          <template is="sec-head" data="{{title:'图文详情'}}"></template>
+          <image lazyLoad a:for="{{morePics}}" class="img-full" src="{{item}}" mode="widthFix" />
+        </view> -->
+        <view class="mt white-bg">
+          <view class="sec-head-box">
+            <template is="sec-head" data="{{title:'图文详情'}}"></template>
+          </view>
+          <template is="aParse" data="{{aParseData:data.nodes}}"/>
+        </view>
+
+        <!-- 价格说明 -->
+        <view class="mt" >
+          <template is="sec-head" data="{{title:'标示价格说明'}}"></template>
+          <view class="price-explain">
+            <text>{{ priceExplain }}</text>
+          </view>
+        </view>
+
+        <!-- 底部按钮 -->
+        <view class="buy">
+          <view class="buy-service" onTap="toCustomService" >
+            <image src="https://img1.haoshiqi.net/miniapp/service_a08016fa51.png" mode="scaleToFill" class="icon"/>
+            <text class="buy-call">客服</text>
+          </view>
+          <view class="buy-service" onTap="toggleCollection" >
+            <image src="{{collectionImg}}" mode="scaleToFill" class="icon"/>
+            <text class="buy-call">{{is_like ? '已收藏' : '收藏'}}</text>
+          </view>
+          <view class="buy-service" onTap="goCart" >
+              <image src="https://img1.haoshiqi.net/miniapp/cart_6f59ff59a0.png" mode="scaleToFill" class="icon"/>
+              <text class="buy-call">购物车</text>
+              <view class="badge {{ cartNumber ? '' : 'hidden' }}" ></view>
+          </view>
+          <block a:if="{{ activityPreheat.activityStatus !== 'ready' || left_stock > 0 }}">
+            <view class="buy-single single-{{ buyBtnStatus }}" style="background-color: #ed0000;" data-type="2" onTap="buyBtnClick" a:if="{{ singleOnly }}">
+              <template is="button-mul-text"  data="{{top:singlePrice, buttom:'立即购买'}}"></template>
+            </view>
+            <block a:else>
+              <view class="buy-single single-{{ buyBtnStatus }}" data-type="2" onTap="buyBtnClick">
+                <template is="button-mul-text"  data="{{top:singlePrice, buttom:'加入购物车'}}"></template>
+              </view>
+              <view class="buy-group bc_red couple-{{ buyBtnStatus }}" data-type="3" onTap="buyBtnClick">
+                <template is="button-mul-text" data="{{top:couplePrice, buttom:countLimit}}"></template>
+              </view>
+            </block>
+          </block>
+          <view class="view-pin activity-ready" a:else>
+            <view class="activity-price">
+              {{activityPreheat.activityType == 1 ? '活动价' : '秒杀价'}}￥{{ (activityPreheat.activityPrice/100).toFixed(2) }}
+            </view>
+            <view class="activity-time">
+              {{ activityPreheat.activityStartTimeTip }}
+            </view>
+          </view>
+        </view>
+
+      </view>
+
+      <!-- 切换城市 -->
+      <select-city didShowCitySelection="{{didShowCitySelection}}" onSelectingNewCity="onSelectingNewCity" onCloseCitySelection="closeCitySelection">
+      </select-city>
+      <!-- sku -->
+      <dwd-sku-select
+        class="detail-sku-select"
+        isPopupShow="{{isShowPopup}}"
+        normSelectTag="{{ normSelectTag }}"
+        skuBtnStatus="{{ skuBtnStatus }}"
+        attrList="{{ attrList }}"
+        skuStocksList="{{ skuStocksList }}"
+        smallCurrentSkuData="{{ smallCurrentSkuData }}"
+        maxBuySum="{{ maxBuySum }}"
+        currentSum="{{ currentSum }}"
+        onSetParentData="setCurrentData"
+        onBtnClick="onBtnClick"
+      />
+      <!--促销说明弹层 -->
+      <card-promotion
+        promotions="{{promotions}}"
+        promotionTitle="促销信息"
+        onShowPromotionCon="onShowPromotionCon"
+        onPinDetail="onPinDetail"
+        isPopupShow="{{onShowPromotionInfo}}" />
+    </button>
+  </form>
+</dwd-page>
+<!-- 优惠券列表弹层 -->
+<view class="popup-outbox {{showCoupons ? '' : 'hidden'}}">
+  <coupon-list coupons="{{coupons}}" onHandleItem="onHandleItem" ></coupon-list>
+</view>
+<!-- 领取成功toast -->
+<template is="coupon-toast" a:if="{{sucToast}}"></template>

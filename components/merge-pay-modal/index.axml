@@ -1,0 +1,49 @@
+<!--支付拦截弹窗-->
+<block a:if="{{isMergePay }}">
+  <view class="order-mask"  onTap="handlePayModal"> </view>
+  <view class="mask-container">
+    <view class="mask-header">
+      <text class="header-title">{{ mergeInfo.desc }}</text>
+    </view>
+    <view class="member-title-price" a:if="{{mergeInfo.member_price > 0}}">
+      <view class="image-title">
+        <image src="{{ mergeInfo.member_icon }}" mode="aspectFit" class="member-image" />
+        <text class="member-title">{{ mergeInfo.member_title }}</text>
+      </view>
+      <view class="member-price">
+          ￥{{ (mergeInfo.member_price/100).toFixed(2) }}
+      </view>
+    </view>
+    <view class="mask-content">
+      <view class="merchant-list" a:for="{{mergeInfo.list}}" a:key="{{index}}" a:for-item="merchantItem">
+        <view class="merchant-item" >
+          <image src="{{ merchantItem.merchant_icon }}" mode="aspectFit" class="merchant-image" />
+          <text class="merchant-name">{{ merchantItem.merchant_name }}</text>
+        </view>
+        <view class="list-item" >
+          <view class="left-text" a:for="{{merchantItem.list}}" a:key="{{index}}" a:for-item="skuItem">
+            <view class="name-price">
+              <text class="sku-name">{{ skuItem.sku_name }}</text>
+              <text class="sku-price">￥{{ (skuItem.price/100).toFixed(2) }}</text>
+            </view>
+            <view class="num"> （共{{ skuItem.amount }}件，共优惠<text class="item-price">￥{{ (skuItem.discount_price/100).toFixed(2) }}</text>元） </view>
+          </view>
+        </view>
+        <view class="delivery-name-price" a:if="{{merchantItem.delivery_price > 0}}">
+          <view class="delivery-name">运费</view>
+          <view class="delivery-price">￥{{(merchantItem.delivery_price/100).toFixed(2) }}</view>
+        </view>
+        <view class="merchant-num-price">
+            共<text class="merchant-num">{{merchantItem.total_amount}}</text>件商品,
+            小计：
+            <text class="merchant-price">¥{{ (merchantItem.total_price/100).toFixed(2) }}</text>
+        </view>
+      </view>
+      <view class="footer-total-price">合计:<text class="total-price">￥{{ (mergeInfo.pay_price/100).toFixed(2) }}</text></view>
+    </view>
+    <view class="footer-btn">
+      <view class="btn btn-cancel" onTap="handlePayModal">取消</view>
+      <view class="btn btn-confirm" onTap="onCheckOrder" data-orderid="{{mergeInfo.order_ids}}">付款</view>
+    </view>
+  </view>
+</block>

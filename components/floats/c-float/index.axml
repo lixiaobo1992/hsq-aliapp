@@ -1,0 +1,9 @@
+<view
+  class="c-float-box"
+  a:if="{{ isValid }}"
+  data-url="{{ link }}"
+  data-index="1"
+  onTap="onUrlPage"
+  style="{{ styles }}"
+>
+</view>

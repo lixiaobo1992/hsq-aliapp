@@ -1,0 +1,36 @@
+
+
+
+<template name="c-swiper">
+  <view
+    class="c-swiper {{ styleType == 2 ? 'c-swiper-1' : '' }}"
+    a:if="{{ list && list.length }}"
+    style="padding-top:{{ padding_top }}%">
+    <!-- 页面逻辑 -->
+    <swiper
+      indicator-dots="{{ list.length > 1 ? indicatorDots : false }}"
+      circular="{{ circular }}"
+      autoplay="{{ autoplay }}"
+      interval="{{ interval }}"
+      current="{{ currentIndex ? currentIndex : 0 }}"
+      previous-margin="{{ list.length > 1 && previousMargin ? previousMargin : '0px' }}"
+      next-margin="{{ list.length > 1 && nextMargin ? nextMargin : '0px' }}"
+      data-module-index="{{ moduleIndex }}"
+      indicator-active-color="{{ activeColor }}"
+      onChange="{{ onChangeEventName }}">
+      <block a:for="{{ list }}">
+        <swiper-item  a:key="{{ index }}" class="c-swiper-item" style="height: {{ height }}px;">
+          <image
+            class="c-swiper-img"
+            onTap="{{ eventName }}"
+            data-url="{{ item.link }}"
+            data-piwik-event="{{ item.piwik ? item.piwik : 'banner' + index }}点击"
+            data-piwik-data="{{ item.piwikData }}"
+            data-index="{{ index }}"
+            src="{{ item.url }}"
+            mode="widthFix" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</template>

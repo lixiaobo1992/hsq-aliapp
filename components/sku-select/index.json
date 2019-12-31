@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "dwd-input-number": "/components/input-number/index"
+  }
+}

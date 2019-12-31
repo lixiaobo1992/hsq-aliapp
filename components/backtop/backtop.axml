@@ -1,0 +1,5 @@
+<template name="backTop">
+  <view class="backTop" catchTap="onBackTop" a:if="{{showBackTop}}" style="bottom:{{bottom?bottom:80}}rpx;">
+    <image class="image" src="https://img1.haoshiqi.net/miniapp/back_top_91bbde488d.png" mode="aspectFit" />
+  </view>
+</template>

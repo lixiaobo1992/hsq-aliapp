@@ -1,0 +1,44 @@
+<import src="/components/foot/foot.axml" />
+<import src="/components/backtop/backtop.axml" />
+
+<scroll-view 
+  onScroll="onScroll" 
+  scroll-top="{{scrollTop}}"
+  lower-threshold="{{240}}"
+  scroll-y
+  style="height:100%;"
+  onScrollToLower="onScrollToLower"
+  >
+
+  <!-- 评论 -->
+  <view class="no">
+    <view a:for="{{list}}" class="box">
+
+      <view class="card-comment">
+        <view class="space-between">
+          <view class="v-center user">
+            <image a:if="{{item.avatar}}" class="head" src="{{item.avatar}}" mode="aspectFit" />
+            <image a:else="{{true}}" class="head"  src="https://img1.haoshiqi.net/miniapp/user_head.png" mode="aspectFit" />
+            <text class="username">{{item.username}}</text>
+            <text class="time">{{item.created_at}}</text>
+          </view>
+          <view class="stars">
+          <block a:for="{{item.score}}" a:for-item="star">
+            <image a:if="{{star == 1}}" class="star"  src="https://img1.haoshiqi.net/miniapp/star_full_ef84985e8e.png" mode="aspectFill" />
+            <image a:else class="star"  src="https://img1.haoshiqi.net/miniapp/star_empty_4091059b5c.png" mode="aspectFill" />
+          </block>
+          </view>
+        </view>
+        <view class="content">{{item.content}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部提示数据 -->
+  <view a:if="{{showFooter}}">
+    <template is="foot"></template>
+  </view>
+
+  <!-- 返回顶部按钮 -->
+  <template is="backTop" data="{{showBackTop}}"></template>
+</scroll-view>

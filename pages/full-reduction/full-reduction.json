@@ -1,0 +1,7 @@
+{
+  "defaultTitle": "凑单满减",
+  "pullRefresh": true,
+  "usingComponents": {
+    "dwd-page": "/components/page/index"
+  }
+}

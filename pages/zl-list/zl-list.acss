@@ -1,0 +1,269 @@
+@import '/components/backtop/backtop.acss';
+@import '/components/foot/foot.acss';
+page{
+  padding: 0rpx;
+  margin: 0rpx;
+  padding-bottom: 98rpx;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.page-zl-list{
+  height: 100%;
+}
+scroll-view{
+  height: 100%;
+}
+
+form .input-hidden{
+  opacity: 0;
+  position: absolute;
+  right: -1000%;
+  top:-1000%;
+}
+
+/* 底部按钮 */
+.my-task-btn{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 98rpx;
+  background-color: #fff;
+  text-align: center;
+  line-height: 98rpx;
+  font-size: 34rpx;
+  color: #ED0000;
+  font-weight: bold;
+  border-top: 1rpx solid #e1e1e1;
+}
+
+/* header */
+.top-head{
+  width: 100%;
+  position: relative;
+  margin-bottom: 20rpx;
+}
+.top-head image{
+    width: 100%;
+}
+.top-head .btn{
+  position: absolute;
+  top: 0rpx;
+  border-radius: 0;
+  width: 120rpx;
+  height: 120rpx;
+  border: none;
+}
+.top-head .rule-btn{
+  left: 0;
+}
+.top-head .share-btn{
+  right: 0;
+  background: none;
+}
+
+
+/* 列表 */
+
+.zl-list{
+  padding:0 30rpx;
+}
+
+.zl-list .zl-list-item{
+  width: 100%;
+  padding:30rpx 30rpx;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border-radius: 10rpx;
+  display: flex;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+
+.zl-list .zl-list-item:last-child{
+  margin-bottom: 0rpx;
+}
+
+.zl-list-item .zl-item-img{
+  width: 200rpx;
+  height: 200rpx;
+  margin-right: 22rpx;
+  border:1px solid #f0f0f0;
+  position: relative;
+}
+.zl-list-item .zl-item-img image{
+  width: 100%;
+  height: 100%;
+}
+
+.zl-list-item .activity-time{
+  position: absolute;
+  left:0;
+  bottom: 0;
+  width: 100%;
+  height: 35rpx;
+  line-height: 35rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 24rpx;
+  background-color: rgba(0,0,0,0.60);
+}
+
+.zl-list-item .zl-item-info{
+  flex: 1;
+  /* border: 1rpx solid #ff0000; */
+  box-sizing: border-box;
+  position: relative;
+}
+
+.zl-item-info .form-btn{
+  position: absolute;
+  left: 0;
+  top:0;
+  width: 100%;
+  height: 100%; 
+  background: none;
+  z-index: 1
+}
+.zl-list-item .subscribe-btn{
+  position: absolute;
+  right: 30rpx;
+  bottom: 30rpx;
+}
+
+.zl-item-info .zl-item-title{
+  font-size: 28rpx;
+  color: #212121;
+  line-height: 32rpx;
+  max-height: 64rpx;
+  margin-bottom: 20rpx;
+}
+
+.zl-item-info .zl-num{
+  display: block;
+  font-size: 24rpx;
+  color: #666666;
+  margin-bottom: 10rpx;
+}
+.schedule-box {
+  width: 210rpx;
+  height: 26rpx;
+  border:1rpx solid #ED0000;
+  border-radius: 13rpx;
+  position: relative;
+  overflow: hidden;
+  background: repeating-linear-gradient(-60deg, #ffe9e9, #ffe9e9 8rpx, #ffffff 0, #ffffff 15rpx);
+}
+.schedule-box .progress-bar{
+  width: 0%;
+  height: 100%;
+  background-color: #FFA1A1;
+  border-radius: 13rpx;
+}
+
+.schedule-box .text-tip{
+  font-size: 20rpx;
+  color: #ED0000;
+  display: block;
+  position: absolute;
+  left: 0;
+  top:0;
+  width: 100%;
+  height: 26rpx;
+  line-height: 26rpx;
+  text-align: center;
+}
+
+.zl-item-info .zl-sub-box{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.price-box {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+.price-box .curr-price{
+  font-size: 24rpx;
+  color: #ED0000;
+  margin-right: 15rpx;
+  font-weight: bold;
+}
+
+.price-box .curr-price text{
+  font-size: 32rpx;
+}
+.price-box .del-price{
+  font-size: 24rpx;
+  color: #999999;
+  text-decoration: line-through;
+}
+
+
+.zl-btn{
+  width: 138rpx;
+  height: 50rpx;
+  border-radius: 25px;
+  font-size: 24rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #999999;
+  box-shadow: 2rpx 2rpx 4rpx 0 rgba(153,153,153,0.20);
+  border-radius: 100rpx;
+  color: #fff;
+  border-color: #999999;
+}
+.virtual-btn{
+  width: 138rpx;
+  height: 50rpx;
+}
+.zl-btn text{
+  vertical-align: middle;
+}
+.zl-btn image{
+  width: 25rpx;
+  height: 25rpx;
+  vertical-align: middle;
+  margin-right: 6rpx;
+}
+/* 马上抢 */
+.zl-btn.hong-btn{
+  background: #ED0000;
+  box-shadow: 2rpx 2rpx 4rpx 0 #E2E2E2;
+  border-radius: 100rpx;
+  color: #fff;
+  border-color: #ED0000;
+}
+/* 提醒我按钮 */
+.zl-btn.huang-btn{
+  background: #FD7317;
+  box-shadow: 0 2rpx 4rpx 0 rgba(237,0,0,0.10);
+  color: #fff;
+  border-color: #FD7317;
+}
+
+/* 取消按钮 */
+.zl-btn.cancel-btn{
+  background: none;
+  color: #FD7317;
+  border: 1rpx solid #FD7317;
+}
+
+.empty-img{
+  display: block;
+  width: 40%;
+  margin: 0rpx auto;
+}
+.empty-text{
+  font-size: 28rpx;
+  text-align: center;
+}

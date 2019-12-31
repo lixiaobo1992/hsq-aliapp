@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="rule-image">
+    <image src="{{imageSrc}}" mode="widthFix" />    
+  </view>
+  <view class="desc-container">
+    <text class="desc-title">{{descTitle}}</text>
+    <text class="desc-content" a:for="{{descs}}">{{item}}</text>
+  </view>
+</view>

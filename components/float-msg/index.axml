@@ -1,0 +1,6 @@
+<view class="msg-box {{ className }}" a:if="{{ msgData.length }}">
+  <view class="msg-item" onTap="onUrlPage" data-index="{{activeIndex}}" animation="{{animationInfo}}">
+    <view class="msg-pic"><image class="image" src="{{ msgData[activeIndex].thumbnail }}" /></view>
+    <view class="msg-text">{{ msgData[activeIndex].text }}</view>
+  </view>
+</view>

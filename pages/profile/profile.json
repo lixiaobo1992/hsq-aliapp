@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "个人中心",
+  "pullRefresh": true,
+  "usingComponents": {
+    "dwd-page": "/components/page/index",
+    "dwd-product-col2": "/components/modules/c-product-col2/index"
+  }
+}

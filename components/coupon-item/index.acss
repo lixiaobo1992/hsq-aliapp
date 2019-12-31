@@ -1,0 +1,24 @@
+.cont-coupon{
+  padding-top:20rpx;
+  clear:both;
+  display:flex;
+  flex-direction: row;
+}
+.cont-coupon .cont-title{
+  color: #959595;
+  width: 130rpx;
+}
+.cont-coupon  .coupon-tag{
+  flex:1;
+}
+.cont-coupon  .coupon-tag text{
+  background:rgb(254, 1, 55);
+  padding:4rpx 5rpx;
+  font-size:24rpx;
+  margin-right:8rpx;
+  color:#fff;
+}
+.cont-couple .rule-more{
+  width:32rpx;
+  height:32rpx;
+}

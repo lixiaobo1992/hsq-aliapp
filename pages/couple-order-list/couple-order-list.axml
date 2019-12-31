@@ -1,0 +1,59 @@
+<import src="/components/foot/foot.axml" />
+<import src="/components/pull-loading/index.axml"/>
+<dwd-page
+  id="dwd-page-couple-order"
+  className="page-couple-order"
+  contentClass="page-couple-order-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+
+  <view class="page {{hideTabs ? 'no-pad' : ''}}">
+    <view class="tabs" hidden="{{hideTabs}}">
+      <view class="tab {{clickIndex == index ? 'switch' : ''}}" a:for="{{tabs}}" data-index="{{index}}" onTap="switchTab">{{item}}
+        <view class="line {{clickIndex == index ? 'switch-line' : ''}}"></view>
+      </view>
+    </view>
+    <scroll-view
+      scroll-y
+      onScrollToLower="onScrollToLower"
+      style="height: 100%"
+      lower-threshold="240">
+      <view class="couple-content" a:for="{{list}}">
+        <view class="content" data-eventid="{{item.eventId}}" onTap="goCoupleShare">
+          <view class="content-img">
+            <image lazyLoad class="img" src="{{item.img}}" default-source="/img/tip-img/not-img2.png" mode="aspectFit" />
+          </view>
+          <view class="content-title">
+            <text class="title max-line-2">{{item.title}}</text>
+            <view class="sub-title">
+              <text class="price">{{item.price}}</text>
+              <text class="count-down" a:if="{{item.status === 1}}">还剩：{{item.countDownInfo}}</text>
+            </view>
+            <image class="tags" src="{{tags}}" mode="aspectFit" />
+          </view>
+        </view>
+        <view class="operate">
+          <view class="join" a:if="{{item.status === 1}}" data-eventid="{{item.eventId}}" onTap="goCoupleShare">邀请好友拼团</view>
+          <view class="pin-detail" a:if="{{item.status > 1}}" data-eventid="{{item.eventId}}" onTap="goCoupleShare">拼团详情</view>
+          <view class="order-detail" data-orderid="{{item.id}}" onTap="goOrderDetail">订单详情</view>
+        </view>
+      </view>
+      <view class="btn-back-home" onTap="goIndex">
+        <image src="https://img1.haoshiqi.net/miniapp/pin-back-home_43521cab98.png" mode="aspectFit"/>
+      </view>
+
+      <view>
+        <template is="pull-loading" data="{{pullLoading}}">
+      </view>
+      <view a:if="{{list.length && showFooter}}">
+        <template is="foot" data="{{text:'没有更多拼团了~'}}"></template>
+      </view>
+      <view a:if="{{!list.length && !isLoading}}">
+        <image class="empty-img" src="/img/tip-img/not-search-result.png" mode="aspectFit" />
+        <view class="empty-text">您还没有相关订单~</view>
+      </view>
+
+
+    </scroll-view>
+  </view>
+</dwd-page>

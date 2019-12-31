@@ -1,0 +1,56 @@
+.c-anchor{
+  position: relative;
+  height: 100rpx;
+}
+.c-anchor-box{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100rpx;
+  padding: 0 90rpx 0 5rpx;
+  background: #ffffff;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 199;
+}
+.c-anchor-item{
+  display: inline-block;
+  height: 100rpx;
+  padding: 10rpx 20rpx;
+  box-sizing: border-box;
+}
+.c-anchor-text{
+  height: 100%;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+.c-anchor-active{
+  color: #BC0000;
+  border-bottom: 2px solid #BC0000;
+}
+.c-anchor-switch{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100rpx;
+  height: 100rpx;
+}
+.c-anchor-switchon{
+  height: auto;
+}
+.c-anchor-arrow{
+  position: absolute;
+  width: 36rpx;
+  height: 36rpx;
+  left: 32rpx;
+  top: 32rpx;
+}
+.c-anchor-arrowon{
+  transform: rotate(180deg);
+}
+.c-anchor-fixed{
+  position: fixed;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+}

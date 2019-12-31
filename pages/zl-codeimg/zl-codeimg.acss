@@ -1,0 +1,43 @@
+page{
+    background-color: #fff;
+}
+.page{
+    padding-bottom: 140rpx;
+}
+.img-block{
+    padding: 109rpx 85rpx 0;
+}
+.img-block image{
+    width: 100%;
+}
+.btn-block{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 140rpx;
+    box-shadow: 0 -1px 0 0 rgba(0,0,0,0.50);
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+    background-color: #fff;
+}
+.download-qr{
+    width: 260rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    border: 1rpx solid #FC4C3B;
+    border-radius: 6rpx;
+    color: #FD4C3C;
+    font-size: 34rpx;
+}
+.download-img{
+    width: 260rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    background-color: #FD4C3C;
+    border-radius: 6rpx;
+    color: #fff;
+    font-size: 34rpx;
+}

@@ -1,0 +1,317 @@
+@import "../../app.acss";
+@import '/components/footer-bar/index.acss';
+@import '/components/foot/foot.acss';
+@import '/components/pull-loading/index.acss';
+/* @import '/components/tabbar/tabbar.acss'; */
+
+/* page {
+  width: 100vw;
+  box-sizing: border-box;
+  padding-bottom: 100rpx;
+} */
+
+
+.app-page{
+  position: relative;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-size:30rpx;
+}
+.profile-top{
+  width: 100%;
+  height: 356rpx;
+  background-image: linear-gradient(90deg,#fff 0%, #FFEBEB 100%);
+  /* background-image: url("https://img1.haoshiqi.net/miniapp/img/proflie_vip_85ed879c46.png"); */
+  /* background-size:100% 142rpx;
+  background-repeat:no-repeat;
+  background-position:20rpx 40rpx; */
+}
+.profile-top image{
+  width: 100%;
+  height: 242rpx;
+}
+
+
+.all-order{
+  overflow: hidden;
+}
+.order-box{
+  display:flex;
+  border-top: 1px solid #e2e2e2;
+}
+.order-box .pay-item{
+  flex: 1;
+  text-align: center;
+  padding: 18rpx 0rpx 0rpx;
+  background: #fff;
+}
+.pay-item .pay-icon{
+  width: 48rpx;
+  height: 48rpx;
+  display:inline-block;
+  margin-bottom:8rpx;
+  position: relative;
+}
+.pay-item .order-num{
+  position: absolute;
+  left: 24rpx;
+  top: 4rpx;
+  color: #fff;
+  background-image: linear-gradient(-90deg, #FF0000 4%, #FF5F5F 100%);
+  border-radius: 16rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  padding:0 9rpx;
+  font-size: 24rpx;
+  white-space: nowrap;
+}
+.pay-icon .icon-img{
+  width: 100%;
+  height: 100%;
+}
+.pay-item .pay-state{
+  display:block;
+  color: #666;
+  margin-top: -20rpx;
+  white-space: nowrap;
+  font-size:24rpx;
+}
+.sell-box{
+  background-color: #fff;
+  font-size: 28rpx;
+  line-height: 80rpx;
+  margin:32.6rpx 24rpx;
+  box-shadow: 0 4rpx 10rpx 0 rgba(0,0,0,0.10);
+  border-radius:12rpx;
+}
+.sell-box .order-left{
+  font-weight:bold;
+}
+.sell-box .order-right{
+  color:#999;
+  font-size:24rpx;
+}
+.box-pad{
+  padding: 0 24rpx;
+}
+.ali-company-info{
+  font-size: 24rpx;
+  margin-top:40rpx;
+  text-align: center;
+  color: #959595;
+}
+
+.user-id{
+  font-size: 28rpx;
+  text-align: center;
+  color: #959595;
+  margin-top:30rpx;
+  margin-bottom: 30rpx;
+}
+
+/* .more{
+  width: 28rpx;
+  height: 42rpx;
+  float: right;
+  margin-top: 22rpx;
+  margin-left: 10rpx;
+} */
+
+.more{
+  float: right;
+  display: block;
+  width: 25rpx;
+  height: 25rpx;
+  margin-top: 26rpx;
+  margin-left: 16rpx;
+  background-image: url('data:image/svg+xml;charset=utf-8,<svg width="16" height="26" viewBox="0 0 16 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="UI-KIT_基础元件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="9.9基础元件" transform="translate(-5809.000000, -8482.000000)" fill="#999999"><polygon id="Disclosure-Indicator" points="5811 8482 5809 8484 5820.5 8495 5809 8506 5811 8508 5825 8495"></polygon></g></g></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  visibility: visible;
+  transition: transform 0.3s;
+}
+
+.pr{
+  position: relative;
+}
+
+.save-money{
+  width: 100%;
+  padding: 0 30rpx;
+  line-height: 80rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.save-money image{
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+}
+.save-text{
+  color: #666;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+}
+.save-text text{
+  font-family: PingFangSC-Medium;
+  color: #EFB40A;
+}
+/* 轻会员中心801改版 */
+.light-member-ticket{
+  border-radius: 6rpx;
+  margin: -72rpx 24rpx 0;
+  height:120rpx;
+  position:relative;
+}
+/* .light-member-ticket .light-bg{
+  width:100%;
+  height:100%;
+  position: absolute;
+  left:0;
+  top:0;
+  z-index:99
+} */
+/* .light-member-ticket .member-text{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  z-index:100;
+  height:80rpx;
+  line-height:80rpx;
+  padding-top:20rpx;
+} */
+.member-text .img-status{
+  width:100%;
+  height:120rpx;
+  background-size:cover;
+}
+.light-member-ticket .text-left{
+  color:30rpx;
+  width:180rpx;
+  padding:0rpx 24rpx;
+  color: #333333;
+  font-weight: bold;
+  border-right:1rpx solid #eee;
+}
+/* .light-member-ticket  .border{
+  height:80rpx;
+  display:inline-block;
+  line-height:80rpx;
+  color:#eee;
+  width:1rpx;
+} */
+.light-member-ticket .text-center{
+  width:340rpx;
+}
+.light-member-ticket .num{
+  font-size:38rpx;
+  color:#FE0505;
+}
+.light-member-ticket .img-left{
+  height:56rpx;
+  width:78rpx;
+  border:2rpx solid #FE0505;
+  margin-top:20rpx;
+  margin-right:20rpx;
+}
+.profile-top .top-info{
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding:32rpx 40rpx;
+  margin-top:-160rpx;
+  position: relative;
+}
+.profile-top .user-info{
+  padding: 20rpx 0rpx 0 40rpx;
+  flex: 1;
+}
+
+.setting-btn{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 30rpx;
+  top: 20rpx;
+}
+.setting-btn image{
+  width: 100%;
+  height: 100%;
+}
+
+
+.profile-top .user-name{
+  display:flex;
+  flex-direction: row;
+  font-weight:bold;
+  font-size:36rpx;
+}
+.user-info .user-name>text{
+  max-width:300rpx;
+  height:50rpx;
+  line-height:50rpx;
+  display:inline-block;
+  overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.profile-top .user-id{
+  font-size:24rpx;
+  color:#666;
+}
+.profile-top .user-avator{
+  width:120rpx;
+  height:120rpx;
+  border-radius:50%;
+}
+.profile-top .vip-status{
+  display:inline-block;
+  /* background-image: linear-gradient(-270deg, #FE0505 0%, #FA5A5A 100%); */
+  width:128rpx;
+  height:36rpx;
+  border-radius:18rpx;
+  margin-left:12rpx;
+  vertical-align: bottom;
+}
+.profile-top .vip-tag{
+  width:128rpx;
+  height:36rpx;
+  margin-top:-2rpx;
+}
+.profile-top .botton-item{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width:100%;
+  margin: 0 auto;
+}
+.profile-top .list{
+  padding:0rpx 30rpx 0 40rpx;
+  border-right:1rpx solid #d7d7d7;
+  width:33.3%;
+  text-align: center;
+}
+.profile-top .last{
+  border-right:none;
+}
+.profile-top .list-num{
+  text-align:center;
+  display:block;
+  font-weight:bold;
+}
+.profile-top .list-name{
+  font-size:22rpx;
+  color:#999;
+}
+.guess-title{
+  font-size: 32rpx;
+  color: #222222;
+  display:block;
+  text-align:center;
+  padding:0 0 40rpx;
+  font-weight:bold;
+}

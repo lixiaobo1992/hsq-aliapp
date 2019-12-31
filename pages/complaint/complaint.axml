@@ -1,0 +1,18 @@
+<view class="page">
+  <view class="title">
+    请选择投诉的类型
+  </view>
+  <view class="item-list">
+    <view class="item {{ index == 1 ? 'no-border' : ''}}" a:for="{{items}}" data-index="{{index}}" onTap="goNext" data-type="item">
+      <view class="item-text">
+        {{item}}
+      </view>
+      <image src="https://img1.haoshiqi.net/miniapp/check1_eaee37113c.png" mode="aspectFit" class="{{index == checkIndex ? 'check-icon' : ''}}"/>
+    </view>
+  </view>
+  <view class="next-block" onTap="goNext" data-type="next">
+    <view class="next-btn {{checked ? 'checked' : ''}}">
+      下一步
+    </view>
+  </view>
+</view>

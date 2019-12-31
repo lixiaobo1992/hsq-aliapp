@@ -1,0 +1,145 @@
+<!-- 主站首页 -->
+<!-- <import src="/components/tabbar/tabbar.axml" /> -->
+
+<import src="/components/pull-loading/index.axml" />
+<import src="/components/foot/foot.axml" />
+<import src="/components/backtop/backtop.axml" />
+<import src="/components/feedback/index.axml" />
+<import src="/components/search/search.axml" />
+<!-- 暂时不需要了 -->
+<!-- <dwd-float-msg class="index-msg" msgData="{{ newMsg }}" /> -->
+<dwd-page
+  id="dwd-page-index"
+  className="page-index"
+  contentClass="page-index-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <scroll-view
+    scroll-into-view="{{viewId}}"
+    lower-threshold="240"
+    scroll-y
+    onScrollToLower="onScrollToLower"
+    style="height:100%"
+    >
+    <view class="line" a:if="{{showLifeStyle}}">
+      <lifestyle publicId="2014082500009174">
+    </view>
+    <view a:if="{{showFavorite}}">
+      <favorite>
+        点我收藏，享受更多低价福利
+      </favorite>
+    </view>
+
+    <template is="search" data="{{content: hotSearch.value ? hotSearch.value : '搜索您想找的商品'}}"/>
+    <!-- <button size="default" type="primary" onTap="clearClick">删除缓存</button> -->
+    <!-- <button size="default" type="primary" onTap="testClick">显示错误</button> -->
+    <form class="" onSubmit="formidSubmit" report-submit>
+      <button formType="submit" class=" formid-submit page-index">
+
+        <view id="scrollTop"></view>
+        <template is="feedback" data="{{isShowFeedback:showBackTop, log: 'c_tousu_index' }}"></template>
+
+        <!-- <block a:for="{{modules}}">
+          <view a:if="{{item.typeName}}" style="margin:{{item.marginTop}}px 0px {{item.marginBottom}}px 0px;background-image:url({{item.bg.url}});background-size:100% 100%;">
+            <template is="{{item.typeName}}" data="{{...item}}"></template>
+          </view>
+        </block> -->
+
+        <view class="tpl-modules" a:for="{{ modules }}" a:key="{{ item.id }}">
+          <dwd-modules data="{{item}}" />
+        </view>
+        <!-- 大家都在拼 -->
+        <block a:if="{{list && list.length}}">
+          <!-- skuList -->
+            <!-- 使用注意事项， card 不实现背景，自己外层盒子实现 -->
+          <view class="product-list">
+            <dwd-product-col2 data="{{ {list: list, id: 'recommendProduct'} }}" />
+          </view>
+          <template is="pull-loading" data="{{pullLoading}}"></template>
+        </block>
+
+        <!-- 底部提示数据 -->
+        <view a:if="{{showFooter}}">
+          <template is="foot"></template>
+        </view>
+        <block a:for="{{ floats }}" a:key="{{ item.id }}">
+          <dwd-floats data="{{item}}" />
+        </block>
+        <!-- 返回顶部按钮 -->
+        <template is="backTop" data="{{showBackTop}}"></template>
+        <!--底部login浮层-->
+        <!-- <view class="login-pop" a:if="{{!logged}}" onTap="goLogin">
+          <view class="left-title">登录好食期打开精彩世界</view>
+          <view class="btn-login">立即登录</view>
+        </view> -->
+      </button>
+    </form>
+    <view class="tip-list">
+      <block a:for="{{tipList}}" a:for-item="item" a:for-index="listIndex">
+        <view class="activity-tip {{listIndex == 1 ? 'tip-surface' : ''}}" a:if="{{item.type == 'active' && activeShow}}">
+          <view class="mask"></view>
+          <view class="activity-box">
+            <view class="activity-block">
+              <view class="close-btn" onTap="closeActiveTip" data-type="1">
+                <image src="https://img1.haoshiqi.net/miniapp/tip-close_6d5af11fad.png" mode="scaleToFill" class="close-image"/>
+              </view>
+              <view class="activity-image" data-tiptype="active" onTap="popupOnUrlPage" data-url="{{item.schema}}">
+                <image src="{{item.imageUrl}}" mode="scaleToFill" />
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="coupon-tip {{listIndex == 1 ? 'tip-surface' : ''}}" a:elif="{{item.type == 'coupon' && couponShow}}">
+          <view class="mask"></view>
+          <view class="activity-box">
+            <view class="activity-block">
+              <view class="close-btn" onTap="closeActiveTip" data-type="2">
+                <image src="https://img1.haoshiqi.net/miniapp/tip-close_6d5af11fad.png" mode="scaleToFill" class="close-image"/>
+              </view>
+              <view class="activity-image">
+                <image src="{{item.imageUrl}}" mode="scaleToFill" />
+              </view>
+              <view class="coupon-tip-list">
+                <view class="coupon-item"
+                  a:for="{{item.list}}"
+                  a:for-item="couponitem"
+                  a:for-index="couponindex"
+                  onTap="{{couponitem.receiveType == 1 ? 'couponItemClick' : 'popupOnUrlPage'}}"
+                  data-couponindex="{{couponindex}}"
+                  data-tipindex="{{listIndex}}"
+                  data-type="{{couponitem.type}}"
+                  data-code="{{couponitem.code}}"
+                  data-url="{{couponitem.schema}}"
+                  data-tiptype="coupon"
+                  >
+                  <image src="../../img/coupon-item.png" mode="scaleToFill" />
+                  <view class="coupon-left">
+                    <view class="coupon-price">
+                      ￥<text>{{couponitem.value/100}}</text>
+                    </view>
+                  </view>
+                  <view class="coupon-right">
+                    <view class="coupon-right-top">
+                      <view class="coupon-item-tit">
+                        <text class="item-list">{{couponitem.title}}</text>
+                        <text class="item-list"> {{couponitem.atLeast}}</text>
+                        <text class="item-list">{{couponitem.termOfValidity}}</text>
+                      </view>
+                      <view class="coupon-item-status">
+                        {{couponitem.receiveType == 1 ? "领取" : "立即使用"}}
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+
+  </scroll-view>
+</dwd-page>
+<!-- 底部tabbar -->
+<!-- <template is="tabbar" data="{{currentPage}}"></template> -->

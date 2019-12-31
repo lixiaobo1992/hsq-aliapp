@@ -1,0 +1,16 @@
+
+.c-img-hor{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.c-img-hor .c-img-box{
+  flex: 1;
+  line-height: 0;
+}
+.c-img-hor .c-img-box image{
+  width: 100%;
+}

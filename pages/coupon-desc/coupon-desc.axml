@@ -1,0 +1,7 @@
+<view class="page">
+  <view class="about">关于说明</view>
+  <view class="desc" a:for="{{list}}" key="{{item}}">
+    <view class="index">{{index+1}}.</view>
+    <view class="item">{{item}}</view>
+  </view>
+</view>

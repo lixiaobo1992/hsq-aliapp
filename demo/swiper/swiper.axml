@@ -1,0 +1,31 @@
+
+<!-- swiper实现，需要以下规则（swiper 有时出现 从0到100%宽度的弹性视觉问题）
+  swiper组件 必须加高度（可以由css替代）
+  swiper-item组件 必须设置内联高度，但不能是100%
+  image组件 必须设置宽高100%(可以css替代)，建议使用 scaleToFill 模式，填充满父容器
+  circular 加此属性，手机预览不出图
+  swiper 不能放在一个容器，先hide，后再显示，这会出问题
+-->
+
+<view class="swiper">
+  <!-- style="height: {{swiperInfo.height}}px;" -->
+  <swiper
+  class="swiper-box"
+  interval="{{swiperInfo.delay || 6000}}"
+  autoplay
+  indicator-dots
+  >
+    <block a:for="{{swiperInfo.list}}">
+      <swiper-item
+      style="height: {{swiperInfo.height}}px;">
+        <!-- style="width: 100%;height: 100%;" -->
+        <image
+        onTap="onUrlPage"
+        data-url="{{item.url}}"
+        data-index="{{index}}"
+        src="{{item.image}}"
+        mode="scaleToFill" />
+      </swiper-item>
+    </swiper>
+  </block>
+</view>

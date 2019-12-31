@@ -1,0 +1,22 @@
+<view class="overlay" data-type="close" onTap="onHandleItem"></view>
+<view class="popup-box">
+  <view class="title">优惠券</view>
+  <view class="close-box" data-type="close" onTap="onHandleItem">
+    <image src="../../img/close.png" mode="aspectFit" class="close-img"></image>
+  </view>
+  <view class="popup-box-list">
+    <text class="list-title">可领取的优惠券</text>
+    <view class="popup-box-item flex-between" a:for="{{ coupons }}" a:key="{{ index }}">
+      <view class="pc-info">
+        <view class="pc-tit">
+          <text class="pc-num">¥{{ item.value }}</text>
+          <text class="pc-text">{{ item.title }}</text>
+        </view>
+        <view class="pc-desc">{{ item.subTitle }}</view>
+        <view class="pc-time">{{ item.time }}</view>
+      </view>
+      <view class="pc-btn {{ !item.isRedeem ? 'disabled' : '' }}" data-index="{{ index }}" data-type="get"
+      onTap="{{ item.isRedeem ? 'onHandleItem' : '' }}">{{ !item.isRedeem ? '已领取' : '立即领取' }}</view>
+    </view>
+  </view>
+</view>

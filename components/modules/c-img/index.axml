@@ -1,0 +1,17 @@
+<dwd-tpl class="c-img" data="{{ data }}">
+  <view
+    class="c-img-item exposure-item"
+    a:for="{{ data.list }}"
+    a:key="{{ index }}"
+    data-url="{{ item.link }}"
+    data-index="{{ index }}"
+    data-title="{{ data.moduleName }}"
+    data-piwik-event="{{item.piwikEvent}}"
+    data-piwik-data="{{item.piwikData}}"
+    data-module-id="{{ data.id }}"
+    onTap="onUrlPage"
+    style="padding-top: {{item.image.h  / item.image.w * 100 + '%' }}"
+  >
+    <image class="image" src="{{ item.image.url }}" default-source="/img/tip-img/not-img1.png" lazyLoad mode="aspectFit" />
+  </view>
+</dwd-tpl>

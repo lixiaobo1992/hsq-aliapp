@@ -1,0 +1,217 @@
+@import '/components/foot/foot.acss';
+page{
+  padding: 0rpx;
+  margin: 0rpx;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.page-zl-task{
+  height: 100%;
+}
+.page-zl-task-content{
+  padding-top: 80rpx;
+}
+scroll-view {
+  height: 100%;
+}
+.tabs{
+    position: absolute;
+    height: 80rpx;
+    width: 100%;
+    display: flex; 
+    border-bottom: 2rpx solid rgb(228, 228, 228);   
+    background: rgb(255, 255, 255);
+    padding-bottom: 0rpx;
+    overflow: hidden; 
+    top: 0rpx;
+    left: 0rpx;
+}
+.tab{
+    line-height: 40rpx;
+    width: 100%;
+    text-align: center;
+    padding: 20rpx 0rpx;
+    /* height: 100%;
+    line-height: 75rpx;
+    text-align: center;
+    align-items: center; */
+    font-size: 28rpx;
+}
+.line{
+    position: relative;
+    background: rgb(255, 255, 255);
+    height: 4rpx;
+    margin: 14rpx 42rpx 0rpx 42rpx;;
+}
+.switch{
+    color: rgb(237, 0, 0);
+}
+.switch .line{
+    background: rgb(237, 0, 0);
+}
+
+.couple-content{
+    position: relative;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    margin-bottom: 10rpx;
+}
+
+.content{
+    display: flex;
+    width: 100%;
+    height: 188rpx;
+    padding: 20rpx 30rpx;
+    border-bottom: 2rpx solid rgb(228, 228, 228);
+}
+.content-img{
+    flex-shrink: 0;
+    width: 148rpx;
+    height: 148rpx;
+    margin-right: 30rpx;
+}
+.img{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.content-title{
+    position: relative;
+    flex-shrink: 1;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+.title{
+    position: relative;
+    padding-top: 2rpx;
+    font-size: 28rpx;
+    text-align: left;
+    /* display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden; */
+}
+.zl-num{
+    font-size: 24rpx;
+    color: rgb(153, 153, 153);
+}
+
+.sub-title{
+    position: absolute;
+    width: 100%;
+    bottom: 0rpx;
+    left: 0rpx;
+    font-size: 24rpx;
+}
+.price{
+    color: rgb(237, 0, 0);
+    font-size: 24rpx;
+    margin-right: 24rpx;
+}
+.price text{
+    font-size: 32rpx;
+}
+.del-price{
+    text-decoration: line-through;
+    font-size: 24rpx;
+    color: #999999;
+}
+
+.tags{
+    display: block;
+    position: absolute;
+    width: 170rpx;
+    height: 127rpx;
+    top: 19rpx;
+    right: 30rpx;
+    bottom: 25rpx;
+}
+.operate{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding:0 30rpx;
+    height: 80rpx;
+    display: flex;
+    font-size: 24rpx;
+    align-items: center;
+
+}
+
+.operate .count-down{
+    text-align: center;
+    color: rgb(153, 153, 153);
+}
+
+.operate .count-hint{
+    color: #ed0000;
+    text-align: center;
+    font-size: 26rpx;
+}
+
+.operate .btns-box{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.operate .left-num{
+    color: rgb(237, 0, 0);
+}
+.task-btn{
+    /* width: 120rpx; */
+    padding:0 15rpx;
+    line-height: 42rpx;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20rpx;
+    border-radius: 6rpx;
+}
+
+.task-btn.btn-red{
+    background: rgb(237, 0, 0);
+    color: rgb(255, 255, 255);
+}
+.task-btn.btn-white{
+    border: 1rpx solid rgb(153, 153, 153);
+    color: rgb(153, 153, 153);
+}
+.task-btn.disabled{
+    background-color: #999999;
+    color: #ffffff;
+}
+
+.empty-img{
+    display: block;
+    width: 40%;
+    margin: 0rpx auto;
+}
+.empty-text{
+    font-size: 28rpx;
+    text-align: center;
+}
+
+/* .footer{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: 80rpx;
+    line-height: 80rpx;
+} */
+
+.complaint-btn{
+  position: fixed;
+  right: 25rpx;
+  bottom: 150rpx;
+  width: 120rpx;
+  height: 120rpx;
+}
+.complaint-btn image{
+  width: 100%;
+  height: 100%;
+}

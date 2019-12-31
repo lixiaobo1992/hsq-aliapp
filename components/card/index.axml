@@ -1,0 +1,57 @@
+<import src="/components/price/index.axml" />
+
+<template name="card">
+  <view class="product-item exposure-item"
+    data-id="{{id}}"
+    onTap="onTapNext"
+    data-type="detail"
+    data-online="{{onLine}}"
+    data-instock="{{inStock}}"
+    data-index="{{index}}"
+    data-url="{{link}}"
+    >
+    <view class="product-row">
+      <view class="product-media"
+      a:if="{{image}}"
+      style="padding-top: {{hwRatio * 100}}%"
+      >
+        <image lazyLoad src="{{image}}" mode="aspectFit"/>
+        <!-- 已停售 -->
+        <image class="image-lootAll" a:if="{{isShowLootAll == 1}}" src="https://img1.haoshiqi.net/miniapp/yitingshou_6b85cdec95.png" mode="aspectFit"></image>
+        <!-- 已抢光 -->
+        <image class="image-lootAll" a:if="{{isShowLootAll == 2}}" src="https://img1.haoshiqi.net/wxapp/img/icon_lootAll_9264ebba09.png" mode="aspectFit"></image>
+      </view>
+
+      <view a:if="{{countDownInfo}}" class="product-countdown">
+        {{countDownInfo}}  结束
+      </view>
+    </view>
+    <view class="product-intro">
+      <view class="product-info">
+        <view class="product-title max-line-2">
+          <text class="title-zy" a:if="{{merchantType == 2}}">自营</text>
+          {{title}}
+        </view>
+        <view class="product-desc" a:if="{{desc}}">{{desc}}</view>
+      </view>
+      <view class="product-tags">
+        <view class="tags"
+          a:for="{{tags}}"
+          a:if="{{tags.length > 0}}"
+          a:for-index="tagIndex"
+          a:for-item="tagItem"
+          a:key="{{tagIndex}}"
+          a:if="{{tagIndex < 2}}"
+          >{{tagItem.text}}</view>
+        <text class="remain-time" a:if="{{remainTime}}">{{remainTime}}</text>
+      </view>
+      <view class="row-expire-day">
+          <text class="row-left-day" a:if="{{ expired_date_text }}">{{ expired_date_text }}</text>
+        </view>
+      <view class="product-sub">
+        <template is="price" data="{{...priceObj}}" />
+        <text class="product-num" a:if="{{num}}">x {{num}}</text>
+      </view>
+    </view>
+  </view>
+</template>

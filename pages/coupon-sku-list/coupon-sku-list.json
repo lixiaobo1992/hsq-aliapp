@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "dwd-page": "/components/page/index"
+  }
+}

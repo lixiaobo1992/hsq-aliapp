@@ -1,0 +1,63 @@
+<dwd-tpl class="c-product-col2" data="{{ data }}" data-type="{{ data.type }}">
+  <view class="col2-box">
+    <view
+      class="row2-box exposure-item"
+      a:for="{{data.list}}"
+      a:key="{{index}}"
+      data-index="{{index}}"
+      data-title="{{ data.moduleName }}"
+      data-url="{{item.link}}"
+      data-piwik-event="{{item.piwikEvent}}"
+      data-piwik-data="{{item.piwikData}}"
+      data-module-id="{{ data.id }}"
+      onTap="onDetailPage"
+    >
+      <view class="row2-container">
+        <view class="row2-img-box">
+          <image class="row2-img" lazyLoad src="{{item.thumbnail}}" default-source="/img/tip-img/not-img2.png" />
+          <!-- <img class="row2-tag-img" src=""/> -->
+          <!-- 商品状态 -->
+          <image
+            class="row2-status-img"
+            src="{{ item.invalid_img }}"
+            a:if="{{ item.invalid_img }}"
+          />
+        </view>
+        <view class="row2-text-box">
+          <view class="row2-title max-line-2">
+            <text class="title-tag" a:if="{{item.merchant_type == 2}}">自营</text>
+            {{ item.title }}
+          </view>
+          <view class="row2-tag-box">
+            <text
+              class="row2-text-tag"
+              a:for="{{item.tags}}"
+              a:for-index="tagIndex"
+              a:for-item="tagData"
+              key="{{tagIndex}}"
+              a:if="{{item.tags.length > 0}}"
+              style = "{ color: tagData.color }"
+            >{{ tagData.text }}
+            </text>
+          </view>
+          <view class="row2-expire-day">
+            <text class="row2-left-day" a:if="{{ item.expired_date_text_two }}">{{ item.expired_date_text_two }} </text>
+          </view>
+          <view class="row2-price-box">
+            <text class="row2-price">
+              <text class="price-integer">￥{{ item.price.price_yuan }}.{{ item.price.price_fen }}</text>
+              <text class="row2-vip-price" a:if="{{ item.light_member_price > 0 }}">
+                  <view class="vip-bg"><image src="https://img1.haoshiqi.net/miniapp/img/vip_price2x_b9f4bf402f.png" class="img-vip" mode="scaleToFill" />
+                  </view>
+                  <text class="vip-price">￥{{ item.light_member_price }}</text>
+              </text>
+              <text class="row2-market" a:else> ￥{{ item.market_price }}</text>
+
+              <!-- <view class="right-circle"><image src="https://img1.haoshiqi.net/miniapp/img/button_qiang_icon_46e1ef308e.png"  mode="scaleToFill" class="hot"></view> -->
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</dwd-tpl>

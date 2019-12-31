@@ -1,0 +1,7 @@
+{
+  "defaultTitle":"全部订单",
+  "usingComponents": {
+    "dwd-page": "/components/page/index",
+    "merge-pay-modal": "/components/merge-pay-modal/index"
+  }
+}

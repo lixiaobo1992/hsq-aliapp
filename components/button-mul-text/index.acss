@@ -1,0 +1,13 @@
+.button-mul-text{
+    color: #fff;
+    text-align: center;
+}
+.button-mul-text .top{
+    font-size: 32rpx;
+    line-height: 60rpx;
+    height: 60rpx;
+}
+.button-mul-text  .buttom{
+    font-size: 20rpx;
+    height: 40rpx;
+}

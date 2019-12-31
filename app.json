@@ -1,0 +1,108 @@
+{
+  "debug": false,
+  "version": "4.0.0",
+  "pages": [
+    "pages/index/index",
+    "pages/favorite-list/favorite-list",
+    "pages/detail/detail",
+    "demo/test/test",
+    "pages/detail2/detail2",
+    "pages/zt/zt",
+    "pages/profile/profile",
+    "pages/zt2/zt2",
+    "pages/community/community",
+    "pages/category/category",
+    "pages/couple-search-list/couple-search-list",
+    "pages/couple-share/couple-share",
+    "pages/address-list/address-list",
+    "pages/address-update/address-update",
+    "pages/order-commit/order-commit",
+    "pages/order-list/order-list",
+    "pages/order-detail/order-detail",
+    "pages/order-refund/order-refund",
+    "pages/order-refund-detail/order-refund-detail",
+    "pages/couple-order-list/couple-order-list",
+    "pages/comment-list/comment-list",
+    "pages/delivery/delivery",
+    "pages/service/service",
+    "pages/rule/rule",
+    "pages/login/login",
+    "pages/error/error",
+    "pages/topic/topic",
+    "demo/swiper/swiper",
+    "demo/baoguang/baoguang",
+    "pages/coupon-list/coupon-list",
+    "pages/coupon-desc/coupon-desc",
+    "pages/coupon-sku-list/coupon-sku-list",
+    "pages/availabel-coupon-list/availabel-coupon-list",
+    "pages/zl-list/zl-list",
+    "pages/zl-detail/zl-detail",
+    "pages/zl-invite/zl-invite",
+    "pages/zl-late/zl-late",
+    "pages/zl-task/zl-task",
+    "pages/complaint-submit/complaint-submit",
+    "pages/complaint/complaint",
+    "pages/zl-rule/zl-rule",
+    "pages/zl-codeimg/zl-codeimg",
+    "pages/search/search",
+    "pages/merchant/merchant",
+    "pages/order-commit2/order-commit2",
+    "pages/member/member",
+    "pages/setup/setup",
+    "pages/web-view/web-view",
+    "demo/sku-select/sku-select",
+    "pages/shopping-cart/shopping-cart",
+    "pages/full-reduction/full-reduction",
+    "pages/pay/pay",
+    "pages/order-result/order-result"
+  ],
+  "window": {
+    "enableWK": "YES",
+    "enableDSL": true,
+    "pullRefresh": false,
+    "defaultTitle": "好食期",
+    "backgroundColor": "#F5F5F9",
+    "allowsBounceVertical": true
+  },
+  "tabBar": {
+    "textColor": "#212121",
+    "selectedColor": "#212121",
+    "backgroundColor": "#ffffff",
+    "items": [
+      {
+        "pagePath": "pages/index/index",
+        "name": "首页",
+        "icon": "/img/tab/tab_index.png",
+        "activeIcon": "/img/tab/tab_index_active.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "name": "分类",
+        "icon": "/img/tab/tab_classify.png",
+        "activeIcon": "/img/tab/tab_classify_active.png"
+      },
+      {
+        "pagePath": "pages/shopping-cart/shopping-cart",
+        "name": "购物车",
+        "icon": "/img/tab/tab_cart.png",
+        "activeIcon": "/img/tab/tab_cart_active.png"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "name": "买家秀",
+        "icon": "/img/tab/camera-nor_5936a22892.png",
+        "activeIcon": "/img/tab/camera-selected_b14d2208f6.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "name": "个人中心",
+        "icon": "/img/tab/tab_profile.png",
+        "activeIcon": "/img/tab/tab_profile_active.png"
+      }
+    ]
+  },
+  "tabBarPath": [
+    "pages/index/index",
+    "pages/profile/profile"
+  ]
+}

@@ -1,0 +1,19 @@
+<dwd-tpl class="c-img-hor" data="{{ data }}">
+  <view class="c-img-box" style="{{ innerStyles }}">
+    <view class="c-img-list">
+      <view
+        class="c-img-item exposure-item"
+        a:for="{{ data.list }}"
+        a:key="{{ index }}"
+        data-index="{{ index }}"
+        data-title="{{ data.moduleName }}"
+        data-url="{{ item.link }}"
+        data-piwik-event="{{item.piwikEvent}}"
+        data-piwik-data="{{item.piwikData}}"
+        data-module-id="{{ data.id }}"
+        onTap="onUrlPage">
+        <image class="image" src="{{ item.image.url }}" lazyLoad default-source="/img/tip-img/not-img2.png" mode="scaleToFill" />
+      </view>
+    </view>
+  </view>
+</dwd-tpl>

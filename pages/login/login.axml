@@ -1,0 +1,6 @@
+<view class="page-login">
+  <view class="block-center">
+    {{ content }}
+  </view>
+  <button a:if="{{cantry}}" type="default" data-type="login" onTap="onClick">重试</button>
+</view>

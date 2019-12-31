@@ -1,0 +1,13 @@
+<view class="page-service">
+  <view class="line" a:if="{{showLifeStyle}}">
+    <lifestyle publicId="2014082500009174">
+  </view>
+  <view class="content">
+    <view class="tip">亲，目前小程序内暂时无法接入在线客服，您需要通过<text class="important">生活号</text>联系客服。</view>
+    <view class="tit">1. <text class="important">点击上方生活号直接进入</text>，或在支付宝中搜索“好食期”，进入“好食期生活号”</view>
+    <image lazyLoad src="https://img1.haoshiqi.net/miniapp/service/1_88ffb3fcf5.png" mode="widthFix" />
+    <view class="tit">2. 在“好食期生活号”底部导航，点击“在线客服”</view>
+    <image lazyLoad src="https://img1.haoshiqi.net/miniapp/service/2_ae33a76961.png" mode="widthFix" />
+  </view>
+  <view class="phone" onTap="makePhoneCall">热线电话：400-185-8058</view>
+</view>

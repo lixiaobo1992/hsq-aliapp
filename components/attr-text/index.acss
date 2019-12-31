@@ -1,0 +1,13 @@
+.attr-text{
+    display: flex;
+    padding: 20rpx;
+    background-color: #fff;
+    font-size: 24rpx;
+}
+.attr-text .title{
+    flex: 1;
+    color: #B4B4B4;
+}
+.attr-text .content{
+    flex: 8;
+}

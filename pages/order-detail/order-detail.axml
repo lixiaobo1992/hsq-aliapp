@@ -1,0 +1,112 @@
+<import src="/components/card/index.axml" />
+<import src="/components/count-down/count-down.axml"/>
+
+<dwd-page
+  id="dwd-page-order-detail"
+  className="page-order-detail"
+  contentClass="page-order-detail-content"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <form class="page-full-auto" onSubmit="formidSubmit" report-submit>
+    <button formType="submit" class="page-full-auto formid-submit">
+
+      <view class="order-page {{orderStatus.hasBottom ? '' : 'order-page-pb'}}">
+        <!-- 公告 -->
+        <view class="scroll_view_border" a:if="{{msgStatus}}">
+          <view class="msg-img-box">
+            <image class="msg-img" src="https://img1.haoshiqi.net/miniapp/horn_9d0f9ebd2c.png" mode="aspectFit" />
+          </view>
+          <view class="msg-content-box">
+            <view class="srcoll_view">{{msgContent.content || ''}}</view>
+          </view>
+        </view>
+        <view class="banner">
+          <image src="{{statusDesc.statusLogo}}" alt="" model="scaleToFill" class="logo" />
+          <view class="state-box">
+            <view class="state">{{statusDesc.statusText}}</view>
+            <view a:if="{{orderStatus.canPay}}" class="countdown">{{countDownInfo}}</view>
+          </view>
+        </view>
+
+        <view class="user-info-box">
+          <view class="user-name-phone {{ orderType === 16 ? 'phone-cost' : ''}}">
+            <view class="user-name">{{userDesc.name}}</view>
+            <view class="user-phone">{{userDesc.phone}}</view>
+          </view>
+          <view class="user-address">{{userDesc.address}}</view>
+        </view>
+
+        <view class="main-content">
+          <view class="prod-box">
+            <view class="prod-mc" data-url="{{merchantSchema}}" onTap="onUrlPage">
+              <image class="prod-mc-logo" src="https://img1.haoshiqi.net/miniapp/img/merchant_icon_25a2d95ce6.png" mode="aspectFit" />
+              <view class="prod-mc-name">{{merchantName}}</view>
+            </view>
+            <view class="prod-item" a:for="{{productDesc}}" a:key="{{index}}" data-url="{{item.schema}}" onTap="onUrlPage">
+              <image class="prod-item-img" src="{{item.imgUrl}}" mode="aspectFit" />
+              <view class="prod-item-right">
+                <view class="prod-item-name max-line-2">{{item.skuName}}</view>
+                <view class="prod-item-info">
+                  <text class="price">￥{{item.price}}</text>
+                  <text class="num">x{{item.amount}}</text>
+                </view>
+                <view class="prod-item-attrs" a:for="{{item.attrs}}" a:for-index="idx" a:for-item="attr" a:key="{{idx}}">{{attr}}</view>
+                <view class="prod-item-btns">
+                  <view class="prod-btn" data-orderid="{{item.orderId}}" data-orderstatus="{{item.status}}" data-suborderid="{{item.subOrderId}}" a:if="{{item.canRefund}}" catchTap="goRefund">申请退款</view>
+                  <view class="prod-btn prod-btn-red" data-suborderid="{{item.subOrderId}}" data-orderstatus="{{item.status}}" data-refundid="{{item.refundId}}" a:if="{{item.refundId > 0}}" catchTap="goRefundDetail">{{item.refundStatus}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="msg-box">
+            <view class="msg-title">买家留言：</view>
+            <view class="msg-content">{{userMsg}}</view>
+          </view>
+          <view class="amount-box">
+            <view class="amount-item" a:for="{{priceDesc}}" a:key="{{index}}">{{item.name}}<text>{{item.icon + item.value}}</text></view>
+            <!-- <view class="amount-item amount-total">订单总价<text>￥{{needPayPrice}}</text></view> -->
+            <view class="amount-item amount-real">实付款<text>￥{{needPayPrice}}</text></view>
+          </view>
+        </view>
+
+        <view class="main-content">
+          <view class="order-msg">
+            <view class="order-num">
+              订单号：{{orderDesc.id}}
+              <view class="order-num-copy" onTap="handleCopy">复制</view>
+            </view>
+            <view class="order-time" a:for="{{stepList}}" a:key="{{index}}">{{item}}</view>
+          </view>
+          <view class="mc-btns">
+            <view class="mc-btn">
+              <view class="mc-btn-txt mc-btn-l" onTap="makePhoneCall">联系卖家</view>
+            </view>
+            <view class="mc-btn">
+              <view class="mc-btn-txt mc-btn-r" onTap="goService">在线客服</view>
+            </view>
+          </view>
+        </view>
+
+        <view class="save-money" a:if="{{statusCode == 1 && savePrice}}">付款后即节省￥{{savePrice}}</view>
+
+        <view class="order-footer" a:if="{{orderStatus.hasBottom}}">
+          <view class="btn-normal btn-red" a:if="{{orderStatus.canConfirm}}" data-index="{{ index }}" onTap="confirmReceipt">确认收货</view>
+          <view class="btn-normal btn-red" data-index={{index}} a:if="{{orderStatus.canPay}}" data-orderid="{{orderDesc.id}}" onTap="checkOrder">付款</view>
+          <view class="btn-normal" a:if="{{orderStatus.canCancel}}" data-index="{{index}}" data-id="{{orderDesc.id}}" onTap="cancelOrder">取消订单</view>
+          <view class="btn-normal" a:if="{{orderStatus.canRefund}}" data-orderid="{{orderDesc.id}}" data-refundprice="{{needPayPrice}}" onTap="goRefund">申请退款</view>
+          <view class="btn-normal btn-red" a:if="{{orderStatus.refundId}}" data-orderid="{{orderDesc.id}}" data-suborderid="{{item.subOrderId}}" data-refundid="{{orderStatus.refundId}}" onTap="goRefundDetail">退款详情</view>
+          <view class="btn-normal" a:if="{{orderStatus.canViewDelivery}}" onTap="goDelivery">查看物流</view>
+        </view>
+      </view>
+
+    </button>
+  </form>
+</dwd-page>
+<!--支付拦截弹窗-->
+<merge-pay-modal
+  onCheckOrder = "checkOrder"
+  onHandlePayModal = "handlePayModal"
+  mergeInfo = "{{mergeInfo}}"
+  isMergePay ="{{isMergePay}}"
+></merge-pay-modal>
+

@@ -1,0 +1,10 @@
+<template name="aEmojiView">
+  <view class="aEmojiView aParse-inline" style="{{item.styleStr}}">
+    <block a:for="{{item.textArray}}" a:key="">
+      <block class="{{item.text == '\\n' ? 'aParse-hide':''}}" a:if="{{item.node == 'text'}}">{{item.text}}</block>
+      <block a:elif="{{item.node == 'element'}}">
+        <image class="aEmoji" src="{{item.baseSrc}}{{item.text}}" />
+      </block>
+    </block>
+  </view>
+</template>

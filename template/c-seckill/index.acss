@@ -1,0 +1,34 @@
+@import '/template/c-count-down/index.acss';
+@import '/template/c-product-row1/index.acss';
+
+.c-seckill{
+  padding: 0 20rpx;
+}
+.c-seckill-timelimit{
+  padding: 35rpx 0;
+  font-size: 30rpx;
+  text-align: center;
+}
+.c-seckill-txt{
+  position: relative;
+  display: inline-block;
+  color: #ffffff;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-right: 15rpx;
+}
+.c-seckill-txt:last-of-type{
+  margin-right: 0;
+}
+.c-seckill-num{
+  width: 50rpx;
+  background: #000000;
+}
+.c-seckill-space:after{
+  content: ":";
+  position: absolute;
+  left: 53rpx;
+  top: 0;
+  height: 50rpx;
+  line-height: 50rpx;
+}

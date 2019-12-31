@@ -1,0 +1,19 @@
+<import src="/template/c-swiper/index.axml" />
+<import src="/template/c-product-row3/index.axml" />
+
+<template name="c-swiper-product">
+  <view class="c-swiper-product">
+    <!-- 页面逻辑 -->
+    <template is="c-swiper" data="{{...swiper, moduleIndex, currentIndex}}"></template>
+    <view class="product-warp" style="background-color:{{ productData.list[currentIndex].bg_color}};">
+      <template
+        is="c-product-row3"
+        data="{{...productData.list[currentIndex], moduleIndex}}"></template>
+      <!-- <view
+        class="more-btn"
+        a:if="{{ !productData.list[currentIndex].isShowMore }}"
+        data-index="{{ currentIndex }}"
+        onTap="{{ productData.moreEventName || '' }}"><text>查看更多</text></view> -->
+    </view>
+  </view>
+</template>

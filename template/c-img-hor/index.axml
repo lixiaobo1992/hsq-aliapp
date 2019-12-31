@@ -1,0 +1,16 @@
+<template name="c-img-hor">
+  <view class="c-img-hor">
+    <!-- 页面逻辑 -->
+    <view
+      class="c-img-box"
+      a:for="{{ list }}"
+      a:key="{{ index }}"
+      onTap="{{ eventName }}"
+      data-url="{{item.link}}"
+      data-piwik-event="{{item.piwik ? item.piwik : 'c-img-hor-module' + moduleIndex }}"
+      data-piwik-data="{{ item.piwikData }}"
+      style="height:{{ height }}px;">
+      <image src="{{ item.url }}" style="height:{{ height }}px;" lazyLoad mode="scaleToFill" />
+    </view>
+  </view>
+</template>

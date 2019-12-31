@@ -1,0 +1,15 @@
+<import src="/template/c-count-down/index.axml" />
+<import src="/template/c-product-row1/index.axml" />
+
+<template name="c-seckill">
+  <view class="c-seckill">
+    <template is="c-count-down" data="{{list: timeList, moduleIndex, curtIndex, seckillingIndex}}"></template>
+    <view class="c-seckill-timelimit">
+      <text class="c-seckill-txt c-seckill-txt1">距结束</text>
+      <text class="c-seckill-txt c-seckill-num c-seckill-space">{{seckillingIndex == curtIndex ? leftTime.hour : '00'}}</text>
+      <text class="c-seckill-txt c-seckill-num c-seckill-space">{{seckillingIndex == curtIndex ? leftTime.minute : '00'}}</text>
+      <text class="c-seckill-txt c-seckill-num">{{seckillingIndex == curtIndex ? leftTime.second : '00'}}</text>
+    </view>
+    <template is="c-product-row1" data="{{list: outList[curtIndex]['list'], eventName, curtStatus}}"></template>
+  </view>
+</template>

@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "",
+  "usingComponents": {
+    "dwd-modules": "/components/modules/index/index"
+  }
+}

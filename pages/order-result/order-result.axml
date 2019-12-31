@@ -1,0 +1,51 @@
+<view class="page page-result">
+  <view class="result-desc {{ higePage ? 'hidden' : '' }}">
+    <view class="result-tit">
+      <image src="https://img1.haoshiqi.net/miniapp/icon-success_0ad47518c9.jpg" mode="scaleToFill" class="icon"/>
+      <view class="order-status-text">支付成功</view>
+    </view>
+    <view class="price" a:if="payPrice">￥{{payPrice}}</view>
+    <view class="btn-box block-center">
+      <view class="btn-sure" onTap="goContinue">
+        返回首页
+      </view>
+      <view class="btn-info" onTap="goOrderList">
+        查看订单
+      </view>
+    </view>
+  </view>
+  <!-- 专题模块  -->
+  <block a:if="{{ !isModulesLoading && modules.length }}">
+    <view class="topic-modules" style="{{ 'background-color: ' +  modules_bg_color }}">
+      <view class="tpl-modules" a:for="{{ modules }}" a:key="{{ item.id }}">
+        <dwd-modules data="{{item}}" />
+      </view>
+    </view>
+  </block>
+</view>
+<!--红包弹窗-->
+<view class="packet-pop" a:if="{{packetPopStatus}}" onTap="closePop">
+  <!--已拆开-->
+  <block a:if="{{redPacket.isOpened}}">
+    <view class="packet-box opened">
+      <view class="packet-bg">
+        <view class="packet-title">恭喜你获得</view>
+        <view  class="packet-price">
+          <text class="price-value">{{redPacket.price}}</text>
+          <text class="price-unit">元</text>
+        </view>
+        <view class="btn-shopping" catchTap="goContinue">继续购物</view>
+      </view>
+    </view>
+</block>
+<!--未拆开-->
+<block a:else>
+  <view class="packet-box notOpen" catchTap="openRedPacket">
+    <view class="packet-notOpen">
+      <view class="packet-title">点击领取</view>
+      <view  class="packet-desc">{{cover_title}}</view>
+    </view>
+  </view>
+</block>
+</view>
+

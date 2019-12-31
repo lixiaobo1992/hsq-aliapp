@@ -1,0 +1,54 @@
+
+
+.product-list{}
+
+.product-list .product-item{
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.product-list .product-item .pic{
+  width: 200rpx;
+  height: 200rpx;
+}
+.product-list .product-item .pic image{
+  width: 100%;
+  height: 100%;
+}
+.product-list .product-item .product-title{
+  flex: 1;
+}
+
+
+.c-tofu .item {
+  float: left;
+}
+
+.layout-1-2 {
+  height: 400rpx;
+}
+
+.layout-1-2 .item{
+  width: 40%;
+  height: 100%;
+  border-right: 1rpx solid #f2f2f2;
+}
+
+.layout-1-2 .item image{
+  width: 100%;
+  height: 100%;
+}
+
+.layout-1-2 .item:nth-of-type(2){
+  width: 60%;
+  height: 50%;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.layout-1-2 .item:nth-of-type(3){
+  width: 60%;
+  height: 50%;
+  border: none;
+}

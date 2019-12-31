@@ -1,0 +1,17 @@
+<template name="c-img">
+  <view class="c-img">
+    <!-- 页面逻辑 -->
+    <view
+      class="c-img-item"
+      a:for="{{ list }}"
+      a:key="{{ index }}"
+      onTap="{{ eventName }}"
+      data-url="{{item.link}}"
+      data-index="{{ index }}"
+      data-piwik-event="{{item.piwik ? item.piwik : 'c-img-module' + moduleIndex}}"
+      data-piwik-data="{{ item.piwikData }}"
+      style="height:{{ item.h }}px;">
+      <image src="{{ item.url }}" style="height:{{ item.h }}px;" lazyLoad mode="scaleToFill" />
+    </view>
+  </view>
+</template>

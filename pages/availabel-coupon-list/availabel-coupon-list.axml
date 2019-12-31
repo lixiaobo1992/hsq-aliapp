@@ -1,0 +1,70 @@
+<view class="availabel-coupon">
+  <view class="member-coupon-box" hidden="{{!isShowMemberCoupon}}">
+    <!-- 会员入口 -->
+    <view class="member-entr" onTap="gotoMember">
+      <image class="entr-icon" mode="widthFix" src="https://img1.haoshiqi.net/miniapp/member-entr_5c92db6959.png
+"/>
+      <text class="entr-text">领券中心</text>
+      <image class="left-arrow" src="https://img1.haoshiqi.net/miniapp/more_85508a3b09.png" mode="widthFix" />
+    </view>
+
+    <view class="member-coupon-list">
+      <view
+        class="member-coupon-item"
+        a:for="{{ memberCouponListData }}"
+        a:key="{{ item.coupon_code }}"
+        data-index="{{ index }}"
+        onTap="receiveCouponEvent">
+        <view class="member-coupon-left">
+          <view class="coupon-pirce">¥<text>{{ item.value }}</text></view>
+          <view class="coupon-info">
+            <view class="coupon-title">{{ item.title }}</view>
+            <view class="coupon-sub-title">{{ item.sub_title }}</view>
+            <view class="coupon-desc">{{ item.desc }}</view>
+          </view>
+        </view>
+        <view class="member-coupon-right">
+          <text class="btn-text">兑换立减</text>
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+  <view class="coupon-list">
+    <view class="coupon-list-title">可使用优惠券</view>
+    <view
+      a:for="{{ listData }}"
+      class="coupon-cell"
+      a:key="{{ item.coupon_code }}"
+      data-index="{{ index }}"
+      onTap="onSelectedCoupon">
+      <view class="coupon-left">
+        <view class="coupon-pirce">¥{{ item.value }}</view>
+      </view>
+      <view class="coupon-right">
+        <view class="ellipsis coupon-name">{{ item.title }}</view>
+        <view class="coupon-sub-title">{{ item.sub_title }}</view>
+        <view class="coupon-end-time">{{ item.enabled_time_display }}</view>
+        <view class="coupon-btn {{ currentCoupon.coupon_code == item.coupon_code ? 'active' : '' }}"></view>
+      </view>
+    </view>
+  </view>
+
+</view>
+<view class="confirm-btn" onTap="onConfirm">确认</view>
+
+<view class="dwd-popup open-popup" hidden="{{ !isShowOpenPopup }}">
+  <view class="dwd-popup-mask" data-type="open" catchTap="setShowPopup"></view>
+  <view class="dwd-popup-content dwd-popup--center open-popup-conent {{ isShowOpenPopup ? 'show': '' }}">
+    <view class="open-popup-conent-box">
+      <view class="open-tit">开通轻会员</view>
+      <view class="open-icon">
+        <image src="https://img1.haoshiqi.net/miniapp/vip-libao_f9848c5491.png" />
+      </view>
+      <view class="open-sub">立送<text>{{ member_discount }}</text>元大礼包</view>
+      <view class="open-member-btn" catchTap="openBtnEvent">立即开通领取</view>
+      <view class="open-member-desc">¥{{ member_price }}会员费，到期再结算，不用不扣钱</view>
+    </view>
+  </view>
+</view>

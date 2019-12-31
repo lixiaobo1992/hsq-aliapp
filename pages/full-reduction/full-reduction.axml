@@ -1,0 +1,87 @@
+<import src="/components/foot/foot.axml" />
+<import src="/components/pull-loading/index.axml" />
+
+<dwd-page
+  id="dwd-page-pin-shopping"
+  className="page-pin-shopping"
+  contentClass="pin-shopping"
+  onRefresh="refresh"
+  isLoading="{{ isLoading }}">
+  <scroll-view
+    scroll-y
+    enable-back-to-top
+    onScrollToLower="onScrollToLower"
+    lower-threshold="240"
+    style="height:100%"
+    >
+    <view class="pin-shopping">
+      <view class="product-list">
+        <view class="header-text">
+            {{ activity_detail.activity_desc }}
+          </view>
+        <view class="product-item"
+          a:for="{{list}}"
+          a:key="{{index}}"
+          onTap="goDetail"
+          data-index="{{index}}"
+          data-url="{{item.link}}"
+          data-piwik-event="{{ item.piwikEvent }}"
+          data-piwik-data="{{ item.piwikData }}"
+        >
+          <view class="product-image">
+            <image src="{{item.thumbnail}}" mode="widthFix" class="left-img"></image>
+          </view>
+          <view class="product-right-detail">
+            <view class="flex-start">
+              <view class="product-title">
+                <view class="product-title">
+                  <text class="is-tag" a:if="{{item.merchant_type == 2}}">自营</text><text class="r-title">{{ item.title }}</text>
+                </view>
+              </view>
+              <view class="expire-data">{{item.expired_date_text}}</view>
+              <view
+                class="product-tag {{item.arrowClick?'tag-overflow':''}}"
+                style="height:{{!item.showupArrow?'100%':''}}"
+                a:if="{{item.tags.length > 0}}"
+              >
+                <view class="tag"
+                  a:for="{{item.tags}}"
+                  a:for-item="tagsItem"
+                  a:for-index="tagsIndex"
+                  a:key="{{tagsIndex}}"
+                  a:if="{{item.tags.length > 0}}"
+                  style="color: {{ tagsItem.background }}"
+                >
+                {{tagsItem.text}}
+                </view>
+                <view
+                  class="left-arrow"
+                  data-type="arrow"
+                  data-index="{{ index }}"
+                  a:if="{{item.arrowClick}}"
+                  catchTap="{{item.arrowClick ? 'onShowAll' : 'goDetail'}}"
+                >
+                    <view class = " arrow {{!item.showupArrow?'up':'down'}}"> </view>
+                  </view>
+              </view>
+          </view>
+            <view class="product-price flex-end" >
+              <text class="original-price">￥{{item.price}}</text>
+              <view class="row-vip-price" a:if="{{ item.member_price > 0 }}">
+                <view class="vip-bg"><image src="https://img1.haoshiqi.net/miniapp/img/vip_price2x_b9f4bf402f.png" class="img-vip" mode="scaleToFill" />
+                </view>
+                <text class="vip-price">￥{{ item.member_price }}</text>
+              </view>
+              <text class="marking-price" a:else>￥{{ item.market_price }}</text>
+            </view>
+            <view class="cart-icon {{ item.can_bought?'active':''}}" data-skuid="{{item.sku_id}}" catchTap="addCart"></view>
+          </view>
+        </view>
+      </view>
+    <template is="pull-loading" data="{{pullLoading}}"></template>
+    <view a:if="{{showFooter}}">
+        <template is="foot" data="{{text:'已到底，没有更多商品啦~'}}"></template>
+    </view>
+  </view>
+  </scroll-view>
+</dwd-page>

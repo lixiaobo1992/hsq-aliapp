@@ -1,0 +1,19 @@
+
+<template name="coupon">
+  <view a:if="{{showCoupon}}" class="coupon-bg" onTap="closeCoupon">
+    <view class="coupon-box" catchTap="stopProp">
+      <view class="coupon-title">领取成功！</view>
+      <view class="coupon-list" a:for="{{couponList}}" onTap="goCoupon">
+        <view class="coupon-price">
+          <text a:if="{{item.isNum}}">¥</text>{{item.value}}
+        </view>
+        <view class="coupon-detail">
+          <view class="ellipsis coupon-name">{{item.sub_title}}</view>
+          <view class="ellipsis coupon-date">{{item.start_at + '-' + item.end_at}}</view>
+        </view>
+      </view>
+      <view class="coupon-more" a:if="{{couponHasMore}}" onTap="goCoupon"><text>查看更多</text></view>
+      <view class="coupon-close" onTap="closeCoupon"></view>
+    </view>
+  </view>
+</template>

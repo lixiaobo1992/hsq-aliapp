@@ -1,0 +1,34 @@
+
+@import '/template/c-img/index.acss';
+@import '/template/c-product-row3/index.acss';
+
+.c-product-3 {
+
+}
+
+.c-product-3-warp{
+  margin: 0 20rpx;
+  overflow: hidden;
+  border-radius: 5rpx;
+}
+
+.c-product-3 .more-btn{
+  margin: 32rpx auto;
+  width: 235rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FDE044;
+  border-radius: 30rpx;
+}
+
+.c-product-3 .more-btn text {
+  font-size: 30rpx;
+  color: #FFFFFF;
+}
+.c-product-3 .more-btn image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 15rpx;
+}

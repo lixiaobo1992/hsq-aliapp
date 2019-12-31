@@ -1,0 +1,23 @@
+<import src="/template/c-tabs/index.axml" />
+<import src="/template/c-product-row3/index.axml" />
+
+<template name="c-tab-product">
+  <view class="c-tab-product" style="background-color:{{ tabProduct[currentIndex].bg_color }};">
+    <!-- 页面逻辑 -->
+    <template
+        is="c-tabs"
+        data="{{...tabs, currentIndex, moduleIndex }}" ></template>
+    <view class="c-tab-product-warp">
+      <template
+        is="c-product-row3"
+        data="{{list: tabProduct[currentIndex].isShowMore ? tabProduct[currentIndex].tempList : tabProduct[currentIndex].list, eventName, moduleIndex }}"></template>
+      <view
+        class="more-btn"
+        style="background-color: {{ tabProduct[currentIndex].button_bg_color }};"
+        a:if="{{ tabProduct[currentIndex].isShowMore }}"
+        data-index="{{ currentIndex }}"
+        data-module-index="{{ moduleIndex }}"
+        onTap="{{ moreEventName || '' }}"><text>查看更多</text><image src="https://img1.haoshiqi.net/miniapp/img/more_icon_0c8d06983e.png" /></view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,18 @@
+<view class='address-item' a:for="{{addresses}}" a:key="id" onTap='onSelecting' data-city="{{item}}" data-index="{{ index }}">
+
+  <block a:if="{{item.currentAddress == currentCity.currentAddress}}">
+    <view class='address-item-left'>
+      <image class="address-icon" src="https://img1.haoshiqi.net/miniapp/location_selected_8b4131351a.png" mode="scaleToFill" />
+      <label class='label-address selected'>{{item.currentAddress}}</label>
+    </view>
+    <image class="address-check" src="https://img1.haoshiqi.net/miniapp/address/location_check_1dadd7aa09.png" mode="scaleToFill" />
+  </block>
+
+  <block a:else>
+    <view class='address-item-left'>
+      <image class="address-icon" src="https://img1.haoshiqi.net/miniapp/location@3x_a034410ec3.png" mode="scaleToFill" />
+      <label class='label-address'>{{item.currentAddress}}</label>
+    </view>
+  </block>
+
+</view>
